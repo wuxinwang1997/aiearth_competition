@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 
 test/usr_data/model_data/
+train/slurm*
+train/sub*
