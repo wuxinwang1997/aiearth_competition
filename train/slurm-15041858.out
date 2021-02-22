@@ -1,0 +1,282 @@
+2021-02-22 20:30:24,537 resnet18 INFO: Using 1 GPUS
+2021-02-22 20:30:24,537 resnet18 INFO: Namespace(config_file='', opts=[])
+2021-02-22 20:30:24,537 resnet18 INFO: Running with config:
+DATALOADER:
+  NUM_WORKERS: 2
+DATASETS:
+  DATA_NAME: SODA
+  ROOT_DIR: /home/wangxiang/dat01/WWX/aiearth/data/enso_round1_train_20210201/
+  X_DIM: 72
+  Y_DIM: 24
+  Z_DIM: 48
+DEBUG: False
+INPUT:
+  
+MODEL:
+  DEVICE: cuda
+  NUM_CLASSES: 2
+  PRETRAINED_CMIP: /home/wangxiang/dat01/WWX/aiearth/aiearth_competition/test/usr_data/model_data/best-model.bin
+  PRETRAINED_IMAGENET: 
+OUTPUT_DIR: /dat01/wangxiang/WWX/aiearth/aiearth_competition/test/usr_data/model_data/soda
+SEED: 66
+SOLVER:
+  BASE_LR: 0.001
+  BIAS_LR_FACTOR: 1
+  COS_CPOCH: 2
+  EARLY_STOP_PATIENCE: 20
+  IMS_PER_BATCH: 64
+  MAX_EPOCHS: 40
+  MOMENTUM: 0.9
+  OPTIMIZER_NAME: Adam
+  SCHEDULER_NAME: CosineAnnealingWarmRestarts
+  TRAIN_CHECKPOINT: False
+  T_MUL: 2
+  WARMUP_EPOCHS: 0
+  WEIGHT_DECAY: 0.0005
+  WEIGHT_DECAY_BIAS: 0
+  WEIGHT_DECAY_BN: 0
+TEST:
+  IMS_PER_BATCH: 64
+  WEIGHT: /dat01/wangxiang/WWX/aiearth/aiearth_competition/test/usr_data/model_data/sodabest-checkpoint.bin
+VERBOSE: True
+2021-02-22 20:30:28,838 resnet18 INFO: Fitter prepared. Device is cuda
+2021-02-22 20:30:28,839 resnet18 INFO: Start training
+2021-02-22 20:30:28,840 resnet18 INFO: 
+2021-02-22T12:30:28.840007
+LR: 0.001
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0008535533905932737, summary_loss: 1.77464, time: 0.39504:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0008535533905932737, summary_loss: 1.77464, time: 0.39504:  50%|█████     | 1/2 [00:00<00:00,  2.54it/s]Train Step 1/2, Learning rate 0.0005, summary_loss: 1.56366, time: 0.55207:  50%|█████     | 1/2 [00:00<00:00,  2.54it/s]               Train Step 1/2, Learning rate 0.0005, summary_loss: 1.56366, time: 0.55207: 100%|██████████| 2/2 [00:00<00:00,  3.94it/s]Train Step 1/2, Learning rate 0.0005, summary_loss: 1.56366, time: 0.55207: 100%|██████████| 2/2 [00:00<00:00,  3.32it/s]2021-02-22 20:30:29,449 resnet18 INFO: [RESULT]: Train. Epoch: 0, summary_loss: 1.56366, time: 0.60962
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.15814:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.15814: 100%|██████████| 1/1 [00:00<00:00,  6.39it/s]Validate Step 0/1, time: 0.15814: 100%|██████████| 1/1 [00:00<00:00,  4.60it/s]2021-02-22 20:30:30,132 resnet18 INFO: [RESULT]: Val. Epoch: 0, Best Score: -36.44267, time: 0.23714
+2021-02-22 20:30:30,706 resnet18 INFO: 
+2021-02-22T12:30:30.706341
+LR: 0.0005
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.00014644660940672628, summary_loss: 0.47569, time: 0.20496:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.00014644660940672628, summary_loss: 0.47569, time: 0.20496:  50%|█████     | 1/2 [00:00<00:00,  4.88it/s]Train Step 1/2, Learning rate 0.001, summary_loss: 0.41057, time: 0.24598:  50%|█████     | 1/2 [00:00<00:00,  4.88it/s]                 Train Step 1/2, Learning rate 0.001, summary_loss: 0.41057, time: 0.24598: 100%|██████████| 2/2 [00:00<00:00,  6.73it/s]2021-02-22 20:30:31,008 resnet18 INFO: [RESULT]: Train. Epoch: 1, summary_loss: 0.41057, time: 0.30226
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.14119:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.14119: 100%|██████████| 1/1 [00:00<00:00,  7.19it/s]Validate Step 0/1, time: 0.14119: 100%|██████████| 1/1 [00:00<00:00,  4.93it/s]2021-02-22 20:30:31,660 resnet18 INFO: [RESULT]: Val. Epoch: 1, Best Score: -27.93162, time: 0.22301
+2021-02-22 20:30:32,227 resnet18 INFO: 
+2021-02-22T12:30:32.227233
+LR: 0.001
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0009619397662556434, summary_loss: 0.39987, time: 0.21353:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0009619397662556434, summary_loss: 0.39987, time: 0.21353:  50%|█████     | 1/2 [00:00<00:00,  4.68it/s]Train Step 1/2, Learning rate 0.0008535533905932737, summary_loss: 0.35108, time: 0.25854:  50%|█████     | 1/2 [00:00<00:00,  4.68it/s]Train Step 1/2, Learning rate 0.0008535533905932737, summary_loss: 0.35108, time: 0.25854: 100%|██████████| 2/2 [00:00<00:00,  6.25it/s]2021-02-22 20:30:32,551 resnet18 INFO: [RESULT]: Train. Epoch: 2, summary_loss: 0.35108, time: 0.32258
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.12430:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.12430: 100%|██████████| 1/1 [00:00<00:00,  8.14it/s]Validate Step 0/1, time: 0.12430: 100%|██████████| 1/1 [00:00<00:00,  5.46it/s]2021-02-22 20:30:33,152 resnet18 INFO: [RESULT]: Val. Epoch: 2, Best Score: -14.35870, time: 0.20335
+2021-02-22 20:30:33,718 resnet18 INFO: 
+2021-02-22T12:30:33.717964
+LR: 0.0008535533905932737
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.000691341716182545, summary_loss: 0.30049, time: 0.20344:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.000691341716182545, summary_loss: 0.30049, time: 0.20344:  50%|█████     | 1/2 [00:00<00:00,  4.91it/s]Train Step 1/2, Learning rate 0.0005, summary_loss: 0.26736, time: 0.24491:  50%|█████     | 1/2 [00:00<00:00,  4.91it/s]              Train Step 1/2, Learning rate 0.0005, summary_loss: 0.26736, time: 0.24491: 100%|██████████| 2/2 [00:00<00:00,  6.62it/s]2021-02-22 20:30:34,025 resnet18 INFO: [RESULT]: Train. Epoch: 3, summary_loss: 0.26736, time: 0.30764
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.12951:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.12951: 100%|██████████| 1/1 [00:00<00:00,  7.86it/s]Validate Step 0/1, time: 0.12951: 100%|██████████| 1/1 [00:00<00:00,  5.24it/s]2021-02-22 20:30:34,684 resnet18 INFO: [RESULT]: Val. Epoch: 3, Best Score: -11.65728, time: 0.21059
+2021-02-22 20:30:35,255 resnet18 INFO: 
+2021-02-22T12:30:35.255821
+LR: 0.0005
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0003086582838174551, summary_loss: 0.23816, time: 0.21840:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0003086582838174551, summary_loss: 0.23816, time: 0.21840:  50%|█████     | 1/2 [00:00<00:00,  4.57it/s]Train Step 1/2, Learning rate 0.00014644660940672628, summary_loss: 0.20917, time: 0.26511:  50%|█████     | 1/2 [00:00<00:00,  4.57it/s]Train Step 1/2, Learning rate 0.00014644660940672628, summary_loss: 0.20917, time: 0.26511: 100%|██████████| 2/2 [00:00<00:00,  6.11it/s]2021-02-22 20:30:35,589 resnet18 INFO: [RESULT]: Train. Epoch: 4, summary_loss: 0.20917, time: 0.33156
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.14054:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.14054: 100%|██████████| 1/1 [00:00<00:00,  7.30it/s]Validate Step 0/1, time: 0.14054: 100%|██████████| 1/1 [00:00<00:00,  5.10it/s]2021-02-22 20:30:36,236 resnet18 INFO: [RESULT]: Val. Epoch: 4, Best Score: -10.70685, time: 0.21732
+2021-02-22 20:30:36,779 resnet18 INFO: 
+2021-02-22T12:30:36.779471
+LR: 0.00014644660940672628
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 3.806023374435663e-05, summary_loss: 0.19275, time: 0.20083:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 3.806023374435663e-05, summary_loss: 0.19275, time: 0.20083:  50%|█████     | 1/2 [00:00<00:00,  4.98it/s]Train Step 1/2, Learning rate 0.001, summary_loss: 0.16918, time: 0.23864:  50%|█████     | 1/2 [00:00<00:00,  4.98it/s]                Train Step 1/2, Learning rate 0.001, summary_loss: 0.16918, time: 0.23864: 100%|██████████| 2/2 [00:00<00:00,  6.69it/s]2021-02-22 20:30:37,082 resnet18 INFO: [RESULT]: Train. Epoch: 5, summary_loss: 0.16918, time: 0.30291
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.12950:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.12950: 100%|██████████| 1/1 [00:00<00:00,  7.87it/s]Validate Step 0/1, time: 0.12950: 100%|██████████| 1/1 [00:00<00:00,  5.31it/s]2021-02-22 20:30:37,718 resnet18 INFO: [RESULT]: Val. Epoch: 5, Best Score: -10.09798, time: 0.20816
+2021-02-22 20:30:38,292 resnet18 INFO: 
+2021-02-22T12:30:38.292946
+LR: 0.001
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0009903926402016153, summary_loss: 0.18014, time: 0.21489:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0009903926402016153, summary_loss: 0.18014, time: 0.21489:  50%|█████     | 1/2 [00:00<00:00,  4.65it/s]Train Step 1/2, Learning rate 0.0009619397662556434, summary_loss: 0.15368, time: 0.25814:  50%|█████     | 1/2 [00:00<00:00,  4.65it/s]Train Step 1/2, Learning rate 0.0009619397662556434, summary_loss: 0.15368, time: 0.25814: 100%|██████████| 2/2 [00:00<00:00,  6.33it/s]2021-02-22 20:30:38,613 resnet18 INFO: [RESULT]: Train. Epoch: 6, summary_loss: 0.15368, time: 0.31967
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.13032:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.13032: 100%|██████████| 1/1 [00:00<00:00,  7.85it/s]Validate Step 0/1, time: 0.13032: 100%|██████████| 1/1 [00:00<00:00,  5.31it/s]2021-02-22 20:30:39,275 resnet18 INFO: [RESULT]: Val. Epoch: 6, Best Score: -6.93557, time: 0.20889
+2021-02-22 20:30:39,939 resnet18 INFO: 
+2021-02-22T12:30:39.939294
+LR: 0.0009619397662556434
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0009157348061512727, summary_loss: 0.10906, time: 0.19725:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0009157348061512727, summary_loss: 0.10906, time: 0.19725:  50%|█████     | 1/2 [00:00<00:00,  5.04it/s]Train Step 1/2, Learning rate 0.0008535533905932737, summary_loss: 0.09660, time: 0.23873:  50%|█████     | 1/2 [00:00<00:00,  5.04it/s]Train Step 1/2, Learning rate 0.0008535533905932737, summary_loss: 0.09660, time: 0.23873: 100%|██████████| 2/2 [00:00<00:00,  6.60it/s]2021-02-22 20:30:40,246 resnet18 INFO: [RESULT]: Train. Epoch: 7, summary_loss: 0.09660, time: 0.30698
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.14001:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.14001: 100%|██████████| 1/1 [00:00<00:00,  7.26it/s]Validate Step 0/1, time: 0.14001: 100%|██████████| 1/1 [00:00<00:00,  5.17it/s]2021-02-22 20:30:40,906 resnet18 INFO: [RESULT]: Val. Epoch: 7, Best Score: -3.22681, time: 0.21345
+2021-02-22 20:30:41,473 resnet18 INFO: 
+2021-02-22T12:30:41.473626
+LR: 0.0008535533905932737
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0007777851165098011, summary_loss: 0.11763, time: 0.22133:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0007777851165098011, summary_loss: 0.11763, time: 0.22133:  50%|█████     | 1/2 [00:00<00:00,  4.52it/s]Train Step 1/2, Learning rate 0.000691341716182545, summary_loss: 0.10232, time: 0.26679:  50%|█████     | 1/2 [00:00<00:00,  4.52it/s] Train Step 1/2, Learning rate 0.000691341716182545, summary_loss: 0.10232, time: 0.26679: 100%|██████████| 2/2 [00:00<00:00,  6.24it/s]2021-02-22 20:30:41,799 resnet18 INFO: [RESULT]: Train. Epoch: 8, summary_loss: 0.10232, time: 0.32461
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.13131:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.13131: 100%|██████████| 1/1 [00:00<00:00,  7.81it/s]Validate Step 0/1, time: 0.13131: 100%|██████████| 1/1 [00:00<00:00,  5.37it/s]2021-02-22 20:30:42,444 resnet18 INFO: [RESULT]: Val. Epoch: 8, Best Score: -0.25615, time: 0.20708
+2021-02-22 20:30:43,005 resnet18 INFO: 
+2021-02-22T12:30:43.004980
+LR: 0.000691341716182545
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0005975451610080642, summary_loss: 0.08654, time: 0.22898:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0005975451610080642, summary_loss: 0.08654, time: 0.22898:  50%|█████     | 1/2 [00:00<00:00,  4.37it/s]Train Step 1/2, Learning rate 0.0005, summary_loss: 0.07396, time: 0.27596:  50%|█████     | 1/2 [00:00<00:00,  4.37it/s]               Train Step 1/2, Learning rate 0.0005, summary_loss: 0.07396, time: 0.27596: 100%|██████████| 2/2 [00:00<00:00,  5.91it/s]2021-02-22 20:30:43,349 resnet18 INFO: [RESULT]: Train. Epoch: 9, summary_loss: 0.07396, time: 0.34309
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.12956:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.12956: 100%|██████████| 1/1 [00:00<00:00,  7.86it/s]Validate Step 0/1, time: 0.12956: 100%|██████████| 1/1 [00:00<00:00,  5.24it/s]2021-02-22 20:30:44,016 resnet18 INFO: [RESULT]: Val. Epoch: 9, Best Score: 1.98534, time: 0.20698
+2021-02-22 20:30:44,607 resnet18 INFO: 
+2021-02-22T12:30:44.607421
+LR: 0.0005
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.00040245483899193594, summary_loss: 0.05850, time: 0.22182:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.00040245483899193594, summary_loss: 0.05850, time: 0.22182:  50%|█████     | 1/2 [00:00<00:00,  4.50it/s]Train Step 1/2, Learning rate 0.0003086582838174551, summary_loss: 0.04955, time: 0.26697:  50%|█████     | 1/2 [00:00<00:00,  4.50it/s] Train Step 1/2, Learning rate 0.0003086582838174551, summary_loss: 0.04955, time: 0.26697: 100%|██████████| 2/2 [00:00<00:00,  6.14it/s]2021-02-22 20:30:44,937 resnet18 INFO: [RESULT]: Train. Epoch: 10, summary_loss: 0.04955, time: 0.33005
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.13051:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.13051: 100%|██████████| 1/1 [00:00<00:00,  7.86it/s]Validate Step 0/1, time: 0.13051: 100%|██████████| 1/1 [00:00<00:00,  5.33it/s]2021-02-22 20:30:45,577 resnet18 INFO: [RESULT]: Val. Epoch: 10, Best Score: 2.97397, time: 0.20869
+2021-02-22 20:30:46,136 resnet18 INFO: 
+2021-02-22T12:30:46.136643
+LR: 0.0003086582838174551
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.00022221488349019903, summary_loss: 0.04636, time: 0.21610:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.00022221488349019903, summary_loss: 0.04636, time: 0.21610:  50%|█████     | 1/2 [00:00<00:00,  4.62it/s]Train Step 1/2, Learning rate 0.00014644660940672628, summary_loss: 0.03926, time: 0.26111:  50%|█████     | 1/2 [00:00<00:00,  4.62it/s]Train Step 1/2, Learning rate 0.00014644660940672628, summary_loss: 0.03926, time: 0.26111: 100%|██████████| 2/2 [00:00<00:00,  6.38it/s]2021-02-22 20:30:46,455 resnet18 INFO: [RESULT]: Train. Epoch: 11, summary_loss: 0.03926, time: 0.31708
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.13049:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.13049: 100%|██████████| 1/1 [00:00<00:00,  7.80it/s]Validate Step 0/1, time: 0.13049: 100%|██████████| 1/1 [00:00<00:00,  5.34it/s]2021-02-22 20:30:47,074 resnet18 INFO: [RESULT]: Val. Epoch: 11, Best Score: 3.15074, time: 0.20083
+2021-02-22 20:30:47,583 resnet18 INFO: 
+2021-02-22T12:30:47.582999
+LR: 0.00014644660940672628
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 8.426519384872733e-05, summary_loss: 0.04064, time: 0.21096:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 8.426519384872733e-05, summary_loss: 0.04064, time: 0.21096:  50%|█████     | 1/2 [00:00<00:00,  4.73it/s]Train Step 1/2, Learning rate 3.806023374435663e-05, summary_loss: 0.03446, time: 0.25416:  50%|█████     | 1/2 [00:00<00:00,  4.73it/s]Train Step 1/2, Learning rate 3.806023374435663e-05, summary_loss: 0.03446, time: 0.25416: 100%|██████████| 2/2 [00:00<00:00,  6.41it/s]2021-02-22 20:30:47,898 resnet18 INFO: [RESULT]: Train. Epoch: 12, summary_loss: 0.03446, time: 0.31548
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.12512:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.12512: 100%|██████████| 1/1 [00:00<00:00,  8.24it/s]Validate Step 0/1, time: 0.12512: 100%|██████████| 1/1 [00:00<00:00,  5.64it/s]2021-02-22 20:30:48,460 resnet18 INFO: [RESULT]: Val. Epoch: 12, Best Score: 3.23105, time: 0.19728
+2021-02-22 20:30:49,008 resnet18 INFO: 
+2021-02-22T12:30:49.008327
+LR: 3.806023374435663e-05
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 9.607359798384786e-06, summary_loss: 0.03782, time: 0.19934:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 9.607359798384786e-06, summary_loss: 0.03782, time: 0.19934:  50%|█████     | 1/2 [00:00<00:00,  4.99it/s]Train Step 1/2, Learning rate 0.001, summary_loss: 0.03211, time: 0.24189:  50%|█████     | 1/2 [00:00<00:00,  4.99it/s]                Train Step 1/2, Learning rate 0.001, summary_loss: 0.03211, time: 0.24189: 100%|██████████| 2/2 [00:00<00:00,  6.53it/s]2021-02-22 20:30:49,318 resnet18 INFO: [RESULT]: Train. Epoch: 13, summary_loss: 0.03211, time: 0.31018
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.13053:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.13053: 100%|██████████| 1/1 [00:00<00:00,  7.80it/s]Validate Step 0/1, time: 0.13053: 100%|██████████| 1/1 [00:00<00:00,  5.35it/s]2021-02-22 20:30:49,995 resnet18 INFO: [RESULT]: Val. Epoch: 13, Best Score: 2.94241, time: 0.20666
+2021-02-22 20:30:49,996 resnet18 INFO: 
+2021-02-22T12:30:49.996210
+LR: 0.001
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0009975923633360985, summary_loss: 0.03709, time: 0.23542:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0009975923633360985, summary_loss: 0.03709, time: 0.23542:  50%|█████     | 1/2 [00:00<00:00,  4.22it/s]Train Step 1/2, Learning rate 0.0009903926402016153, summary_loss: 0.03124, time: 0.29625:  50%|█████     | 1/2 [00:00<00:00,  4.22it/s]Train Step 1/2, Learning rate 0.0009903926402016153, summary_loss: 0.03124, time: 0.29625: 100%|██████████| 2/2 [00:00<00:00,  5.64it/s]2021-02-22 20:30:50,355 resnet18 INFO: [RESULT]: Train. Epoch: 14, summary_loss: 0.03124, time: 0.35944
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.12953:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.12953: 100%|██████████| 1/1 [00:00<00:00,  7.86it/s]Validate Step 0/1, time: 0.12953: 100%|██████████| 1/1 [00:00<00:00,  5.65it/s]2021-02-22 20:30:50,988 resnet18 INFO: [RESULT]: Val. Epoch: 14, Best Score: 2.95942, time: 0.19687
+2021-02-22 20:30:50,988 resnet18 INFO: 
+2021-02-22T12:30:50.988619
+LR: 0.0009903926402016153
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0009784701678661044, summary_loss: 0.02617, time: 0.23287:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0009784701678661044, summary_loss: 0.02617, time: 0.23287:  50%|█████     | 1/2 [00:00<00:00,  4.27it/s]Train Step 1/2, Learning rate 0.0009619397662556434, summary_loss: 0.02363, time: 0.27952:  50%|█████     | 1/2 [00:00<00:00,  4.27it/s]Train Step 1/2, Learning rate 0.0009619397662556434, summary_loss: 0.02363, time: 0.27952: 100%|██████████| 2/2 [00:00<00:00,  5.95it/s]2021-02-22 20:30:51,328 resnet18 INFO: [RESULT]: Train. Epoch: 15, summary_loss: 0.02363, time: 0.33999
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.14439:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.14439: 100%|██████████| 1/1 [00:00<00:00,  7.04it/s]Validate Step 0/1, time: 0.14439: 100%|██████████| 1/1 [00:00<00:00,  4.85it/s]2021-02-22 20:30:51,999 resnet18 INFO: [RESULT]: Val. Epoch: 15, Best Score: 2.32792, time: 0.22701
+2021-02-22 20:30:52,000 resnet18 INFO: 
+2021-02-22T12:30:52.000102
+LR: 0.0009619397662556434
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0009409606321741775, summary_loss: 0.02433, time: 0.24544:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0009409606321741775, summary_loss: 0.02433, time: 0.24544:  50%|█████     | 1/2 [00:00<00:00,  4.06it/s]Train Step 1/2, Learning rate 0.0009157348061512727, summary_loss: 0.02141, time: 0.29190:  50%|█████     | 1/2 [00:00<00:00,  4.06it/s]Train Step 1/2, Learning rate 0.0009157348061512727, summary_loss: 0.02141, time: 0.29190: 100%|██████████| 2/2 [00:00<00:00,  5.65it/s]2021-02-22 20:30:52,359 resnet18 INFO: [RESULT]: Train. Epoch: 16, summary_loss: 0.02141, time: 0.35887
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.13138:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.13138: 100%|██████████| 1/1 [00:00<00:00,  7.74it/s]Validate Step 0/1, time: 0.13138: 100%|██████████| 1/1 [00:00<00:00,  5.33it/s]2021-02-22 20:30:52,994 resnet18 INFO: [RESULT]: Val. Epoch: 16, Best Score: 1.63115, time: 0.20744
+2021-02-22 20:30:52,995 resnet18 INFO: 
+2021-02-22T12:30:52.995200
+LR: 0.0009157348061512727
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0008865052266813684, summary_loss: 0.01764, time: 0.23798:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0008865052266813684, summary_loss: 0.01764, time: 0.23798:  50%|█████     | 1/2 [00:00<00:00,  4.18it/s]Train Step 1/2, Learning rate 0.0008535533905932737, summary_loss: 0.01513, time: 0.28497:  50%|█████     | 1/2 [00:00<00:00,  4.18it/s]Train Step 1/2, Learning rate 0.0008535533905932737, summary_loss: 0.01513, time: 0.28497: 100%|██████████| 2/2 [00:00<00:00,  5.73it/s]2021-02-22 20:30:53,349 resnet18 INFO: [RESULT]: Train. Epoch: 17, summary_loss: 0.01513, time: 0.35397
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.15882:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.15882: 100%|██████████| 1/1 [00:00<00:00,  6.44it/s]Validate Step 0/1, time: 0.15882: 100%|██████████| 1/1 [00:00<00:00,  4.56it/s]2021-02-22 20:30:54,064 resnet18 INFO: [RESULT]: Val. Epoch: 17, Best Score: 1.12463, time: 0.24113
+2021-02-22 20:30:54,065 resnet18 INFO: 
+2021-02-22T12:30:54.065332
+LR: 0.0008535533905932737
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0008171966420818228, summary_loss: 0.01420, time: 0.24526:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0008171966420818228, summary_loss: 0.01420, time: 0.24526:  50%|█████     | 1/2 [00:00<00:00,  4.08it/s]Train Step 1/2, Learning rate 0.0007777851165098011, summary_loss: 0.01222, time: 0.29176:  50%|█████     | 1/2 [00:00<00:00,  4.08it/s]Train Step 1/2, Learning rate 0.0007777851165098011, summary_loss: 0.01222, time: 0.29176: 100%|██████████| 2/2 [00:00<00:00,  5.65it/s]2021-02-22 20:30:54,424 resnet18 INFO: [RESULT]: Train. Epoch: 18, summary_loss: 0.01222, time: 0.35867
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.14580:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.14580: 100%|██████████| 1/1 [00:00<00:00,  6.96it/s]Validate Step 0/1, time: 0.14580: 100%|██████████| 1/1 [00:00<00:00,  4.89it/s]2021-02-22 20:30:55,081 resnet18 INFO: [RESULT]: Val. Epoch: 18, Best Score: 0.77959, time: 0.22609
+2021-02-22 20:30:55,082 resnet18 INFO: 
+2021-02-22T12:30:55.082109
+LR: 0.0007777851165098011
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.000735698368412999, summary_loss: 0.01100, time: 0.24776:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.000735698368412999, summary_loss: 0.01100, time: 0.24776:  50%|█████     | 1/2 [00:00<00:00,  4.04it/s]Train Step 1/2, Learning rate 0.000691341716182545, summary_loss: 0.00935, time: 0.29321:  50%|█████     | 1/2 [00:00<00:00,  4.04it/s]Train Step 1/2, Learning rate 0.000691341716182545, summary_loss: 0.00935, time: 0.29321: 100%|██████████| 2/2 [00:00<00:00,  5.69it/s]2021-02-22 20:30:55,439 resnet18 INFO: [RESULT]: Train. Epoch: 19, summary_loss: 0.00935, time: 0.35678
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.13556:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.13556: 100%|██████████| 1/1 [00:00<00:00,  7.49it/s]Validate Step 0/1, time: 0.13556: 100%|██████████| 1/1 [00:00<00:00,  5.10it/s]2021-02-22 20:30:56,067 resnet18 INFO: [RESULT]: Val. Epoch: 19, Best Score: 0.54097, time: 0.21639
+2021-02-22 20:30:56,067 resnet18 INFO: 
+2021-02-22T12:30:56.067666
+LR: 0.000691341716182545
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0006451423386272311, summary_loss: 0.00759, time: 0.21307:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0006451423386272311, summary_loss: 0.00759, time: 0.21307:  50%|█████     | 1/2 [00:00<00:00,  4.69it/s]Train Step 1/2, Learning rate 0.0005975451610080642, summary_loss: 0.00643, time: 0.25552:  50%|█████     | 1/2 [00:00<00:00,  4.69it/s]Train Step 1/2, Learning rate 0.0005975451610080642, summary_loss: 0.00643, time: 0.25552: 100%|██████████| 2/2 [00:00<00:00,  6.39it/s]2021-02-22 20:30:56,385 resnet18 INFO: [RESULT]: Train. Epoch: 20, summary_loss: 0.00643, time: 0.31756
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.14141:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.14141: 100%|██████████| 1/1 [00:00<00:00,  7.19it/s]Validate Step 0/1, time: 0.14141: 100%|██████████| 1/1 [00:00<00:00,  4.93it/s]2021-02-22 20:30:57,017 resnet18 INFO: [RESULT]: Val. Epoch: 20, Best Score: 0.45107, time: 0.22291
+2021-02-22 20:30:57,018 resnet18 INFO: 
+2021-02-22T12:30:57.018392
+LR: 0.0005975451610080642
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0005490085701647804, summary_loss: 0.00593, time: 0.24731:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0005490085701647804, summary_loss: 0.00593, time: 0.24731:  50%|█████     | 1/2 [00:00<00:00,  4.02it/s]Train Step 1/2, Learning rate 0.0005, summary_loss: 0.00508, time: 0.29537:  50%|█████     | 1/2 [00:00<00:00,  4.02it/s]               Train Step 1/2, Learning rate 0.0005, summary_loss: 0.00508, time: 0.29537: 100%|██████████| 2/2 [00:00<00:00,  5.57it/s]2021-02-22 20:30:57,382 resnet18 INFO: [RESULT]: Train. Epoch: 21, summary_loss: 0.00508, time: 0.36359
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.13994:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.13994: 100%|██████████| 1/1 [00:00<00:00,  7.27it/s]Validate Step 0/1, time: 0.13994: 100%|██████████| 1/1 [00:00<00:00,  5.09it/s]2021-02-22 20:30:57,997 resnet18 INFO: [RESULT]: Val. Epoch: 21, Best Score: 0.32673, time: 0.20930
+2021-02-22 20:30:57,997 resnet18 INFO: 
+2021-02-22T12:30:57.997710
+LR: 0.0005
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0004509914298352197, summary_loss: 0.00480, time: 0.23418:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0004509914298352197, summary_loss: 0.00480, time: 0.23418:  50%|█████     | 1/2 [00:00<00:00,  4.24it/s]Train Step 1/2, Learning rate 0.00040245483899193594, summary_loss: 0.00414, time: 0.28195:  50%|█████     | 1/2 [00:00<00:00,  4.24it/s]Train Step 1/2, Learning rate 0.00040245483899193594, summary_loss: 0.00414, time: 0.28195: 100%|██████████| 2/2 [00:00<00:00,  5.97it/s]2021-02-22 20:30:58,336 resnet18 INFO: [RESULT]: Train. Epoch: 22, summary_loss: 0.00414, time: 0.33841
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.14371:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.14371: 100%|██████████| 1/1 [00:00<00:00,  7.06it/s]Validate Step 0/1, time: 0.14371: 100%|██████████| 1/1 [00:00<00:00,  4.97it/s]2021-02-22 20:30:59,042 resnet18 INFO: [RESULT]: Val. Epoch: 22, Best Score: 0.15063, time: 0.22117
+2021-02-22 20:30:59,042 resnet18 INFO: 
+2021-02-22T12:30:59.042879
+LR: 0.00040245483899193594
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0003548576613727689, summary_loss: 0.00379, time: 0.24705:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0003548576613727689, summary_loss: 0.00379, time: 0.24705:  50%|█████     | 1/2 [00:00<00:00,  4.03it/s]Train Step 1/2, Learning rate 0.0003086582838174551, summary_loss: 0.00324, time: 0.29443:  50%|█████     | 1/2 [00:00<00:00,  4.03it/s]Train Step 1/2, Learning rate 0.0003086582838174551, summary_loss: 0.00324, time: 0.29443: 100%|██████████| 2/2 [00:00<00:00,  5.79it/s]2021-02-22 20:30:59,392 resnet18 INFO: [RESULT]: Train. Epoch: 23, summary_loss: 0.00324, time: 0.34941
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.13015:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.13015: 100%|██████████| 1/1 [00:00<00:00,  7.82it/s]Validate Step 0/1, time: 0.13015: 100%|██████████| 1/1 [00:00<00:00,  5.41it/s]2021-02-22 20:31:00,010 resnet18 INFO: [RESULT]: Val. Epoch: 23, Best Score: 0.00521, time: 0.20442
+2021-02-22 20:31:00,010 resnet18 INFO: 
+2021-02-22T12:31:00.010576
+LR: 0.0003086582838174551
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.00026430163158700117, summary_loss: 0.00301, time: 0.24596:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.00026430163158700117, summary_loss: 0.00301, time: 0.24596:  50%|█████     | 1/2 [00:00<00:00,  4.05it/s]Train Step 1/2, Learning rate 0.00022221488349019903, summary_loss: 0.00256, time: 0.29226:  50%|█████     | 1/2 [00:00<00:00,  4.05it/s]Train Step 1/2, Learning rate 0.00022221488349019903, summary_loss: 0.00256, time: 0.29226: 100%|██████████| 2/2 [00:00<00:00,  5.70it/s]2021-02-22 20:31:00,364 resnet18 INFO: [RESULT]: Train. Epoch: 24, summary_loss: 0.00256, time: 0.35385
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.13394:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.13394: 100%|██████████| 1/1 [00:00<00:00,  7.60it/s]Validate Step 0/1, time: 0.13394: 100%|██████████| 1/1 [00:00<00:00,  5.16it/s]2021-02-22 20:31:00,987 resnet18 INFO: [RESULT]: Val. Epoch: 24, Best Score: -0.10784, time: 0.21355
+2021-02-22 20:31:00,987 resnet18 INFO: 
+2021-02-22T12:31:00.987704
+LR: 0.00022221488349019903
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.00018280335791817732, summary_loss: 0.00251, time: 0.23984:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.00018280335791817732, summary_loss: 0.00251, time: 0.23984:  50%|█████     | 1/2 [00:00<00:00,  4.14it/s]Train Step 1/2, Learning rate 0.00014644660940672628, summary_loss: 0.00212, time: 0.28650:  50%|█████     | 1/2 [00:00<00:00,  4.14it/s]Train Step 1/2, Learning rate 0.00014644660940672628, summary_loss: 0.00212, time: 0.28650: 100%|██████████| 2/2 [00:00<00:00,  5.71it/s]2021-02-22 20:31:01,343 resnet18 INFO: [RESULT]: Train. Epoch: 25, summary_loss: 0.00212, time: 0.35526
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.13967:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.13967: 100%|██████████| 1/1 [00:00<00:00,  7.28it/s]Validate Step 0/1, time: 0.13967: 100%|██████████| 1/1 [00:00<00:00,  5.18it/s]2021-02-22 20:31:01,974 resnet18 INFO: [RESULT]: Val. Epoch: 25, Best Score: -0.20180, time: 0.21290
+2021-02-22 20:31:01,974 resnet18 INFO: 
+2021-02-22T12:31:01.974565
+LR: 0.00014644660940672628
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.00011349477331863151, summary_loss: 0.00221, time: 0.23775:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.00011349477331863151, summary_loss: 0.00221, time: 0.23775:  50%|█████     | 1/2 [00:00<00:00,  4.18it/s]Train Step 1/2, Learning rate 8.426519384872733e-05, summary_loss: 0.00186, time: 0.28570:  50%|█████     | 1/2 [00:00<00:00,  4.18it/s] Train Step 1/2, Learning rate 8.426519384872733e-05, summary_loss: 0.00186, time: 0.28570: 100%|██████████| 2/2 [00:00<00:00,  5.91it/s]2021-02-22 20:31:02,317 resnet18 INFO: [RESULT]: Train. Epoch: 26, summary_loss: 0.00186, time: 0.34294
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.12941:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.12941: 100%|██████████| 1/1 [00:00<00:00,  7.86it/s]Validate Step 0/1, time: 0.12941: 100%|██████████| 1/1 [00:00<00:00,  5.27it/s]2021-02-22 20:31:02,949 resnet18 INFO: [RESULT]: Val. Epoch: 26, Best Score: -0.27744, time: 0.20941
+2021-02-22 20:31:02,950 resnet18 INFO: 
+2021-02-22T12:31:02.950138
+LR: 8.426519384872733e-05
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 5.903936782582253e-05, summary_loss: 0.00201, time: 0.24626:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 5.903936782582253e-05, summary_loss: 0.00201, time: 0.24626:  50%|█████     | 1/2 [00:00<00:00,  4.04it/s]Train Step 1/2, Learning rate 3.806023374435663e-05, summary_loss: 0.00168, time: 0.29221:  50%|█████     | 1/2 [00:00<00:00,  4.04it/s]Train Step 1/2, Learning rate 3.806023374435663e-05, summary_loss: 0.00168, time: 0.29221: 100%|██████████| 2/2 [00:00<00:00,  5.83it/s]2021-02-22 20:31:03,297 resnet18 INFO: [RESULT]: Train. Epoch: 27, summary_loss: 0.00168, time: 0.34701
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.14224:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.14224: 100%|██████████| 1/1 [00:00<00:00,  7.14it/s]Validate Step 0/1, time: 0.14224: 100%|██████████| 1/1 [00:00<00:00,  4.90it/s]2021-02-22 20:31:03,977 resnet18 INFO: [RESULT]: Val. Epoch: 27, Best Score: -0.33434, time: 0.22394
+2021-02-22 20:31:03,978 resnet18 INFO: 
+2021-02-22T12:31:03.978178
+LR: 3.806023374435663e-05
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 2.152983213389559e-05, summary_loss: 0.00189, time: 0.24364:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 2.152983213389559e-05, summary_loss: 0.00189, time: 0.24364:  50%|█████     | 1/2 [00:00<00:00,  4.08it/s]Train Step 1/2, Learning rate 9.607359798384786e-06, summary_loss: 0.00158, time: 0.29153:  50%|█████     | 1/2 [00:00<00:00,  4.08it/s]Train Step 1/2, Learning rate 9.607359798384786e-06, summary_loss: 0.00158, time: 0.29153: 100%|██████████| 2/2 [00:00<00:00,  5.81it/s]2021-02-22 20:31:04,326 resnet18 INFO: [RESULT]: Train. Epoch: 28, summary_loss: 0.00158, time: 0.34814
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.13310:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.13310: 100%|██████████| 1/1 [00:00<00:00,  7.65it/s]Validate Step 0/1, time: 0.13310: 100%|██████████| 1/1 [00:00<00:00,  5.26it/s]2021-02-22 20:31:04,932 resnet18 INFO: [RESULT]: Val. Epoch: 28, Best Score: -0.38202, time: 0.20995
+2021-02-22 20:31:04,933 resnet18 INFO: 
+2021-02-22T12:31:04.933436
+LR: 9.607359798384786e-06
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 2.4076366639015913e-06, summary_loss: 0.00184, time: 0.24730:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 2.4076366639015913e-06, summary_loss: 0.00184, time: 0.24730:  50%|█████     | 1/2 [00:00<00:00,  4.02it/s]Train Step 1/2, Learning rate 0.001, summary_loss: 0.00153, time: 0.29370:  50%|█████     | 1/2 [00:00<00:00,  4.02it/s]                 Train Step 1/2, Learning rate 0.001, summary_loss: 0.00153, time: 0.29370: 100%|██████████| 2/2 [00:00<00:00,  5.68it/s]2021-02-22 20:31:05,290 resnet18 INFO: [RESULT]: Train. Epoch: 29, summary_loss: 0.00153, time: 0.35722
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.14447:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.14447: 100%|██████████| 1/1 [00:00<00:00,  7.02it/s]Validate Step 0/1, time: 0.14447: 100%|██████████| 1/1 [00:00<00:00,  4.84it/s]2021-02-22 20:31:05,943 resnet18 INFO: [RESULT]: Val. Epoch: 29, Best Score: -0.42544, time: 0.22028
+2021-02-22 20:31:05,943 resnet18 INFO: 
+2021-02-22T12:31:05.943786
+LR: 0.001
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0009993977281025862, summary_loss: 0.00182, time: 0.23406:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0009993977281025862, summary_loss: 0.00182, time: 0.23406:  50%|█████     | 1/2 [00:00<00:00,  4.25it/s]Train Step 1/2, Learning rate 0.0009975923633360985, summary_loss: 0.00152, time: 0.28076:  50%|█████     | 1/2 [00:00<00:00,  4.25it/s]Train Step 1/2, Learning rate 0.0009975923633360985, summary_loss: 0.00152, time: 0.28076: 100%|██████████| 2/2 [00:00<00:00,  5.98it/s]2021-02-22 20:31:06,282 resnet18 INFO: [RESULT]: Train. Epoch: 30, summary_loss: 0.00152, time: 0.33810
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.14272:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.14272: 100%|██████████| 1/1 [00:00<00:00,  7.12it/s]Validate Step 0/1, time: 0.14272: 100%|██████████| 1/1 [00:00<00:00,  4.94it/s]2021-02-22 20:31:06,914 resnet18 INFO: [RESULT]: Val. Epoch: 30, Best Score: -0.79785, time: 0.22224
+2021-02-22 20:31:06,915 resnet18 INFO: 
+2021-02-22T12:31:06.915222
+LR: 0.0009975923633360985
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0009945882549823905, summary_loss: 0.00193, time: 0.23349:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0009945882549823905, summary_loss: 0.00193, time: 0.23349:  50%|█████     | 1/2 [00:00<00:00,  4.26it/s]Train Step 1/2, Learning rate 0.0009903926402016153, summary_loss: 0.00174, time: 0.27624:  50%|█████     | 1/2 [00:00<00:00,  4.26it/s]Train Step 1/2, Learning rate 0.0009903926402016153, summary_loss: 0.00174, time: 0.27624: 100%|██████████| 2/2 [00:00<00:00,  6.02it/s]2021-02-22 20:31:07,251 resnet18 INFO: [RESULT]: Train. Epoch: 31, summary_loss: 0.00174, time: 0.33599
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.14418:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.14418: 100%|██████████| 1/1 [00:00<00:00,  7.04it/s]Validate Step 0/1, time: 0.14418: 100%|██████████| 1/1 [00:00<00:00,  4.87it/s]2021-02-22 20:31:07,897 resnet18 INFO: [RESULT]: Val. Epoch: 31, Best Score: -0.87346, time: 0.22015
+2021-02-22 20:31:07,897 resnet18 INFO: 
+2021-02-22T12:31:07.897788
+LR: 0.0009903926402016153
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.000985015626597272, summary_loss: 0.00205, time: 0.23619:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.000985015626597272, summary_loss: 0.00205, time: 0.23619:  50%|█████     | 1/2 [00:00<00:00,  4.21it/s]Train Step 1/2, Learning rate 0.0009784701678661044, summary_loss: 0.00175, time: 0.28268:  50%|█████     | 1/2 [00:00<00:00,  4.21it/s]Train Step 1/2, Learning rate 0.0009784701678661044, summary_loss: 0.00175, time: 0.28268: 100%|██████████| 2/2 [00:00<00:00,  5.77it/s]2021-02-22 20:31:08,249 resnet18 INFO: [RESULT]: Train. Epoch: 32, summary_loss: 0.00175, time: 0.35117
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.14286:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.14286: 100%|██████████| 1/1 [00:00<00:00,  7.12it/s]Validate Step 0/1, time: 0.14286: 100%|██████████| 1/1 [00:00<00:00,  4.87it/s]2021-02-22 20:31:08,954 resnet18 INFO: [RESULT]: Val. Epoch: 32, Best Score: -0.65666, time: 0.21961
+2021-02-22 20:31:08,955 resnet18 INFO: 
+2021-02-22T12:31:08.955287
+LR: 0.0009784701678661044
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0009707720325915104, summary_loss: 0.00147, time: 0.21206:   0%|          | 0/2 [00:00<?, ?it/s]Train Step 0/2, Learning rate 0.0009707720325915104, summary_loss: 0.00147, time: 0.21206:  50%|█████     | 1/2 [00:00<00:00,  4.68it/s]Train Step 1/2, Learning rate 0.0009619397662556434, summary_loss: 0.00130, time: 0.25629:  50%|█████     | 1/2 [00:00<00:00,  4.68it/s]Train Step 1/2, Learning rate 0.0009619397662556434, summary_loss: 0.00130, time: 0.25629: 100%|██████████| 2/2 [00:00<00:00,  6.38it/s]2021-02-22 20:31:09,273 resnet18 INFO: [RESULT]: Train. Epoch: 33, summary_loss: 0.00130, time: 0.31776
+
+Validating:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.13541:   0%|          | 0/1 [00:00<?, ?it/s]Validate Step 0/1, time: 0.13541: 100%|██████████| 1/1 [00:00<00:00,  7.50it/s]Validate Step 0/1, time: 0.13541: 100%|██████████| 1/1 [00:00<00:00,  5.07it/s]2021-02-22 20:31:09,927 resnet18 INFO: [RESULT]: Val. Epoch: 33, Best Score: -0.44542, time: 0.21601
+2021-02-22 20:31:09,928 resnet18 INFO: Early Stopping!
+

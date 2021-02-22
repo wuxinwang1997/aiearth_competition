@@ -8,5 +8,5 @@ from .simpleresnet import SimpleResnet
 
 
 def build_model(cfg):
-    model = SimpleResnet()
+    model = SimpleResnet(cfg)
     return model

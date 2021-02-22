@@ -97,8 +97,8 @@ class Fitter:
                 datas = datas.to(self.device).float()
                 outputs = self.model(datas)
                 for i in range(len(outputs)):
-                    self.all_predictions.append(outputs[i].numpy())
-                    self.all_labels.append(labels[i].numpy())
+                    self.all_predictions.append(outputs[i].cpu().numpy())
+                    self.all_labels.append(labels[i].cpu().numpy())
                 valid_loader.set_description(f'Validate Step {step}/{len(self.val_loader)}, ' + \
                                              f'time: {(time.time() - t):.5f}')
 

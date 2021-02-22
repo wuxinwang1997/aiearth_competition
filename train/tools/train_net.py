@@ -7,6 +7,7 @@
 import argparse
 import os
 import sys
+sys.path.append('.')
 from os import mkdir
 from config import cfg
 from data import make_data_loader
@@ -51,7 +52,7 @@ def main():
 
     args = parser.parse_args()
 
-    num_gpus = int(os.environ["WORLD_SIZE"]) if "WORLD_SIZE" in os.environ else 0
+    num_gpus = int(os.environ["WORLD_SIZE"]) if "WORLD_SIZE" in os.environ else 1
 
     if args.config_file != "":
         cfg.merge_from_file(args.config_file)
