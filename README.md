@@ -1,2 +1,2 @@
 # aiearth_competition
-My code for aiearth competition
+My code for aieatrh competition
