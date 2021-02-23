@@ -2,14 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68c37ce9-2442-44cb-a869-809c8fef2e9b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/test/usr_data/model_data/log.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/slurm-15041819.out" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/slurm-15041828.out" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/slurm-15041829.out" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/slurm-15041836.out" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/slurm-15041841.out" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/slurm-15041843.out" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/slurm-15041858.out" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/aiearth_competition.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/aiearth_competition.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/test/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/result/test_0144-01-12.npy" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +21,17 @@
       <list>
         <option value="Python Script" />
       </list>
+    </option>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
     </option>
   </component>
   <component name="Git.Settings">
@@ -35,9 +46,10 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/test/Dockerfile" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.alibabacloud.intellij.config.DockerServerConfigurable" />
   </component>
   <component name="RunManager" selected="Deploy to Registry / Kubernetes.Deploy to Registry">
     <configuration name="Deploy to Registry" type="DEPLOY_ACS_RUN_CONFIGURATION" factoryName="Deploy to ACR">
@@ -46,7 +58,7 @@
       <option name="autoVersion" value="false" />
       <option name="clusterType" value="ALI" />
       <option name="configFilePath" />
-      <option name="contextDirectory" value="D:\Study\Lab\Competition\AIEarth\code\aiearth_competition\test" />
+      <option name="contextDirectory" value="D:\Study\Lab\Competition\AIEarth\code\aiearth_competition\test\" />
       <option name="controllerType" />
       <option name="customRegistryId" value="0" />
       <option name="customRepository" value="false" />
@@ -55,7 +67,7 @@
       <option name="imageRepoNamespace" value="27wilson" />
       <option name="imageRepoRegionId" value="cn-shenzhen" />
       <option name="imageRepoStatus" />
-      <option name="imageRepoTagName" value="20210222211836" />
+      <option name="imageRepoTagName" value="1.0" />
       <option name="imageRepoType" />
       <option name="k8sClusterId" />
       <option name="k8sClusterName" />
@@ -144,7 +156,11 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1613992050149</updated>
-      <workItem from="1613992057014" duration="6781000" />
+      <workItem from="1613992057014" duration="7010000" />
+      <workItem from="1614000375356" duration="61000" />
+      <workItem from="1614000442231" duration="696000" />
+      <workItem from="1614012079054" duration="301000" />
+      <workItem from="1614040344375" duration="604000" />
     </task>
     <servers />
   </component>
@@ -161,6 +177,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/aiearth_competition$resnet18_predict.coverage" NAME="resnet18_predict Coverage Results" MODIFIED="1613999784633" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/code" />
