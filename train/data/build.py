@@ -19,12 +19,19 @@ def prepare_data(cfg):
         label = nc4.Dataset(cfg.DATASETS.ROOT_DIR + cfg.DATASETS.DATA_NAME + '_label.nc')
         sample_size = data.variables['sst'].shape[0]
         train_data = np.zeros((sample_size, cfg.DATASETS.Z_DIM, cfg.DATASETS.Y_DIM, cfg.DATASETS.X_DIM))
-        train_data[:, 0:12, :, :] = data.variables['sst'][:, 0:12, :, :]
-        train_data[:, 12:24, :, :] = data.variables['t300'][:, 0:12, :, :]
-        train_data[:, 24:36, :, :] = data.variables['ua'][:, 0:12, :, :]
-        train_data[:, 36:48, :, :] = data.variables['va'][:, 0:12, :, :]
-        data = np.array(train_data)
-        data[np.isnan(data)] = 0
+        sst = np.array(data.variables['sst'][:, 0:12, :, :])
+        sst[np.isnan(sst)] = np.nanmean(sst)
+        train_data[:, 0:12, :, :] = sst
+        t300 = np.array(data.variables['t300'][:, 0:12, :, :])
+        t300[np.isnan(t300)] =  np.nanmean(t300)
+        train_data[:, 12:24, :, :] = t300
+        ua = np.array(data.variables['ua'][:, 0:12, :, :])
+        ua[np.isnan(ua)] = np.nanmean(ua)
+        train_data[:, 24:36, :, :] = ua
+        va = np.array(data.variables['va'][:, 0:12, :, :])
+        va[np.isnan(va)] = np.nanmean(va)
+        train_data[:, 36:48, :, :] = va
+        data = train_data
         label = label.variables['nino']
         label = np.array(label)
         for i in range(sample_size):

@@ -35,7 +35,7 @@ class Fitter:
         self.model = model
         self.device = device
         self.model.to(self.device)
-        self.loss = torch.nn.MSELoss(reduce=True, size_average=True)
+        self.loss = torch.nn.MSELoss()
 
         self.optimizer = make_optimizer(cfg, model)
 
@@ -82,7 +82,6 @@ class Fitter:
             if self.early_stop_epochs > self.config.SOLVER.EARLY_STOP_PATIENCE:
                 self.logger.info('Early Stopping!')
                 break
-
             self.epoch += 1
 
     def validation(self):
@@ -109,6 +108,8 @@ class Fitter:
     def train_one_epoch(self):
         self.model.train()
         summary_loss = AverageMeter()
+        self.all_predictions = []
+        self.all_labels = []
         t = time.time()
         train_loader = tqdm(self.train_loader, total=len(self.train_loader), desc="Training")
         for step, (datas, labels) in enumerate(train_loader):
@@ -130,6 +131,9 @@ class Fitter:
                                          f'Learning rate {self.optimizer.param_groups[0]["lr"]}, ' + \
                                          f'summary_loss: {summary_loss.avg:.5f}, ' + \
                                          f'time: {(time.time() - t):.5f}')
+
+        #  if self.do_scheduler:
+        #    self.scheduler.step()
 
         return summary_loss
 

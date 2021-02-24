@@ -12,7 +12,7 @@ class SimpleResnet(nn.Module):
 
     def __init__(self, cfg):
         super().__init__()
-        self.model = models.resnet18(pretrained=False)
+        self.model = models.resnet50(pretrained=False)
         if cfg.MODEL.PRETRAINED_IMAGENET is not '':
             self.model.load_state_dict(torch.load(cfg.MODEL.PRETRAINED_IMAGENET))
         self.model.conv1 = nn.Conv2d(48, 64, kernel_size=7, stride=2, padding=3, bias=False)
