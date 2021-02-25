@@ -3,52 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="68c37ce9-2442-44cb-a869-809c8fef2e9b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/aiearth_competition.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/aiearth_competition.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/.idea/test.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/code/resnet18_predict.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/requirements.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/run.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/config/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/config/defaults.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/configs/train_wheat_detector.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/data/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/data/build.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/data/collate_batch.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/data/datasets/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/data/datasets/dataset.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/data/transforms/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/data/transforms/build.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/data/transforms/transforms.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/engine/average.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/engine/fitter.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/evaluate/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/evaluate/calculate_score.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/evaluate/evaluate.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/modeling/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/modeling/simpleresnet.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/solver/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/solver/build.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/solver/lr_scheduler.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/submit-1GPU.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/tests/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/tests/test_data_samplers.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/tools/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/tools/test_net.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/tools/train_net.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/utils/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/utils/logger.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modeling/miltiresnet.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/miltiresnet.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,7 +175,7 @@
       <workItem from="1614012079054" duration="301000" />
       <workItem from="1614040344375" duration="604000" />
       <workItem from="1614229877206" duration="5926000" />
-      <workItem from="1614257744412" duration="1516000" />
+      <workItem from="1614257744412" duration="1830000" />
     </task>
     <servers />
   </component>

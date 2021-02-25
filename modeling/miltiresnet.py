@@ -23,5 +23,3 @@ class MultiResnet(nn.Module):
         for i in range(24):
             preds.append(self.models[i](x))
         return preds
-
-
