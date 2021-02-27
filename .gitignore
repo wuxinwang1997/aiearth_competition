@@ -128,7 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-usr_data/model_data/cmip/
-usr_data/model_data/soda/
+usr_data/model_data/
 slurm*
-sub*
+

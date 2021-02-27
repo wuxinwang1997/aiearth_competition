@@ -1,4 +1,7 @@
 numpy
 netcdf4
 torch
+yacs
+tqdm
+sklearn
 torchvision

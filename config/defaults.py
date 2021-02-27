@@ -30,14 +30,12 @@ _C.VERBOSE = True
 _C.MODEL = CN()
 _C.MODEL.DEVICE = "cuda"
 _C.MODEL.NUM_CLASSES = 2
-_C.MODEL.PRETRAINED_IMAGENET = '/home/wangxiang/dat01/WWX/aiearth/pretrained/resnet18.pth'
-_C.MODEL.PRETRAINED_CMIP = '' # '/home/wangxiang/dat01/WWX/aiearth/aiearth_competition/test/usr_data/model_data/best-model.bin'
+_C.MODEL.PRETRAINED_IMAGENET = '/home/wangxiang/dat01/WWX/aiearth/pretrained/resnet50.pth'
 
 # -----------------------------------------------------------------------------
 # INPUT
 # -----------------------------------------------------------------------------
 _C.INPUT = CN()
-
 
 # -----------------------------------------------------------------------------
 # Dataset
@@ -46,7 +44,6 @@ _C.DATASETS = CN()
 # Root dir of dataset
 _C.DATASETS.ROOT_DIR = "/home/wangxiang/dat01/WWX/aiearth/data/enso_round1_train_20210201/"
 # Fold to validate
-_C.DATASETS.DATA_NAME = "CMIP"
 
 _C.DATASETS.X_DIM = 72
 _C.DATASETS.Y_DIM = 24
@@ -69,10 +66,10 @@ _C.DATALOADER.NUM_WORKERS = 2
 _C.SOLVER = CN()
 _C.SOLVER.OPTIMIZER_NAME = "Adam"
 _C.SOLVER.SCHEDULER_NAME = "CosineAnnealingWarmRestarts"
-_C.SOLVER.COS_CPOCH = 2
+_C.SOLVER.COS_CPOCH = 5
 _C.SOLVER.T_MUL = 2
 
-_C.SOLVER.MAX_EPOCHS = 30
+_C.SOLVER.MAX_EPOCHS = 80
 
 _C.SOLVER.BASE_LR = 1e-3
 _C.SOLVER.BIAS_LR_FACTOR = 1
@@ -83,9 +80,9 @@ _C.SOLVER.WEIGHT_DECAY = 0.0005
 _C.SOLVER.WEIGHT_DECAY_BIAS = 0
 _C.SOLVER.WEIGHT_DECAY_BN = 0
 
-_C.SOLVER.WARMUP_EPOCHS = 0
+_C.SOLVER.WARMUP_EPOCHS = 5
 
-_C.SOLVER.EARLY_STOP_PATIENCE = 25
+_C.SOLVER.EARLY_STOP_PATIENCE = 40
 
 _C.SOLVER.TRAIN_CHECKPOINT = False
 
@@ -98,9 +95,9 @@ _C.SOLVER.IMS_PER_BATCH = 64
 # see 2 images per batch
 _C.TEST = CN()
 _C.TEST.IMS_PER_BATCH = 64
-_C.TEST.WEIGHT = os.path.abspath(os.path.join(os.getcwd(), "../test/usr_data/model_data/cmip/"))+"/best-checkpoint.bin"
+_C.TEST.WEIGHT = os.path.abspath(os.path.join(os.getcwd(), "./usr_data/model_data/"))+"/best-checkpoint.bin"
 
 # ---------------------------------------------------------------------------- #
 # Misc options
 # ---------------------------------------------------------------------------- #
-_C.OUTPUT_DIR = os.path.abspath(os.path.join(os.getcwd(), "../test/usr_data/model_data/cmip/"))
+_C.OUTPUT_DIR = os.path.abspath(os.path.join(os.getcwd(), "./usr_data/model_data/"))

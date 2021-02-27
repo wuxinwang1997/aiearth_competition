@@ -2,4 +2,4 @@
 CURDIR="`dirname $0`" #获取此脚本所在目录
 echo $CURDIR
 cd $CURDIR #切换到该脚本所在目录
-python ./test/resnet_predict.py
+python ./test/predict.py

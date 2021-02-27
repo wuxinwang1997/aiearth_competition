@@ -4,7 +4,7 @@
 @contact: wuxin.wang@whu.edu.cn
 """
 
-from .miltiresnet import MultiResnet
+from .multiresnet import MultiResnet
 
 
 def build_model(cfg):

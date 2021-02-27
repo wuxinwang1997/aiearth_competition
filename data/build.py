@@ -14,8 +14,8 @@ from .collate_batch import collate_batch
 def prepare_cmip_data(cfg):
         mean = []
         std = []
-        cmip_data = nc4.Dataset(cfg.DATASETS.ROOT_DIR + cfg.DATASETS.DATA_NAME + 'CMIP_train.nc')
-        cmip_label = nc4.Dataset(cfg.DATASETS.ROOT_DIR + cfg.DATASETS.DATA_NAME + 'CMIP_label.nc')
+        cmip_data = nc4.Dataset(cfg.DATASETS.ROOT_DIR + 'CMIP_train.nc')
+        cmip_label = nc4.Dataset(cfg.DATASETS.ROOT_DIR + 'CMIP_label.nc')
         sample_size = cmip_data.variables['sst'].shape[0]
         train_data = np.zeros((sample_size, cfg.DATASETS.Z_DIM, cfg.DATASETS.Y_DIM, cfg.DATASETS.X_DIM))
         sst = np.array(cmip_data.variables['sst'][:, 0:12, :, :])
@@ -52,8 +52,8 @@ def prepare_cmip_data(cfg):
 def prepare_soda_data(cfg):
     mean = []
     std = []
-    soda_data = nc4.Dataset(cfg.DATASETS.ROOT_DIR + cfg.DATASETS.DATA_NAME + 'SODA_train.nc')
-    soda_label = nc4.Dataset(cfg.DATASETS.ROOT_DIR + cfg.DATASETS.DATA_NAME + 'SODA_label.nc')
+    soda_data = nc4.Dataset(cfg.DATASETS.ROOT_DIR + 'SODA_train.nc')
+    soda_label = nc4.Dataset(cfg.DATASETS.ROOT_DIR + 'SODA_label.nc')
     sample_size = soda_data.variables['sst'].shape[0]
     train_data = np.zeros((sample_size, cfg.DATASETS.Z_DIM, cfg.DATASETS.Y_DIM, cfg.DATASETS.X_DIM))
     sst = np.array(soda_data.variables['sst'][:, 0:12, :, :])
@@ -90,22 +90,22 @@ def prepare_data(cfg):
     for cmip_6 in range(15):
         for year in range(151):
             if year < int(151 * 0.8):
-                data_train.append((cmip_data[151*cmip_6 + year, 0:12, :, :], cmip_label[151*cmip_6 + year, 12:]))
+                data_train.append((cmip_data[151*cmip_6 + year, :, :, :], cmip_label[151*cmip_6 + year, 12:]))
             else:
-                data_val.append((cmip_data[151*cmip_6 + year, 0:12, :, :], cmip_label[151*cmip_6 + year, 12:]))
+                data_val.append((cmip_data[151*cmip_6 + year, :, :, :], cmip_label[151*cmip_6 + year, 12:]))
 
     for cmip_5 in range(17):
         for year in range(140):
             if year < int(140 * 0.8):
-                data_train.append((cmip_data[2264+140*cmip_5 + year, 0:12, :, :], cmip_label[2264+140*cmip_5 + year, 12:]))
+                data_train.append((cmip_data[2264+140*cmip_5 + year, :, :, :], cmip_label[2264+140*cmip_5 + year, 12:]))
             else:
-                data_val.append((cmip_data[2264+140*cmip_5 + year, 0:12, :, :], cmip_label[2264+140*cmip_5 + year, 12:]))
+                data_val.append((cmip_data[2264+140*cmip_5 + year, :, :, :], cmip_label[2264+140*cmip_5 + year, 12:]))
 
     for year in range(100):
         if year < int(100 * 0.8):
-            data_train.append((soda_data[4644 + year, 0:12, :, :], soda_label[4644 + year, 12:]))
+            data_train.append((soda_data[year, :, :, :], soda_label[year, 12:]))
         else:
-            data_val.append((soda_data[4644 + year, 0:12, :, :], soda_label[4644 + year, 12:]))
+            data_val.append((soda_data[year, :, :, :], soda_label[year, 12:]))
 
     return data_train, data_val
 
@@ -136,6 +136,7 @@ def make_data_loader(cfg, is_train=True):
     train_loader = data.DataLoader(
         dataset=train_dataset,
         batch_size=batch_size,
+        drop_last=True,
         num_workers=num_workers,
         pin_memory=False,
         shuffle=False)
@@ -144,6 +145,7 @@ def make_data_loader(cfg, is_train=True):
         val_dataset,
         batch_size=batch_size,
         num_workers=num_workers,
+        drop_last=True,
         shuffle=False,
         pin_memory=False,
     )
