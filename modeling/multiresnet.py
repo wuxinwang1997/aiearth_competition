@@ -16,7 +16,7 @@ class MultiResnet(nn.Module):
         self.model = nn.ModuleList(SimpleResnet(cfg) for i in range(24))
 
     def forward(self, x):
-        res = torch.zeros((x.shape[0], 24), dtype=torch.float).to('cuda')
+        res = torch.zeros((x.shape[0], 24), dtype=torch.float).to('cpu')
 
         for i, model in enumerate(self.model):
             y = model(x)

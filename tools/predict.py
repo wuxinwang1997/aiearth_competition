@@ -27,14 +27,14 @@ def main():
 
     args = parser.parse_args()
 
-    num_gpus = int(os.environ["WORLD_SIZE"]) if "WORLD_SIZE" in os.environ else 1
+    num_gpus = int(os.environ["WORLD_SIZE"]) if "WORLD_SIZE" in os.environ else 0
 
     if args.config_file != "":
         cfg.merge_from_file(args.config_file)
     cfg.merge_from_list(args.opts)
     cfg.freeze()
 
-    output_dir = cfg.OUTPUT_DIR
+    output_dir = cfg.RESULT_DIR
     if output_dir and not os.path.exists(output_dir):
         mkdir(output_dir)
 
@@ -52,7 +52,7 @@ def main():
     model = MultiResnet(cfg)
 
     model.load_state_dict(
-        torch.load(cfg.TEST.WEIGHT, map_location=torch.device('cpu'))['model_state_dict'])
+        torch.load(cfg.TEST.WEIGHT, map_location=cfg.MODEL.DEVICE)['model_state_dict'])
     model.eval()
 
     test_path = '../tcdata/enso_round1_test_20210201/'
@@ -63,7 +63,6 @@ def main():
     mean = []
     std = []
     vals = np.zeros((len(files), 48, 24, 72))
-    data_test = []
 
     for i in range(len(files)):
         val = np.load(test_path + files[i])

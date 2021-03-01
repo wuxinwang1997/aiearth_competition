@@ -28,9 +28,9 @@ _C.SEED = 66
 _C.VERBOSE = True
 
 _C.MODEL = CN()
-_C.MODEL.DEVICE = "cuda"
+_C.MODEL.DEVICE = "cpu"
 _C.MODEL.NUM_CLASSES = 2
-_C.MODEL.PRETRAINED_IMAGENET = '/home/wangxiang/dat01/WWX/aiearth/pretrained/resnet50.pth'
+_C.MODEL.PRETRAINED_IMAGENET = '' # '/home/wangxiang/dat01/WWX/aiearth/pretrained/resnet50.pth'
 
 # -----------------------------------------------------------------------------
 # INPUT
@@ -95,9 +95,10 @@ _C.SOLVER.IMS_PER_BATCH = 64
 # see 2 images per batch
 _C.TEST = CN()
 _C.TEST.IMS_PER_BATCH = 64
-_C.TEST.WEIGHT = os.path.abspath(os.path.join(os.getcwd(), "./usr_data/model_data/"))+"/best-checkpoint.bin"
+_C.TEST.WEIGHT = os.path.abspath(os.path.join(os.getcwd(), "../usr_data/model_data/"))+"/best-model.bin"
 
 # ---------------------------------------------------------------------------- #
 # Misc options
 # ---------------------------------------------------------------------------- #
-_C.OUTPUT_DIR = os.path.abspath(os.path.join(os.getcwd(), "./usr_data/model_data/"))
+_C.OUTPUT_DIR = os.path.abspath(os.path.join(os.getcwd(), "../usr_data/model_data/"))
+_C.RESULT_DIR = os.path.abspath(os.path.join(os.getcwd(), "../result"))

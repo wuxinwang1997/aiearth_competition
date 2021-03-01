@@ -2,9 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68c37ce9-2442-44cb-a869-809c8fef2e9b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/aiearth_competition.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/aiearth_competition.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modeling/miltiresnet.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/miltiresnet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/defaults.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/defaults.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modeling/miltiresnet.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modeling/multiresnet.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/multiresnet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/run.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/tools/predict.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usr_data/model_data/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/usr_data/model_data/log.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,26 +49,26 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/test" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../NUDT/深度学习方法与实践/assignments" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python tests.pytest in D:/Study/Lab/Competition/AIEarth/code/aiearth_competition/test/code/resnet_predict.py">
+  <component name="RunManager" selected="Deploy to Registry / Kubernetes.Deploy to Registry">
     <configuration name="Deploy to Registry" type="DEPLOY_ACS_RUN_CONFIGURATION" factoryName="Deploy to ACR">
       <option name="acrRegistryAddress" value="registry.cn-shenzhen.aliyuncs.com" />
       <option name="alreadyReset" value="true" />
       <option name="autoVersion" value="false" />
       <option name="clusterType" value="ALI" />
       <option name="configFilePath" />
-      <option name="contextDirectory" value="D:\Study\Lab\Competition\AIEarth\code\aiearth_competition\test\" />
+      <option name="contextDirectory" value="D:\Study\Lab\Competition\AIEarth\code\aiearth_competition" />
       <option name="controllerType" />
       <option name="customRegistryId" value="0" />
       <option name="customRepository" value="false" />
-      <option name="dockerfile" value="D:\Study\Lab\Competition\AIEarth\code\aiearth_competition\test\Dockerfile" />
+      <option name="dockerfile" value="D:\Study\Lab\Competition\AIEarth\code\aiearth_competition\Dockerfile" />
       <option name="imageRepoName" value="aiearth" />
       <option name="imageRepoNamespace" value="27wilson" />
       <option name="imageRepoRegionId" value="cn-shenzhen" />
       <option name="imageRepoStatus" />
-      <option name="imageRepoTagName" value="1.0" />
+      <option name="imageRepoTagName" value="multicnn1.0" />
       <option name="imageRepoType" />
       <option name="k8sClusterId" />
       <option name="k8sClusterName" />
@@ -73,6 +79,28 @@
       <option name="onlyDeployImage" value="true" />
       <option name="regionId" />
       <option name="registoryType" value="REGISTRY" />
+      <method v="2" />
+    </configuration>
+    <configuration name="predict" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="aiearth_competition" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tools" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tools/predict.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
     <configuration name="resnet18_predict" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -97,7 +125,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="train_net" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="text" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="aiearth_competition" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -105,12 +133,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/train/tools" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/train/tools/train_net.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/text.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -149,12 +177,20 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Deploy to Registry / Kubernetes.Deploy to Registry" />
+      <item itemvalue="Python.predict" />
+      <item itemvalue="Python.resnet18_predict" />
+      <item itemvalue="Python.text" />
+      <item itemvalue="Python tests.pytest in D:/Study/Lab/Competition/AIEarth/code/aiearth_competition/test/code/resnet_predict.py" />
+      <item itemvalue="Shell Script.run.sh" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.text" />
         <item itemvalue="Python tests.pytest in D:/Study/Lab/Competition/AIEarth/code/aiearth_competition/test/code/resnet_predict.py" />
         <item itemvalue="Shell Script.run.sh" />
         <item itemvalue="Python.resnet18_predict" />
-        <item itemvalue="Python.train_net" />
       </list>
     </recent_temporary>
   </component>
@@ -176,6 +212,12 @@
       <workItem from="1614040344375" duration="604000" />
       <workItem from="1614229877206" duration="5926000" />
       <workItem from="1614257744412" duration="1830000" />
+      <workItem from="1614411649625" duration="463000" />
+      <workItem from="1614412126771" duration="4237000" />
+      <workItem from="1614430770936" duration="5277000" />
+      <workItem from="1614510285935" duration="86000" />
+      <workItem from="1614511500259" duration="939000" />
+      <workItem from="1614559184756" duration="9879000" />
     </task>
     <servers />
   </component>
@@ -195,8 +237,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/aiearth_competition$text.coverage" NAME="text Coverage Results" MODIFIED="1614561055136" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/aiearth_competition$resnet18_predict.coverage" NAME="resnet18_predict Coverage Results" MODIFIED="1613999784633" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/code" />
     <SUITE FILE_PATH="coverage/aiearth_competition$pytest_in_resnet_predict_py.coverage" NAME="pytest in resnet_predict.py Coverage Results" MODIFIED="1614233349444" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/code" />
+    <SUITE FILE_PATH="coverage/aiearth_competition$predict.coverage" NAME="predict Coverage Results" MODIFIED="1614560874205" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tools" />
     <SUITE FILE_PATH="coverage/aiearth_competition$train_net.coverage" NAME="train_net Coverage Results" MODIFIED="1613995197763" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/train/tools" />
   </component>
 </project>
