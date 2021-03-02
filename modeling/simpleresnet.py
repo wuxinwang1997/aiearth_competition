@@ -12,15 +12,26 @@ class SimpleResnet(nn.Module):
 
     def __init__(self, cfg):
         super().__init__()
-        self.model = models.resnet50(pretrained=False)
-        if cfg.MODEL.PRETRAINED_IMAGENET is not '':
-            self.model.load_state_dict(torch.load(cfg.MODEL.PRETRAINED_IMAGENET))
-        self.model.conv1 = nn.Conv2d(48, 64, kernel_size=7, stride=2, padding=3, bias=False)
-        self.model.fc = nn.Linear(self.model.fc.in_features, 1)
-        nn.init.kaiming_normal_(self.model.conv1.weight, mode='fan_out', nonlinearity='relu')
+        self.model = nn.ModuleList([nn.Conv2d(in_channels=12, out_channels=12, kernel_size=i) for i in [3]]) 
+        # resnet = models.resnet18(pretrained=False)
+        # if cfg.MODEL.PRETRAINED_IMAGENET is not '':
+        #    resnet.load_state_dict(torch.load(cfg.MODEL.PRETRAINED_IMAGENET))
+        # resnet.conv1 = nn.Conv2d(12, 64, kernel_size=7, stride=2, padding=3, bias=False)
+        # nn.init.kaiming_normal_(resnet.conv1.weight, mode='fan_out', nonlinearity='relu')
+        #self.model = nn.Sequential(
+        #    resnet.conv1,
+        #    resnet.bn1,
+        #    resnet.relu,
+        #    resnet.maxpool,
+        #    resnet.layer1,
+        #    resnet.layer2,
+        #    resnet.layer3,
+        #    resnet.layer4
+        #)
 
     def forward(self, x):
-
-        return self.model(x)
+        for layer in self.model:
+            x = layer(x)
+        return x #self.model(x)
 
 

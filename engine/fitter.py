@@ -124,13 +124,15 @@ class Fitter:
             summary_loss.update(loss.item(), batch_size)
             self.optimizer.step()
 
-            if self.do_scheduler:
-                self.scheduler.step()
+            # if self.do_scheduler:
+            #     self.scheduler.step()
             train_loader.set_description(f'Train Step {step}/{len(self.train_loader)}, ' + \
                                          f'Learning rate {self.optimizer.param_groups[0]["lr"]}, ' + \
                                          f'summary_loss: {summary_loss.avg:.5f}, ' + \
                                          f'time: {(time.time() - t):.5f}')
-
+        
+       # if self.do_scheduler:
+       #     self.scheduler.step()
         return summary_loss
 
     def save(self, path):

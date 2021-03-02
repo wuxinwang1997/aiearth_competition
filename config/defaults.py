@@ -30,7 +30,7 @@ _C.VERBOSE = True
 _C.MODEL = CN()
 _C.MODEL.DEVICE = "cpu"
 _C.MODEL.NUM_CLASSES = 2
-_C.MODEL.PRETRAINED_IMAGENET = '' # '/home/wangxiang/dat01/WWX/aiearth/pretrained/resnet50.pth'
+_C.MODEL.PRETRAINED_IMAGENET = '/home/wangxiang/dat01/WWX/aiearth/pretrained/resnet18.pth'
 
 # -----------------------------------------------------------------------------
 # INPUT
@@ -66,12 +66,12 @@ _C.DATALOADER.NUM_WORKERS = 2
 _C.SOLVER = CN()
 _C.SOLVER.OPTIMIZER_NAME = "Adam"
 _C.SOLVER.SCHEDULER_NAME = "CosineAnnealingWarmRestarts"
-_C.SOLVER.COS_CPOCH = 5
-_C.SOLVER.T_MUL = 2
+_C.SOLVER.COS_EPOCH = 50 
+_C.SOLVER.T_MUL = 1
 
-_C.SOLVER.MAX_EPOCHS = 80
+_C.SOLVER.MAX_EPOCHS = 22
 
-_C.SOLVER.BASE_LR = 1e-3
+_C.SOLVER.BASE_LR = 8e-5
 _C.SOLVER.BIAS_LR_FACTOR = 1
 
 _C.SOLVER.MOMENTUM = 0.9
@@ -80,7 +80,7 @@ _C.SOLVER.WEIGHT_DECAY = 0.0005
 _C.SOLVER.WEIGHT_DECAY_BIAS = 0
 _C.SOLVER.WEIGHT_DECAY_BN = 0
 
-_C.SOLVER.WARMUP_EPOCHS = 5
+_C.SOLVER.WARMUP_EPOCHS = 0
 
 _C.SOLVER.EARLY_STOP_PATIENCE = 40
 
@@ -95,10 +95,10 @@ _C.SOLVER.IMS_PER_BATCH = 64
 # see 2 images per batch
 _C.TEST = CN()
 _C.TEST.IMS_PER_BATCH = 64
-_C.TEST.WEIGHT = os.path.abspath(os.path.join(os.getcwd(), "../usr_data/model_data/"))+"/best-model.bin"
+_C.TEST.WEIGHT = os.path.abspath(os.path.join(os.getcwd(), "../usr_data/model_data/"))+"/last-checkpoint.bin"
 
 # ---------------------------------------------------------------------------- #
 # Misc options
 # ---------------------------------------------------------------------------- #
-_C.OUTPUT_DIR = os.path.abspath(os.path.join(os.getcwd(), "../usr_data/model_data/"))
+_C.OUTPUT_DIR = os.path.abspath(os.path.join(os.getcwd(), "./usr_data/model_data/"))
 _C.RESULT_DIR = os.path.abspath(os.path.join(os.getcwd(), "../result"))

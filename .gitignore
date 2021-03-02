@@ -129,5 +129,4 @@ dmypy.json
 .pyre/
 
 usr_data/model_data/*.bin
-usr_data/model_data/cmip/
 slurm*

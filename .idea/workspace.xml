@@ -2,15 +2,50 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68c37ce9-2442-44cb-a869-809c8fef2e9b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/usr_data/model_data/best-model.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/usr_data/model_data/last-checkpoint.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/aiearth_competition.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/aiearth_competition.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/defaults.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/defaults.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modeling/miltiresnet.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/train_wheat_detector.yml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/train_wheat_detector.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/collate_batch.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/collate_batch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/datasets/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/datasets/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/datasets/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/datasets/dataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/transforms/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/transforms/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/transforms/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/transforms/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/transforms/transforms.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/transforms/transforms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/average.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/average.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/fitter.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/fitter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evaluate/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/evaluate/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evaluate/calculate_score.py" beforeDir="false" afterPath="$PROJECT_DIR$/evaluate/calculate_score.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evaluate/evaluate.py" beforeDir="false" afterPath="$PROJECT_DIR$/evaluate/evaluate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modeling/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modeling/multiresnet.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/multiresnet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modeling/simpleresnet.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/simpleresnet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/result/log.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/run.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/solver/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/solver/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/solver/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/solver/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/solver/lr_scheduler.py" beforeDir="false" afterPath="$PROJECT_DIR$/solver/lr_scheduler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/submit-1GPU.sh" beforeDir="false" afterPath="$PROJECT_DIR$/submit-1GPU.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/tools/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tools/predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/tools/predict.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/train_net.py" beforeDir="false" afterPath="$PROJECT_DIR$/tools/train_net.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usr_data/model_data/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/usr_data/model_data/log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/logger.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +73,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="ProjectId" id="1opmjm4BoCdsG1x737XZUuLZtse" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -49,7 +92,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../NUDT/深度学习方法与实践/assignments" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Dockerfile" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager" selected="Deploy to Registry / Kubernetes.Deploy to Registry">
@@ -59,16 +102,16 @@
       <option name="autoVersion" value="false" />
       <option name="clusterType" value="ALI" />
       <option name="configFilePath" />
-      <option name="contextDirectory" value="D:\Study\Lab\Competition\AIEarth\code\aiearth_competition" />
+      <option name="contextDirectory" value="D:\Study\Lab\Competition\AIEarth\code\baseline\aiearth_competition" />
       <option name="controllerType" />
       <option name="customRegistryId" value="0" />
       <option name="customRepository" value="false" />
-      <option name="dockerfile" value="D:\Study\Lab\Competition\AIEarth\code\aiearth_competition\Dockerfile" />
+      <option name="dockerfile" value="D:\Study\Lab\Competition\AIEarth\code\baseline\aiearth_competition\Dockerfile" />
       <option name="imageRepoName" value="aiearth" />
       <option name="imageRepoNamespace" value="27wilson" />
       <option name="imageRepoRegionId" value="cn-shenzhen" />
       <option name="imageRepoStatus" />
-      <option name="imageRepoTagName" value="multicnn1.0" />
+      <option name="imageRepoTagName" value="cnnlstm-baseline1.0" />
       <option name="imageRepoType" />
       <option name="k8sClusterId" />
       <option name="k8sClusterName" />
@@ -217,7 +260,10 @@
       <workItem from="1614430770936" duration="5277000" />
       <workItem from="1614510285935" duration="86000" />
       <workItem from="1614511500259" duration="939000" />
-      <workItem from="1614559184756" duration="9879000" />
+      <workItem from="1614559184756" duration="11429000" />
+      <workItem from="1614600959325" duration="3525000" />
+      <workItem from="1614611242267" duration="11436000" />
+      <workItem from="1614689474917" duration="477000" />
     </task>
     <servers />
   </component>
@@ -237,10 +283,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/aiearth_competition$text.coverage" NAME="text Coverage Results" MODIFIED="1614561055136" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/aiearth_competition$text.coverage" NAME="text Coverage Results" MODIFIED="1614689859482" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/aiearth_competition$resnet18_predict.coverage" NAME="resnet18_predict Coverage Results" MODIFIED="1613999784633" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/code" />
     <SUITE FILE_PATH="coverage/aiearth_competition$pytest_in_resnet_predict_py.coverage" NAME="pytest in resnet_predict.py Coverage Results" MODIFIED="1614233349444" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/code" />
-    <SUITE FILE_PATH="coverage/aiearth_competition$predict.coverage" NAME="predict Coverage Results" MODIFIED="1614560874205" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tools" />
+    <SUITE FILE_PATH="coverage/aiearth_competition$predict.coverage" NAME="predict Coverage Results" MODIFIED="1614689847461" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tools" />
     <SUITE FILE_PATH="coverage/aiearth_competition$train_net.coverage" NAME="train_net Coverage Results" MODIFIED="1613995197763" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/train/tools" />
   </component>
 </project>
