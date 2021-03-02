@@ -128,5 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# User data
 usr_data/model_data/*.bin
 slurm*

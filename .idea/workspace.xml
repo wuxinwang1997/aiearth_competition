@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68c37ce9-2442-44cb-a869-809c8fef2e9b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/usr_data/model_data/best-model.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/usr_data/model_data/last-checkpoint.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/aiearth_competition.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/aiearth_competition.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
@@ -32,9 +30,8 @@
       <change beforePath="$PROJECT_DIR$/evaluate/evaluate.py" beforeDir="false" afterPath="$PROJECT_DIR$/evaluate/evaluate.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modeling/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modeling/multiresnet.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/multiresnet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modeling/simpleresnet.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/simpleresnet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modeling/simpleresnet.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/simplecnn.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/log.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/run.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/solver/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/solver/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/solver/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/solver/build.py" afterDir="false" />
@@ -43,6 +40,8 @@
       <change beforePath="$PROJECT_DIR$/tools/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/tools/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tools/predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/tools/predict.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tools/train_net.py" beforeDir="false" afterPath="$PROJECT_DIR$/tools/train_net.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usr_data/model_data/best-model.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usr_data/model_data/best-model.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usr_data/model_data/last-checkpoint.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usr_data/model_data/last-checkpoint.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usr_data/model_data/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/usr_data/model_data/log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/logger.py" afterDir="false" />
@@ -92,7 +91,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Dockerfile" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager" selected="Deploy to Registry / Kubernetes.Deploy to Registry">
@@ -203,7 +202,7 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="pytest in D:/Study/Lab/Competition/AIEarth/code/aiearth_competition/test/code/resnet_predict.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest in D:/Study/Lab/Competition/AIEarth/code/baseline/aiearth_competition/test/code/resnet_predict.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="aiearth_competition" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -225,13 +224,13 @@
       <item itemvalue="Python.predict" />
       <item itemvalue="Python.resnet18_predict" />
       <item itemvalue="Python.text" />
-      <item itemvalue="Python tests.pytest in D:/Study/Lab/Competition/AIEarth/code/aiearth_competition/test/code/resnet_predict.py" />
       <item itemvalue="Shell Script.run.sh" />
+      <item itemvalue="Python tests.pytest in D:/Study/Lab/Competition/AIEarth/code/baseline/aiearth_competition/test/code/resnet_predict.py" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.text" />
-        <item itemvalue="Python tests.pytest in D:/Study/Lab/Competition/AIEarth/code/aiearth_competition/test/code/resnet_predict.py" />
+        <item itemvalue="Python tests.pytest in D:/Study/Lab/Competition/AIEarth/code/baseline/aiearth_competition/test/code/resnet_predict.py" />
         <item itemvalue="Shell Script.run.sh" />
         <item itemvalue="Python.resnet18_predict" />
       </list>
@@ -263,7 +262,8 @@
       <workItem from="1614559184756" duration="11429000" />
       <workItem from="1614600959325" duration="3525000" />
       <workItem from="1614611242267" duration="11436000" />
-      <workItem from="1614689474917" duration="477000" />
+      <workItem from="1614689474917" duration="3991000" />
+      <workItem from="1614700935107" duration="305000" />
     </task>
     <servers />
   </component>

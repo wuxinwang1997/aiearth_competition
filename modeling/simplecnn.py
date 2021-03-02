@@ -8,8 +8,7 @@ import torch
 from torch import nn
 import torchvision.models as models
 
-class SimpleResnet(nn.Module):
-
+class SimpleCNN(nn.Module):
     def __init__(self, cfg):
         super().__init__()
         self.model = nn.ModuleList([nn.Conv2d(in_channels=12, out_channels=12, kernel_size=i) for i in [3]]) 

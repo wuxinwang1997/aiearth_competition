@@ -7,123 +7,59 @@
 import netCDF4 as nc4
 import numpy as np
 import torch.utils.data as data
-from .datasets.dataset import TrainDataset
+from .datasets.dataset import EarthDataset
 from .transforms.build import build_transforms
 from .collate_batch import collate_batch
 
 def prepare_cmip_data(cfg):
-        mean = []
-        std = []
-        cmip_data = nc4.Dataset(cfg.DATASETS.ROOT_DIR + 'CMIP_train.nc')
-        cmip_label = nc4.Dataset(cfg.DATASETS.ROOT_DIR + 'CMIP_label.nc')
-        sample_size = cmip_data.variables['sst'].shape[0]
-        train_data = np.zeros((sample_size, cfg.DATASETS.Z_DIM, cfg.DATASETS.Y_DIM, cfg.DATASETS.X_DIM))
-        sst = np.array(cmip_data.variables['sst'][:, 0:12, :, :])
-        for i in range(12):
-            sst = np.nan_to_num(sst)
-            #sst[:, i, :, :][np.isnan(sst[:, i, :, :])] = np.nanmean(sst[:, i, :, :])
-            mean.append(np.nanmean(sst[:, i, :, :]))
-            std.append(np.nanstd(sst[:, i, :, :]))
-        train_data[:, 0:12, :, :] = sst
-        t300 = np.array(cmip_data.variables['t300'][:, 0:12, :, :])
-        for i in range(12):
-            t300 = np.nan_to_num(t300)
-            # t300[:, i, :, :][np.isnan(t300[:, i, :, :])] = np.nanmean(t300[:, i, :, :])
-            mean.append(np.nanmean(t300[:, i, :, :]))
-            std.append(np.nanstd(t300[:, i, :, :]))
-        train_data[:, 12:24, :, :] = t300
-        ua = np.array(cmip_data.variables['ua'][:, 0:12, :, :])
-        for i in range(12):
-            ua = np.nan_to_num(ua)
-            # ua[:, i, :, :][np.isnan(ua[:, i, :, :])] = np.nanmean(ua[:, i, :, :])
-            mean.append(np.nanmean(ua[:, i, :, :]))
-            std.append(np.nanstd(ua[:, i, :, :]))
-        train_data[:, 24:36, :, :] = ua
-        va = np.array(cmip_data.variables['va'][:, 0:12, :, :])
-        for i in range(12):
-            va = np.nan_to_num(va)
-            #va[:, i, :, :][np.isnan(va[:, i, :, :])] = np.nanmean(va[:, i, :, :])
-            mean.append(np.nanmean(va[:, i, :, :]))
-            std.append(np.nanstd(va[:, i, :, :]))
-        train_data[:, 36:48, :, :] = va
-        cmip_data = train_data
-        cmip_label = cmip_label.variables['nino']
-        cmip_label = np.array(cmip_label)
-
-        return cmip_data, cmip_label, mean, std
+    cmip_data = nc4.Dataset(cfg.DATASETS.ROOT_DIR + 'CMIP_train.nc')
+    cmip_label = nc4.Dataset(cfg.DATASETS.ROOT_DIR + 'CMIP_label.nc')
+    cmip_sst = cmip_data['sst'][:, 0:12].values
+    cmip_sst = np.nan_to_num(cmip_sst)
+    cmip_t300 = cmip_data['t300'][:, 0:12].values
+    cmip_t300 = np.nan_to_num(cmip_t300)
+    cmip_ua = cmip_data['ua'][:, 0:12, :, :].values
+    cmip_ua = np.nan_to_num(cmip_ua)
+    cmip_va = cmip_data['va'][:, 0:12, :, :].values
+    cmip_va = np.nan_to_num(cmip_va)
+    cmip_label = cmip_label['nino'][:,12:36].values
+    cmip_label = np.array(cmip_label)
+    dict_cmip = {
+        'sst':cmip_sst,
+        't300':cmip_t300,
+        'ua':cmip_ua,
+        'va': cmip_va,
+        'label': cmip_label
+        }
+    return dict_cmip
 
 
 def prepare_soda_data(cfg):
-    mean = []
-    std = []
     soda_data = nc4.Dataset(cfg.DATASETS.ROOT_DIR + 'SODA_train.nc')
     soda_label = nc4.Dataset(cfg.DATASETS.ROOT_DIR + 'SODA_label.nc')
-    sample_size = soda_data.variables['sst'].shape[0]
-    train_data = np.zeros((sample_size, cfg.DATASETS.Z_DIM, cfg.DATASETS.Y_DIM, cfg.DATASETS.X_DIM))
-    sst = np.array(soda_data.variables['sst'][:, 0:12, :, :])
-    for i in range(12):
-        mean.append(np.nanmean(sst[:, i, :, :]))
-        std.append(np.nanstd(sst[:, i, :, :]))
-    train_data[:, 0:12, :, :] = sst
-    t300 = np.array(soda_data.variables['t300'][:, 0:12, :, :])
-    for i in range(12):
-        mean.append(np.nanmean(t300[:, i, :, :]))
-        std.append(np.nanstd(t300[:, i, :, :]))
-    train_data[:, 12:24, :, :] = t300
-    ua = np.array(soda_data.variables['ua'][:, 0:12, :, :])
-    for i in range(12):
-        mean.append(np.nanmean(ua[:, i, :, :]))
-        std.append(np.nanstd(ua[:, i, :, :]))
-    train_data[:, 24:36, :, :] = ua
-    va = np.array(soda_data.variables['va'][:, 0:12, :, :])
-    for i in range(12):
-        mean.append(np.nanmean(va[:, i, :, :]))
-        std.append(np.nanstd(va[:, i, :, :]))
-    train_data[:, 36:48, :, :] = va
-    soda_data = train_data
-    soda_label = soda_label.variables['nino']
-    soda_label = np.array(soda_label)
-
-    return soda_data, soda_label, mean, std
-
-def prepare_data(cfg):
-    data_train = []
-    data_val = []
-    cmip_data, cmip_label, cmip_mean, cmip_std = prepare_cmip_data(cfg)
-    soda_data, soda_label, soda_mean, soda_std = prepare_soda_data(cfg)
-    for cmip_6 in range(15):
-        for year in range(151):
-        #    if year not in [6, 7, 8, 9, 13]:
-            if year < int(151 * 1):
-                data_train.append((cmip_data[151*cmip_6 + year, :, :, :], cmip_label[151*cmip_6 + year, 12:]))
-            else:
-                data_val.append((cmip_data[151*cmip_6 + year, :, :, :], cmip_label[151*cmip_6 + year, 12:]))
-
-    for cmip_5 in range(17):
-        for year in range(140):
-            if year < int(140 * 1):
-                data_train.append((cmip_data[2264+140*cmip_5 + year, :, :, :], cmip_label[2264+140*cmip_5 + year, 12:]))
-            else:
-                data_val.append((cmip_data[2264+140*cmip_5 + year, :, :, :], cmip_label[2264+140*cmip_5 + year, 12:]))
-
-    for year in range(100):
-        if year < int(100 * 0):
-            data_train.append((soda_data[year, :, :, :], soda_label[year, 12:]))
-        else:
-            data_val.append((soda_data[year, :, :, :], soda_label[year, 12:]))
-
-    return data_train, data_val
-
+    soda_sst = soda_data['sst'][:, 0:12].values
+    soda_t300 = soda_data['t300'][:, 0:12].values
+    soda_ua = soda_data['ua'][:, 0:12].values
+    soda_va = soda_data['va'][:, 0:12].values
+    soda_label = soda_label['nino'][:, 12:36].values
+    dict_soda = {
+        'sst':soda_sst,
+        't300':soda_t300,
+        'ua':soda_ua,
+        'va':soda_va,
+        'label':soda_label
+        }
+    return dict_soda
 
 def build_dataset(cfg):
-    data_train, data_val = prepare_data(cfg)
-    train_dataset = TrainDataset(
-        data_list = data_train,
+    dict_cmip, dict_soda = prepare_cmip_data(cfg), prepare_soda_data(cfg)
+    train_dataset = EarthDataset(
+        data_dict = dict_cmip,
         transforms=build_transforms(cfg, is_train=True),
     )
 
-    val_dataset = TrainDataset(
-        data_list=data_val,
+    val_dataset = EarthDataset(
+        data_dict = dict_soda,
         transforms=build_transforms(cfg, is_train=False),
     )
 

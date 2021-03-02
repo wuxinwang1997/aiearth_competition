@@ -42,7 +42,6 @@ class Fitter:
         self.scheduler = make_scheduler(cfg, self.optimizer, train_loader)
 
         self.logger.info(f'Fitter prepared. Device is {self.device}')
-        self.all_predictions = []
         self.early_stop_epochs = 0
         self.early_stop_patience = self.config.SOLVER.EARLY_STOP_PATIENCE
         self.do_scheduler = True
@@ -88,21 +87,24 @@ class Fitter:
     def validation(self):
         self.model.eval()
         t = time.time()
-        self.all_predictions = []
-        self.all_labels = []
+        y_true = []
+        y_pred = []
         torch.cuda.empty_cache()
         valid_loader = tqdm(self.val_loader, total=len(self.val_loader), desc="Validating")
         with torch.no_grad():
-            for step, (datas, labels) in enumerate(valid_loader):
-                datas = datas.to(self.device).float()
-                outputs = self.model(datas)
-                for i in range(len(outputs)):
-                    self.all_predictions.append(outputs[i].cpu().numpy())
-                    self.all_labels.append(labels[i].cpu().numpy())
+            for step, ((sst, t300, ua, va), labels) in enumerate(valid_loader):
+                sst = sst.to(self.device).float()
+                t300 = t300.to(self.device).float()
+                ua = ua.to(self.device).float()
+                va = va.to(self.device).float()
+                outputs = self.model((sst, t300, ua, va))
+                y_pred.append(outputs)
+                y_true.append(labels)
                 valid_loader.set_description(f'Validate Step {step}/{len(self.val_loader)}, ' + \
                                              f'time: {(time.time() - t):.5f}')
-
-        score = evaluate(np.array(self.all_labels), np.array(self.all_predictions))
+        y_true = torch.cat(y_true, axis=0)
+        y_pred = torch.cat(y_pred, axis=0)
+        score = evaluate(y_true.cpu().detach().numpy(), y_pred.cpu().detach().numpy())
 
         return score
 
@@ -111,17 +113,19 @@ class Fitter:
         summary_loss = AverageMeter()
         t = time.time()
         train_loader = tqdm(self.train_loader, total=len(self.train_loader), desc="Training")
-        for step, (datas, labels) in enumerate(train_loader):
-            datas = datas.to(self.device).float()
-            batch_size = datas.shape[0]
+        for step, ((sst, t300, ua, va), labels) in enumerate(train_loader):
+            sst = sst.to(self.device).float()
+            t300 = t300.to(self.device).float()
+            ua = ua.to(self.device).float()
+            va = va.to(self.device).float()
             labels = labels.to(self.device).float()
             self.optimizer.zero_grad()
-            outputs = self.model(datas)
+            outputs = self.model((sst, t300, ua, va))
             loss = self.loss(outputs, labels)
 
             loss.backward()
 
-            summary_loss.update(loss.item(), batch_size)
+            summary_loss.update(loss.item(), sst.shape[0])
             self.optimizer.step()
 
             # if self.do_scheduler:

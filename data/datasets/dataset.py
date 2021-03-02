@@ -6,23 +6,21 @@
 
 from torch.utils.data import Dataset
 
-class TrainDataset(Dataset):
+class EarthDataset(Dataset):
     """
     Example dataset class for loading images from folder and converting them to monochromatic.
     Can be used to perform inference with trained MNIST model.
     'Dataset' type classes can also be used to create 'DataLoader' type classes which are used by datamodules.
     """
 
-    def __init__(self, data_list, transforms):
-        self.data_list = data_list
+    def __init__(self, data_dict, transforms):
+        self.data_dict = data_dict
         self.transform = transforms
-        self.len = len(self.data_list)
+        self.len = len(self.data_dict['sst'])
 
     def __getitem__(self, idx):
         index = idx % self.len
-        img = self.data_list[index][0]
-        label = self.data_list[index][1]
-        return img, label
+        return  self.data_dict(self.data['sst'][idx], self.data['t300'][idx], self.data['ua'][idx], self.data['va'][idx]), self.data_dict['label'][idx]
 
     def __len__(self):
         return self.len
@@ -33,5 +31,6 @@ class TrainDataset(Dataset):
         :param data:
         :return:
         '''
-        data = self.transform(data)
+        for i in range(4):
+            data[i] = self.transform(data[i])
         return data
