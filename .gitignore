@@ -133,4 +133,4 @@ usr_data/model_data/cmip/
 slurm*
 
 # MacOS
-*.DS_Store
+.DS_Store
