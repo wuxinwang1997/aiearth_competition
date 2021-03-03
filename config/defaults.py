@@ -43,6 +43,7 @@ _C.INPUT = CN()
 _C.DATASETS = CN()
 # Root dir of dataset
 _C.DATASETS.ROOT_DIR = "/home/wangxiang/dat01/WWX/aiearth/data/enso_round1_train_20210201/"
+_C.DATASETS.TEST_DIR = os.path.abspath(os.path.join(os.getcwd(), "./tcdata/enso_round1_test_20210201/"))
 # Fold to validate
 
 _C.DATASETS.X_DIM = 72

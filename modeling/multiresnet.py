@@ -13,10 +13,10 @@ class MultiResnet(nn.Module):
 
     def __init__(self, cfg):
         super().__init__()
-        self.conv1 = SimpleCNN(cfg)
-        self.conv2 = SimpleCNN(cfg)
-        self.conv3 = SimpleCNN(cfg)
-        self.conv4 = SimpleCNN(cfg)
+        self.conv1 = nn.ModuleList([nn.Conv2d(in_channels=12, out_channels=12, kernel_size=i) for i in [3]]) 
+        self.conv2 = nn.ModuleList([nn.Conv2d(in_channels=12, out_channels=12, kernel_size=i) for i in [3]])
+        self.conv3 = nn.ModuleList([nn.Conv2d(in_channels=12, out_channels=12, kernel_size=i) for i in [3]])
+        self.conv4 = nn.ModuleList([nn.Conv2d(in_channels=12, out_channels=12, kernel_size=i) for i in [3]])
         self.avgpool = nn.AdaptiveAvgPool2d((1,128))
         self.lstm = nn.LSTM(input_size=1540 * 4 ,hidden_size=64,num_layers=2,batch_first=True,bidirectional=True)
         self.batch_norm = nn.BatchNorm1d(12, affine=False)
@@ -36,7 +36,7 @@ class MultiResnet(nn.Module):
         sst = torch.flatten(sst, start_dim=2)
         t300 = torch.flatten(t300, start_dim=2)
         ua = torch.flatten(ua, start_dim=2)
-        va = torch.flatten(va, start_dim=3)
+        va = torch.flatten(va, start_dim=2)
 
         output = torch.cat([sst, t300, ua, va], dim=-1)
         output = self.batch_norm(output)
