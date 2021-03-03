@@ -31,7 +31,7 @@ def seed_everything(seed):
 def predict(cfg, logger):
     seed_everything(cfg.SEED)
     model = build_model(cfg)
-    model.load_state_dict(torch.load(cfg.TEST.WEIGHTS)['model_state_dict'])
+    model.load_state_dict(torch.load(cfg.TEST.WEIGHT)['model_state_dict'])
     device = cfg.MODEL.DEVICE
 
     test_loader = make_test_data_loader(cfg)

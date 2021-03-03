@@ -133,7 +133,7 @@ def make_data_loader(cfg, is_train=True):
 def make_test_data_loader(cfg):
     batch_size = cfg.TEST.IMS_PER_BATCH
 
-    test_dataset = build_dataset(cfg)
+    test_dataset = build_test_dataset(cfg)
 
     num_workers = cfg.DATALOADER.NUM_WORKERS
     test_loader = data.DataLoader(

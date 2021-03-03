@@ -27,6 +27,7 @@ class Predicter:
         self.base_dir = f'{self.config.RESULT_DIR}'
         if not os.path.exists(self.base_dir):
             os.makedirs(self.base_dir)
+        self.result_path = f'{self.config.RESULT_PATH}'
 
         self.logger = logger
 
@@ -49,17 +50,23 @@ class Predicter:
                 ua = ua.to(self.device).float()
                 va = va.to(self.device).float()
                 outputs = self.model((sst, t300, ua, va))
-                for i in range(name.shape[0]):
+                for i in range(len(name)):
                     test_predicts_dict[name[i]] = outputs[i].reshape(-1, )
                 test_loader.set_description(f'Test Step {step}/{len(self.test_loader)}, ' + \
                                              f'time: {(time.time() - t):.5f}')
         for file_name, val in test_predicts_dict.items():
-            np.save('../result/' + file_name, val.detach().numpy())
-
-        self.make_zip()
+            np.save(self.base_dir + file_name, val.cpu().detach().numpy())
+            val = np.load(self.base_dir+file_name)
+            print("----type----")
+            print(type(val))
+            print("----shape----")
+            print(val.shape)
+            print("----data----")
+            print(val)
+        self.make_zip(self.base_dir, self.result_path)
 
     # 打包目录为zip文件（未压缩）
-    def make_zip(self, source_dir='../result/', output_filename='../result.zip'):
+    def make_zip(self, source_dir, output_filename):
         zipf = zipfile.ZipFile(output_filename, 'w')
         pre_len = len(os.path.dirname(source_dir))
         source_dirs = os.walk(source_dir)

@@ -130,4 +130,5 @@ dmypy.json
 
 # User data
 usr_data/model_data/*.bin
+usr_data/model_data/baseline/*.bin
 slurm*

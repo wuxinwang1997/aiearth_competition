@@ -16,6 +16,9 @@ class TestDataset(Dataset):
         idx = idx%self.len
         return  (self.data_dict['sst'][idx], self.data_dict['t300'][idx], self.data_dict['ua'][idx], self.data_dict['va'][idx]), self.data_dict['name'][idx]
 
+    def __len__(self):
+        return self.len
+
     def data_preproccess(self, data):
         for i in range(4):
             data[i] = self.transform(data[i])

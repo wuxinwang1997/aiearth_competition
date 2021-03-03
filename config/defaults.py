@@ -43,7 +43,7 @@ _C.INPUT = CN()
 _C.DATASETS = CN()
 # Root dir of dataset
 _C.DATASETS.ROOT_DIR = "/home/wangxiang/dat01/WWX/aiearth/data/enso_round1_train_20210201/"
-_C.DATASETS.TEST_DIR = os.path.abspath(os.path.join(os.getcwd(), "./tcdata/enso_round1_test_20210201/"))
+_C.DATASETS.TEST_DIR = os.path.abspath(os.path.join(os.getcwd(), "./tcdata/enso_round1_test_20210201/"))+'/'
 # Fold to validate
 
 _C.DATASETS.X_DIM = 72
@@ -102,4 +102,5 @@ _C.TEST.WEIGHT = os.path.abspath(os.path.join(os.getcwd(), "./usr_data/model_dat
 # Misc options
 # ---------------------------------------------------------------------------- #
 _C.OUTPUT_DIR = os.path.abspath(os.path.join(os.getcwd(), "./usr_data/model_data/baseline/"))
-_C.RESULT_DIR = os.path.abspath(os.path.join(os.getcwd(), "./result"))
+_C.RESULT_DIR = os.path.abspath(os.path.join(os.getcwd(), "./result/"))
+_C.RESULT_PATH = os.path.abspath(os.path.join(os.getcwd(), "./result.zip"))

@@ -1,0 +1,153 @@
+2021-03-03 11:02:28,461 resnet18 INFO: Using 1 GPUS
+2021-03-03 11:02:28,462 resnet18 INFO: Namespace(config_file='', opts=[])
+2021-03-03 11:02:28,463 resnet18 INFO: Running with config:
+DATALOADER:
+  NUM_WORKERS: 2
+DATASETS:
+  ROOT_DIR: /home/wangxiang/dat01/WWX/aiearth/data/enso_round1_train_20210201/
+  TEST_DIR: /dat01/wangxiang/WWX/aiearth/baseline/aiearth_competition/tcdata/enso_round1_test_20210201
+  X_DIM: 72
+  Y_DIM: 24
+  Z_DIM: 48
+DEBUG: False
+INPUT:
+  
+MODEL:
+  DEVICE: cuda
+  NUM_CLASSES: 2
+  PRETRAINED_IMAGENET: /home/wangxiang/dat01/WWX/aiearth/pretrained/resnet18.pth
+OUTPUT_DIR: /dat01/wangxiang/WWX/aiearth/baseline/aiearth_competition/usr_data/model_data/baseline
+RESULT_DIR: /dat01/wangxiang/WWX/aiearth/baseline/aiearth_competition/result
+SEED: 66
+SOLVER:
+  BASE_LR: 8e-05
+  BIAS_LR_FACTOR: 1
+  COS_EPOCH: 50
+  EARLY_STOP_PATIENCE: 40
+  IMS_PER_BATCH: 64
+  MAX_EPOCHS: 22
+  MOMENTUM: 0.9
+  OPTIMIZER_NAME: Adam
+  SCHEDULER_NAME: CosineAnnealingWarmRestarts
+  TRAIN_CHECKPOINT: False
+  T_MUL: 1
+  WARMUP_EPOCHS: 0
+  WEIGHT_DECAY: 0.0005
+  WEIGHT_DECAY_BIAS: 0
+  WEIGHT_DECAY_BN: 0
+TEST:
+  IMS_PER_BATCH: 64
+  WEIGHT: /dat01/wangxiang/WWX/aiearth/baseline/aiearth_competition/usr_data/model_data/baseline/best-model.bin
+VERBOSE: True
+2021-03-03 11:05:23,318 resnet18 INFO: Fitter prepared. Device is cuda
+2021-03-03 11:05:23,318 resnet18 INFO: Start training
+2021-03-03 11:05:23,319 resnet18 INFO: 
+2021-03-03T03:05:23.319241
+LR: 8e-05
+2021-03-03 11:05:27,699 resnet18 INFO: [RESULT]: Train. Epoch: 0, summary_loss: 0.73838, time: 4.38007
+2021-03-03 11:05:27,989 resnet18 INFO: [RESULT]: Val. Epoch: 0, Best Score: -16.61503, time: 0.17479
+2021-03-03 11:05:28,092 resnet18 INFO: 
+2021-03-03T03:05:28.092627
+LR: 8e-05
+2021-03-03 11:05:31,568 resnet18 INFO: [RESULT]: Train. Epoch: 1, summary_loss: 0.71259, time: 3.47548
+2021-03-03 11:05:31,822 resnet18 INFO: [RESULT]: Val. Epoch: 1, Best Score: -9.95365, time: 0.13194
+2021-03-03 11:05:31,943 resnet18 INFO: 
+2021-03-03T03:05:31.943674
+LR: 8e-05
+2021-03-03 11:05:35,574 resnet18 INFO: [RESULT]: Train. Epoch: 2, summary_loss: 0.63296, time: 3.63012
+2021-03-03 11:05:35,859 resnet18 INFO: [RESULT]: Val. Epoch: 2, Best Score: -2.87169, time: 0.16673
+2021-03-03 11:05:36,017 resnet18 INFO: 
+2021-03-03T03:05:36.017492
+LR: 8e-05
+2021-03-03 11:05:39,962 resnet18 INFO: [RESULT]: Train. Epoch: 3, summary_loss: 0.55311, time: 3.94483
+2021-03-03 11:05:40,246 resnet18 INFO: [RESULT]: Val. Epoch: 3, Best Score: 0.34406, time: 0.14717
+2021-03-03 11:05:40,372 resnet18 INFO: 
+2021-03-03T03:05:40.372743
+LR: 8e-05
+2021-03-03 11:05:43,382 resnet18 INFO: [RESULT]: Train. Epoch: 4, summary_loss: 0.50396, time: 3.00953
+2021-03-03 11:05:43,631 resnet18 INFO: [RESULT]: Val. Epoch: 4, Best Score: 1.20382, time: 0.14870
+2021-03-03 11:05:43,753 resnet18 INFO: 
+2021-03-03T03:05:43.753432
+LR: 8e-05
+2021-03-03 11:05:46,633 resnet18 INFO: [RESULT]: Train. Epoch: 5, summary_loss: 0.46416, time: 2.88019
+2021-03-03 11:05:46,871 resnet18 INFO: [RESULT]: Val. Epoch: 5, Best Score: 1.38373, time: 0.14401
+2021-03-03 11:05:47,006 resnet18 INFO: 
+2021-03-03T03:05:47.006766
+LR: 8e-05
+2021-03-03 11:05:50,824 resnet18 INFO: [RESULT]: Train. Epoch: 6, summary_loss: 0.42693, time: 3.81693
+2021-03-03 11:05:51,133 resnet18 INFO: [RESULT]: Val. Epoch: 6, Best Score: 1.28081, time: 0.18337
+2021-03-03 11:05:51,134 resnet18 INFO: 
+2021-03-03T03:05:51.134313
+LR: 8e-05
+2021-03-03 11:05:55,084 resnet18 INFO: [RESULT]: Train. Epoch: 7, summary_loss: 0.38918, time: 3.95002
+2021-03-03 11:05:55,405 resnet18 INFO: [RESULT]: Val. Epoch: 7, Best Score: 0.78916, time: 0.18550
+2021-03-03 11:05:55,406 resnet18 INFO: 
+2021-03-03T03:05:55.406189
+LR: 8e-05
+2021-03-03 11:05:59,271 resnet18 INFO: [RESULT]: Train. Epoch: 8, summary_loss: 0.34882, time: 3.86534
+2021-03-03 11:05:59,565 resnet18 INFO: [RESULT]: Val. Epoch: 8, Best Score: 0.17933, time: 0.18345
+2021-03-03 11:05:59,565 resnet18 INFO: 
+2021-03-03T03:05:59.565484
+LR: 8e-05
+2021-03-03 11:06:02,714 resnet18 INFO: [RESULT]: Train. Epoch: 9, summary_loss: 0.30734, time: 3.14869
+2021-03-03 11:06:02,982 resnet18 INFO: [RESULT]: Val. Epoch: 9, Best Score: -0.05398, time: 0.16700
+2021-03-03 11:06:02,983 resnet18 INFO: 
+2021-03-03T03:06:02.983204
+LR: 8e-05
+2021-03-03 11:06:06,330 resnet18 INFO: [RESULT]: Train. Epoch: 10, summary_loss: 0.26680, time: 3.34667
+2021-03-03 11:06:06,662 resnet18 INFO: [RESULT]: Val. Epoch: 10, Best Score: 0.10434, time: 0.20215
+2021-03-03 11:06:06,663 resnet18 INFO: 
+2021-03-03T03:06:06.663347
+LR: 8e-05
+2021-03-03 11:06:09,559 resnet18 INFO: [RESULT]: Train. Epoch: 11, summary_loss: 0.22753, time: 2.89639
+2021-03-03 11:06:09,845 resnet18 INFO: [RESULT]: Val. Epoch: 11, Best Score: 0.76633, time: 0.18233
+2021-03-03 11:06:09,845 resnet18 INFO: 
+2021-03-03T03:06:09.845705
+LR: 8e-05
+2021-03-03 11:06:13,523 resnet18 INFO: [RESULT]: Train. Epoch: 12, summary_loss: 0.18944, time: 3.67695
+2021-03-03 11:06:13,797 resnet18 INFO: [RESULT]: Val. Epoch: 12, Best Score: 1.59473, time: 0.17521
+2021-03-03 11:06:13,919 resnet18 INFO: 
+2021-03-03T03:06:13.919678
+LR: 8e-05
+2021-03-03 11:06:17,574 resnet18 INFO: [RESULT]: Train. Epoch: 13, summary_loss: 0.15851, time: 3.65448
+2021-03-03 11:06:17,888 resnet18 INFO: [RESULT]: Val. Epoch: 13, Best Score: 2.23082, time: 0.19599
+2021-03-03 11:06:18,038 resnet18 INFO: 
+2021-03-03T03:06:18.038508
+LR: 8e-05
+2021-03-03 11:06:21,161 resnet18 INFO: [RESULT]: Train. Epoch: 14, summary_loss: 0.17906, time: 3.12309
+2021-03-03 11:06:21,395 resnet18 INFO: [RESULT]: Val. Epoch: 14, Best Score: 4.42517, time: 0.13078
+2021-03-03 11:06:21,519 resnet18 INFO: 
+2021-03-03T03:06:21.519680
+LR: 8e-05
+2021-03-03 11:06:24,557 resnet18 INFO: [RESULT]: Train. Epoch: 15, summary_loss: 0.17287, time: 3.03723
+2021-03-03 11:06:24,841 resnet18 INFO: [RESULT]: Val. Epoch: 15, Best Score: 6.26246, time: 0.18565
+2021-03-03 11:06:25,020 resnet18 INFO: 
+2021-03-03T03:06:25.020677
+LR: 8e-05
+2021-03-03 11:06:28,070 resnet18 INFO: [RESULT]: Train. Epoch: 16, summary_loss: 0.12639, time: 3.04933
+2021-03-03 11:06:28,300 resnet18 INFO: [RESULT]: Val. Epoch: 16, Best Score: 2.50724, time: 0.13363
+2021-03-03 11:06:28,300 resnet18 INFO: 
+2021-03-03T03:06:28.300680
+LR: 8e-05
+2021-03-03 11:06:32,113 resnet18 INFO: [RESULT]: Train. Epoch: 17, summary_loss: 0.10644, time: 3.81257
+2021-03-03 11:06:32,365 resnet18 INFO: [RESULT]: Val. Epoch: 17, Best Score: 1.88817, time: 0.14799
+2021-03-03 11:06:32,365 resnet18 INFO: 
+2021-03-03T03:06:32.365571
+LR: 8e-05
+2021-03-03 11:06:36,113 resnet18 INFO: [RESULT]: Train. Epoch: 18, summary_loss: 0.10811, time: 3.74801
+2021-03-03 11:06:36,408 resnet18 INFO: [RESULT]: Val. Epoch: 18, Best Score: 0.80568, time: 0.17378
+2021-03-03 11:06:36,409 resnet18 INFO: 
+2021-03-03T03:06:36.409119
+LR: 8e-05
+2021-03-03 11:06:40,171 resnet18 INFO: [RESULT]: Train. Epoch: 19, summary_loss: 0.09867, time: 3.76248
+2021-03-03 11:06:40,429 resnet18 INFO: [RESULT]: Val. Epoch: 19, Best Score: -0.76957, time: 0.14085
+2021-03-03 11:06:40,430 resnet18 INFO: 
+2021-03-03T03:06:40.430258
+LR: 8e-05
+2021-03-03 11:06:43,991 resnet18 INFO: [RESULT]: Train. Epoch: 20, summary_loss: 0.08055, time: 3.56060
+2021-03-03 11:06:44,287 resnet18 INFO: [RESULT]: Val. Epoch: 20, Best Score: 0.16890, time: 0.18036
+2021-03-03 11:06:44,288 resnet18 INFO: 
+2021-03-03T03:06:44.288035
+LR: 8e-05
+2021-03-03 11:06:48,412 resnet18 INFO: [RESULT]: Train. Epoch: 21, summary_loss: 0.07195, time: 4.12448
+2021-03-03 11:06:48,719 resnet18 INFO: [RESULT]: Val. Epoch: 21, Best Score: 1.70269, time: 0.17414
