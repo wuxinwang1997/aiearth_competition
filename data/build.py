@@ -6,6 +6,7 @@
 
 import os
 
+from scipy import interpolate
 import pandas as pd
 import netCDF4 as nc4
 import numpy as np
@@ -13,6 +14,20 @@ import torch.utils.data as data
 from .datasets.dataset import EarthDataset, TestDataset
 from .transforms.build import build_transforms
 from .collate_batch import collate_batch
+
+
+def upsample(a, ratio):
+    height = a.shape[0]
+    width = a.shape[1]
+    y = np.array(range(height))
+    x = np.array(range(width))
+    f = interpolate.interp2d(x, y, a, kind='linear')
+
+    xnew = np.linspace(0, width, width * 2)
+    ynew = np.linspace(0, height, height * 2)
+    znew = f(xnew, ynew)
+
+    return znew
 
 
 def prepare_cmip_data(cfg):
@@ -61,13 +76,16 @@ def prepare_cmip_data(cfg):
 
     cmip_label = np.array(cmip_label['nino'][:, 12:36])
     cmip_label = np.array(cmip_label)
-    dict_cmip = {
-        'sst': train_data[0],
-        't300': train_data[1],
-        'ua': train_data[2],
-        'va': train_data[3],
-        'label': cmip_label
-    }
+
+    ratio = cfg.DATASETS.UP_RATIO
+    dict_cmip = dict()
+    for i, var in enumerate(['sst', 't300', 'ua', 'va']):
+        tmp = np.zeros(sample_size, 12, 24 * ratio, 72 * ratio)
+        for year in range(sample_size):
+            for month in range(12):
+                tmp[year][month] = upsample(train_data[i][year][month], ratio)
+        dict_cmip[var] = tmp
+    dict_cmip['label'] = cmip_label
 
     return dict_cmip
 
