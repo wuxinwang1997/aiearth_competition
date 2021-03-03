@@ -4,12 +4,65 @@
 @contact: wuxin.wang@whu.edu.cn
 """
 
+import pandas as pd
 import netCDF4 as nc4
 import numpy as np
 import torch.utils.data as data
 from .datasets.dataset import TrainDataset
 from .transforms.build import build_transforms
 from .collate_batch import collate_batch
+
+
+def prepare_cmip_data_2(cfg):
+    mean = []
+    std = []
+    cmip_data = nc4.Dataset(cfg.DATASETS.ROOT_DIR + 'CMIP_train.nc')
+    cmip_label = nc4.Dataset(cfg.DATASETS.ROOT_DIR + 'CMIP_label.nc')
+    sample_size = cmip_data['sst'].shape[0]
+    train_data = np.zeros((sample_size, 48, 24, 72))
+    cmip6 = np.zeros((4, 15, 151, 12, 24, 72))
+    cmip5 = np.zeros((4, 17, 140, 12, 24, 72))
+
+    # decompose
+    for i, var in enumerate(['sst', 't300', 'ua', 'va']):
+        for j in range(15):
+            for k in range(151):
+                cmip6[i, j, k, :, :] = cmip_data[var][j * 151 + k, 0:12, :, :]
+        for j in range(17):
+            for k in range(140):
+                cmip5[i, j, k, :, :] = cmip_data[var][j * 140 + k + 15 * 151, 0:12, :, :]
+
+    # fill nan
+    for data in [cmip6, cmip5]:
+        for i in range(4):
+            nan_idx = np.argwhere(np.isnan(data[i]))
+            if not nan_idx.shape[0]:
+                continue
+            nan_df = pd.DataFrame(nan_idx)
+            yx_unique_nan = nan_df.groupby([3, 4]).size().reset_index(name='Freq')
+            for idx, row in yx_unique_nan.iterrows():
+                y = row[3]
+                x = row[4]
+                for year in range(151):
+                    for month in range(12):
+                        pt = data[i, :, year, month, y, x]
+                        pt[np.isnan(pt)] = np.nanmean(pt)
+
+    # reshape
+    for i in range(4):
+        print(f'var_{i}')
+        year = 0
+        while year < 15 * 151:
+            train_data[year, 12 * i:12 * (i + 1), :, :] = cmip6[i, int(year / 151), year % 151, 0:12, :, :]
+            year += 1
+        while year < 15 * 151 + 17 * 140:
+            train_data[year, 12 * i:12 * (i + 1), :, :] = cmip5[i, int((year - 151 * 15) / 140), year % 140, 0:12, :, :]
+            year += 1
+
+    cmip_label = cmip_label.variables['nino']
+    cmip_label = np.array(cmip_label)
+
+    return cmip_data, cmip_label, mean, std
 
 def prepare_cmip_data(cfg):
         mean = []
@@ -85,7 +138,7 @@ def prepare_soda_data(cfg):
 def prepare_data(cfg):
     data_train = []
     data_val = []
-    cmip_data, cmip_label, cmip_mean, cmip_std = prepare_cmip_data(cfg)
+    cmip_data, cmip_label, cmip_mean, cmip_std = prepare_cmip_data_2(cfg)
     soda_data, soda_label, soda_mean, soda_std = prepare_soda_data(cfg)
     for cmip_6 in range(15):
         for year in range(151):
