@@ -5,6 +5,8 @@
 """
 
 import os
+
+import pandas as pd
 import netCDF4 as nc4
 import numpy as np
 import torch.utils.data as data
@@ -12,28 +14,62 @@ from .datasets.dataset import EarthDataset, TestDataset
 from .transforms.build import build_transforms
 from .collate_batch import collate_batch
 
+
 def prepare_cmip_data(cfg):
     cmip_data = nc4.Dataset(cfg.DATASETS.ROOT_DIR + 'CMIP_train.nc')
     cmip_label = nc4.Dataset(cfg.DATASETS.ROOT_DIR + 'CMIP_label.nc')
-    cmip_sst = np.array(cmip_data.variables['sst'][:, 0:12, :, :])
-    cmip_sst = np.nan_to_num(cmip_sst)
-    cmip_t300 = np.array(cmip_data.variables['t300'][:, 0:12, :, :])
-    cmip_t300 = np.nan_to_num(cmip_t300)
-    cmip_ua = np.array(cmip_data.variables['ua'][:, 0:12, :, :])
-    cmip_ua = np.nan_to_num(cmip_ua)
-    cmip_va = np.array(cmip_data.variables['va'][:, 0:12, :, :])
-    cmip_va = np.nan_to_num(cmip_va)
-    cmip_label = np.array(cmip_label.variables['nino'][:,12:36])
+
+    sample_size = cmip_data['sst'].shape[0]
+    train_data = np.zeros((4, sample_size, 12, 24, 72))
+    cmip6 = np.zeros((4, 15, 151, 12, 24, 72))
+    cmip5 = np.zeros((4, 17, 140, 12, 24, 72))
+
+    print('decompose')
+    for i, var in enumerate(['sst', 't300', 'ua', 'va']):
+        for j in range(15):
+            for k in range(151):
+                cmip6[i, j, k, :, :] = cmip_data[var][j * 151 + k, 0:12, :, :]
+        for j in range(17):
+            for k in range(140):
+                cmip5[i, j, k, :, :] = cmip_data[var][j * 140 + k + 15 * 151, 0:12, :, :]
+
+    print('fill nan')
+    for data in [cmip6, cmip5]:
+        for i in range(4):
+            nan_idx = np.argwhere(np.isnan(data[i]))
+            if not nan_idx.shape[0]:
+                continue
+            nan_df = pd.DataFrame(nan_idx)
+            yx_unique_nan = nan_df.groupby([3, 4]).size().reset_index(name='Freq')
+            for idx, row in yx_unique_nan.iterrows():
+                y = row[3]
+                x = row[4]
+                for year in range(151):
+                    for month in range(12):
+                        pt = data[i, :, year, month, y, x]
+                        pt[np.isnan(pt)] = np.nanmean(pt)
+    print('reshape')
+    for i in range(4):
+        print(f'var_{i}')
+        year = 0
+        while year < 15 * 151:
+            train_data[i, year, :, :, :] = cmip6[i, int(year / 151), year % 151, :, :, :]
+            year += 1
+        while year < 15 * 151 + 17 * 140:
+            train_data[i, year, :, :, :] = cmip5[i, int((year - 151 * 15) / 140), year % 140, :, :, :]
+            year += 1
+
+    cmip_label = np.array(cmip_label['nino'][:, 12:36])
     cmip_label = np.array(cmip_label)
     dict_cmip = {
-        'sst':cmip_sst,
-        't300':cmip_t300,
-        'ua':cmip_ua,
-        'va': cmip_va,
+        'sst': train_data[0],
+        't300': train_data[1],
+        'ua': train_data[2],
+        'va': train_data[3],
         'label': cmip_label
-        }
-    return dict_cmip
+    }
 
+    return dict_cmip
 
 def prepare_soda_data(cfg):
     soda_data = nc4.Dataset(cfg.DATASETS.ROOT_DIR + 'SODA_train.nc')

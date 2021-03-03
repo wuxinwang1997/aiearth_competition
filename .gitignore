@@ -132,3 +132,6 @@ dmypy.json
 usr_data/model_data/*.bin
 usr_data/model_data/baseline/*.bin
 slurm*
+
+# MacOS
+.DS_Store
