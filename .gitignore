@@ -131,3 +131,6 @@ dmypy.json
 usr_data/model_data/*.bin
 usr_data/model_data/cmip/
 slurm*
+
+# MacOS
+.DS_Store
