@@ -43,7 +43,7 @@ _C.INPUT = CN()
 _C.DATASETS = CN()
 # Root dir of dataset
 _C.DATASETS.ROOT_DIR = "/home/wangxiang/dat01/WWX/aiearth/data/enso_round1_train_20210201/"
-_C.DATASETS.TEST_DIR = os.path.abspath(os.path.join(os.getcwd(), "./tcdata/enso_round1_test_20210201/"))+'/'
+_C.DATASETS.TEST_DIR = "../tcdata/enso_round1_test_20210201/"
 # Fold to validate
 
 _C.DATASETS.X_DIM = 72
@@ -71,12 +71,12 @@ _C.DATALOADER.NUM_WORKERS = 2
 _C.SOLVER = CN()
 _C.SOLVER.OPTIMIZER_NAME = "Adam"
 _C.SOLVER.SCHEDULER_NAME = "CosineAnnealingWarmRestarts"
-_C.SOLVER.COS_EPOCH = 50 
+_C.SOLVER.COS_EPOCH = 25
 _C.SOLVER.T_MUL = 1
 
-_C.SOLVER.MAX_EPOCHS = 22
+_C.SOLVER.MAX_EPOCHS = 30
 
-_C.SOLVER.BASE_LR = 8e-5
+_C.SOLVER.BASE_LR = 1e-4
 _C.SOLVER.BIAS_LR_FACTOR = 1
 
 _C.SOLVER.MOMENTUM = 0.9
@@ -85,7 +85,7 @@ _C.SOLVER.WEIGHT_DECAY = 0.0005
 _C.SOLVER.WEIGHT_DECAY_BIAS = 0
 _C.SOLVER.WEIGHT_DECAY_BN = 0
 
-_C.SOLVER.WARMUP_EPOCHS = 0
+_C.SOLVER.WARMUP_EPOCHS = 5
 
 _C.SOLVER.EARLY_STOP_PATIENCE = 40
 
@@ -100,11 +100,11 @@ _C.SOLVER.IMS_PER_BATCH = 64
 # see 2 images per batch
 _C.TEST = CN()
 _C.TEST.IMS_PER_BATCH = 64
-_C.TEST.WEIGHT = os.path.abspath(os.path.join(os.getcwd(), "./usr_data/model_data/baseline/"))+"/best-model.bin"
+_C.TEST.WEIGHT = "../usr_data/model_data/baseline/best-model.bin"
 
 # ---------------------------------------------------------------------------- #
 # Misc options
 # ---------------------------------------------------------------------------- #
 _C.OUTPUT_DIR = os.path.abspath(os.path.join(os.getcwd(), "./usr_data/model_data/baseline/"))
-_C.RESULT_DIR = os.path.abspath(os.path.join(os.getcwd(), "./result/"))
-_C.RESULT_PATH = os.path.abspath(os.path.join(os.getcwd(), "./result.zip"))
+_C.RESULT_DIR = "../result/"
+_C.RESULT_PATH = "../result.zip"
