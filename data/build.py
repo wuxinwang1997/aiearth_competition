@@ -5,6 +5,8 @@
 """
 
 import os
+import socket
+
 import netCDF4 as nc4
 import numpy as np
 import torch
@@ -15,8 +17,12 @@ from .collate_batch import collate_batch
 
 
 def prepare_cmip_data(cfg):
-    cmip_data = nc4.Dataset(cfg.DATASETS.ROOT_DIR + 'CMIP_train.nc').variables
-    cmip_label = nc4.Dataset(cfg.DATASETS.ROOT_DIR + 'CMIP_label.nc').variables
+    if socket.gethostname() == 'lujingzedeMacBook-Pro.local':
+        root_dir = '/Users/lujingze/Programming/ai-earth/data/'
+    else:
+        root_dir = cfg.DATASETS.ROOT_DIR
+    cmip_data = nc4.Dataset(root_dir + 'CMIP_train.nc').variables
+    cmip_label = nc4.Dataset(root_dir + 'CMIP_label.nc').variables
 
     cmip = dict()
     for var in ['sst', 't300', 'ua', 'va']:
@@ -36,8 +42,12 @@ def prepare_cmip_data(cfg):
 
 
 def prepare_soda_data(cfg):
-    soda_data = nc4.Dataset(cfg.DATASETS.ROOT_DIR + 'SODA_train.nc').variables
-    soda_label = nc4.Dataset(cfg.DATASETS.ROOT_DIR + 'SODA_label.nc').variables
+    if socket.gethostname() == 'lujingzedeMacBook-Pro.local':
+        root_dir = '/Users/lujingze/Programming/ai-earth/data/'
+    else:
+        root_dir = cfg.DATASETS.ROOT_DIR
+    soda_data = nc4.Dataset(root_dir + 'SODA_train.nc').variables
+    soda_label = nc4.Dataset(root_dir + 'SODA_label.nc').variables
 
     soda = dict()
     for var in ['sst', 't300', 'ua', 'va']:

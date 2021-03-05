@@ -139,4 +139,5 @@ slurm*
 # Idea
 .idea/workspace.xml
 
-# 
+# compiled bytecode of Python source files
+.pyc
