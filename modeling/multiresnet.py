@@ -16,7 +16,7 @@ class MultiResnet(nn.Module):
         self.cnn = nn.ModuleList([SimpleCNN(cfg) for i in range(4)])
         self.avgpool = nn.AdaptiveAvgPool2d((1,128))
         self.lstm = nn.LSTM(input_size=3 * 4 ,hidden_size=64,num_layers=2,batch_first=True,bidirectional=True)
-        self.batch_norm = nn.BatchNorm1d(12, affine=False)
+        self.batch_norm = nn.BatchNorm1d(512, affine=False)
         self.linear = nn.Linear(128, 24)
 
     def forward(self, x):
