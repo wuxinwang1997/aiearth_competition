@@ -18,7 +18,7 @@ from .collate_batch import collate_batch
 
 def prepare_cmip_data(cfg):
     if socket.gethostname() == 'lujingzedeMacBook-Pro.local':
-        root_dir = '/Users/lujingze/Programming/ai-earth/data/'
+        root_dir = '/Users/lujingze/Programming/ai-earth/data/enso_round1_train_20210201/'
     else:
         root_dir = cfg.DATASETS.ROOT_DIR
     cmip_data = nc4.Dataset(root_dir + 'CMIP_train.nc').variables
@@ -43,7 +43,7 @@ def prepare_cmip_data(cfg):
 
 def prepare_soda_data(cfg):
     if socket.gethostname() == 'lujingzedeMacBook-Pro.local':
-        root_dir = '/Users/lujingze/Programming/ai-earth/data/'
+        root_dir = '/Users/lujingze/Programming/ai-earth/data/enso_round1_train_20210201/'
     else:
         root_dir = cfg.DATASETS.ROOT_DIR
     soda_data = nc4.Dataset(root_dir + 'SODA_train.nc').variables
