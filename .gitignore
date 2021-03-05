@@ -136,5 +136,7 @@ slurm*
 # MacOS
 .DS_Store
 
-#
+# Idea
 .idea/workspace.xml
+
+# 
