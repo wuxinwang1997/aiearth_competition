@@ -6,6 +6,7 @@
 
 from torch.utils.data import Dataset
 
+
 class TestDataset(Dataset):
     def __init__(self, data_dict, transforms):
         self.data_dict = data_dict
@@ -13,8 +14,9 @@ class TestDataset(Dataset):
         self.len = len(self.data_dict['sst'])
 
     def __getitem__(self, idx):
-        idx = idx%self.len
-        return  (self.data_dict['sst'][idx], self.data_dict['t300'][idx], self.data_dict['ua'][idx], self.data_dict['va'][idx]), self.data_dict['name'][idx]
+        idx = idx % self.len
+        return (self.data_dict['sst'][idx], self.data_dict['t300'][idx], self.data_dict['ua'][idx],
+                self.data_dict['va'][idx]), self.data_dict['name'][idx]
 
     def __len__(self):
         return self.len
@@ -23,6 +25,7 @@ class TestDataset(Dataset):
         for i in range(4):
             data[i] = self.transform(data[i])
         return data
+
 
 class EarthDataset(Dataset):
     """
@@ -35,10 +38,16 @@ class EarthDataset(Dataset):
         self.data_dict = data_dict
         self.transform = transforms
         self.len = len(self.data_dict['sst'])
+        self.feature_months = 12
+        self.label_months = 24
 
     def __getitem__(self, idx):
         idx = idx % self.len
-        return  (self.data_dict['sst'][idx], self.data_dict['t300'][idx], self.data_dict['ua'][idx], self.data_dict['va'][idx]), self.data_dict['label'][idx]
+        return (self.data_dict['sst'][idx:idx + self.feature_months],
+                self.data_dict['t300'][idx:idx + self.feature_months],
+                self.data_dict['ua'][idx:idx + self.feature_months],
+                self.data_dict['va'][idx:idx + self.feature_months]),\
+               self.data_dict['label'][idx:idx + self.label_months]
 
     def __len__(self):
         return self.len
