@@ -109,31 +109,35 @@ class Fitter:
         return score
 
     def train_one_epoch(self):
-        self.model.train()
-        summary_loss = AverageMeter()
-        t = time.time()
-        train_loader = tqdm(self.train_loader, total=len(self.train_loader), desc="Training")
-        for step, ((sst, t300, ua, va), labels) in enumerate(train_loader):
-            sst = sst.to(self.device).float()
-            t300 = t300.to(self.device).float()
-            ua = ua.to(self.device).float()
-            va = va.to(self.device).float()
-            labels = labels.to(self.device).float()
-            self.optimizer.zero_grad()
-            outputs = self.model((sst, t300, ua, va))
-            loss = self.loss(outputs, labels)
+        try:
+            self.model.train()
+            summary_loss = AverageMeter()
+            t = time.time()
+            train_loader = tqdm(self.train_loader, total=len(self.train_loader), desc="Training")
+            for step, ((sst, t300, ua, va), labels) in enumerate(train_loader):
+                sst = sst.to(self.device).float()
+                t300 = t300.to(self.device).float()
+                ua = ua.to(self.device).float()
+                va = va.to(self.device).float()
+                labels = labels.to(self.device).float()
+                self.optimizer.zero_grad()
+                outputs = self.model((sst, t300, ua, va))
+                loss = self.loss(outputs, labels)
 
-            loss.backward()
+                loss.backward()
 
-            summary_loss.update(loss.item(), sst.shape[0])
-            self.optimizer.step()
+                summary_loss.update(loss.item(), sst.shape[0])
+                self.optimizer.step()
 
-            # if self.do_scheduler:
-            #     self.scheduler.step()
-            train_loader.set_description(f'Train Step {step}/{len(self.train_loader)}, ' + \
-                                         f'Learning rate {self.optimizer.param_groups[0]["lr"]}, ' + \
-                                         f'summary_loss: {summary_loss.avg:.5f}, ' + \
-                                         f'time: {(time.time() - t):.5f}')
+                # if self.do_scheduler:
+                #     self.scheduler.step()
+                train_loader.set_description(f'Train Step {step}/{len(self.train_loader)}, ' + \
+                                             f'Learning rate {self.optimizer.param_groups[0]["lr"]}, ' + \
+                                             f'summary_loss: {summary_loss.avg:.5f}, ' + \
+                                             f'time: {(time.time() - t):.5f}')
+        except Exception as msg:
+            breakpoint()
+            exit(msg)
         
        # if self.do_scheduler:
        #     self.scheduler.step()

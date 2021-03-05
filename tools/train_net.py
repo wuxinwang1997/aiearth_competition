@@ -19,6 +19,7 @@ import torch
 import numpy as np
 from utils.logger import setup_logger
 
+
 def seed_everything(seed):
     random.seed(seed)
     os.environ['PYTHONHASHSEED'] = str(seed)
@@ -28,10 +29,15 @@ def seed_everything(seed):
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = True
 
+
 def train(cfg, logger):
     seed_everything(cfg.SEED)
     model = build_model(cfg)
-    device = cfg.MODEL.DEVICE
+    if torch.cuda.is_available():
+        device = 'cuda'
+    else:
+        device = 'cpu'
+    # device = cfg.MODEL.DEVICE
     check = cfg.SOLVER.TRAIN_CHECKPOINT
 
     train_loader, val_loader = make_data_loader(cfg, is_train=True)
@@ -41,6 +47,7 @@ def train(cfg, logger):
         curPath = os.path.abspath(os.path.dirname(__file__))
         fitter.load(f'{cfg.OUTPUT_DIR}/last-checkpoint.bin')
     fitter.fit()
+
 
 def main():
     parser = argparse.ArgumentParser(description="PyTorch Template MNIST Training")
