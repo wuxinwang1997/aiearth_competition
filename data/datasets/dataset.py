@@ -37,9 +37,9 @@ class EarthDataset(Dataset):
     def __init__(self, data_dict, transforms):
         self.data_dict = data_dict
         self.transform = transforms
-        self.len = len(self.data_dict['sst'])
         self.feature_months = 12
         self.label_months = 24
+        self.len = len(self.data_dict['sst']) - self.feature_months
 
     def __getitem__(self, idx):
         idx = idx % self.len

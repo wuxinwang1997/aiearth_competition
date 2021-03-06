@@ -48,7 +48,7 @@ class Fitter:
         self.logger.info("Start training")
 
     def fit(self):
-        for epoch in range(self.epoch, self.config.SOLVER.MAX_EPOCHS ):
+        for epoch in range(self.epoch, self.config.SOLVER.MAX_EPOCHS):
             if epoch < self.config.SOLVER.WARMUP_EPOCHS:
                 lr_scale = min(1., float(epoch + 1) / float(self.config.SOLVER.WARMUP_EPOCHS))
                 for pg in self.optimizer.param_groups:
