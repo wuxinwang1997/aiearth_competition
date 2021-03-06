@@ -31,7 +31,7 @@ def prepare_cmip_data(cfg):
         tmp = torch.tensor(tmp)
         tmp = torch.flatten(tmp, start_dim=0, end_dim=1)
         cmip[var] = tmp.numpy()
-    tmp = cmip_label['nino'][:, 12:24]
+    tmp = np.array(cmip_label['nino'][:, 12:24])
     last_year_nino = np.array(cmip_label['nino'][-1, -12:].reshape((1, 12)))
     tmp = np.concatenate((tmp, last_year_nino), axis=0)
     cmip['label'] = tmp.flatten()
@@ -59,7 +59,7 @@ def prepare_soda_data(cfg):
         tmp = torch.flatten(tmp, start_dim=0, end_dim=1)
         soda[var] = tmp.numpy()
 
-    tmp = soda_label['nino'][:, 12:24]
+    tmp = np.array(soda_label['nino'][:, 12:24])
     last_year_nino = np.array(soda_label['nino'][-1, -12:].reshape((1, 12)))
     tmp = np.concatenate((tmp, last_year_nino), axis=0)
     soda['label'] = tmp.flatten()
