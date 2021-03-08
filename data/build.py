@@ -8,7 +8,9 @@ import os
 import socket
 
 import netCDF4 as nc4
+from scipy import interpolate
 import numpy as np
+import pandas as pd
 import torch
 import torch.utils.data as data
 from .datasets.dataset import EarthDataset, TestDataset
@@ -16,29 +18,92 @@ from .transforms.build import build_transforms
 from .collate_batch import collate_batch
 
 
+def fill_nan(cmip_data):
+    sample_size = cmip_data['sst'].shape[0]
+    train_data = np.zeros((4, sample_size, 12, 24, 72))
+    cmip6 = np.zeros((4, 15, 151, 12, 24, 72))
+    cmip5 = np.zeros((4, 17, 140, 12, 24, 72))
+
+    print('decompose')
+    for i, var in enumerate(['sst', 't300', 'ua', 'va']):
+        for j in range(15):
+            for k in range(151):
+                cmip6[i, j, k, :, :] = cmip_data[var][j * 151 + k, 0:12, :, :]
+        for j in range(17):
+            for k in range(140):
+                cmip5[i, j, k, :, :] = cmip_data[var][j * 140 + k + 15 * 151, 0:12, :, :]
+
+    print('fill nan')
+    for data in [cmip6, cmip5]:
+        for i in range(4):
+            nan_idx = np.argwhere(np.isnan(data[i]))
+            if not nan_idx.shape[0]:
+                continue
+            nan_df = pd.DataFrame(nan_idx)
+            yx_unique_nan = nan_df.groupby([3, 4]).size().reset_index(name='Freq')
+            for idx, row in yx_unique_nan.iterrows():
+                y = row[3]
+                x = row[4]
+                for year in range(151):
+                    for month in range(12):
+                        pt = data[i, :, year, month, y, x]
+                        pt[np.isnan(pt)] = np.nanmean(pt)
+    print('reshape')
+    for i in range(4):
+        print(f'var_{i}')
+        year = 0
+        while year < 15 * 151:
+            train_data[i, year, :, :, :] = cmip6[i, int(year / 151), year % 151, :, :, :]
+            year += 1
+        while year < 15 * 151 + 17 * 140:
+            train_data[i, year, :, :, :] = cmip5[i, int((year - 151 * 15) / 140), year % 140, :, :, :]
+            year += 1
+
+    return train_data
+
+
+def upsample(a, ratio):
+    height = a.shape[0]
+    width = a.shape[1]
+    y = np.array(range(height))
+    x = np.array(range(width))
+    f = interpolate.interp2d(x, y, a, kind='linear')
+
+    xnew = np.linspace(0, width, width * ratio)
+    ynew = np.linspace(0, height, height * ratio)
+    znew = f(xnew, ynew)
+
+    return znew
+
+
 def prepare_cmip_data(cfg):
     if socket.gethostname() == 'lujingzedeMacBook-Pro.local':
         root_dir = '/Users/lujingze/Programming/ai-earth/data/enso_round1_train_20210201/'
     else:
         root_dir = cfg.DATASETS.ROOT_DIR
+    ratio = cfg.DATASETS.UP_RATIO
     cmip_data = nc4.Dataset(root_dir + 'CMIP_train.nc').variables
+    # shape: (4, years, 12, 24, 72)
+    cmip_data = fill_nan(cmip_data)
     cmip_label = nc4.Dataset(root_dir + 'CMIP_label.nc').variables
 
-    cmip = dict()
-    for var in ['sst', 't300', 'ua', 'va']:
-        tmp = np.array(cmip_data[var][:, 0:12, :, :])
+    dict_cmip = dict()
+    for i, var in enumerate(['sst', 't300', 'ua', 'va']):
+        tmp = np.array(cmip_data[i][:, 0:12, :, :])
         tmp = np.nan_to_num(tmp)
         tmp = torch.tensor(tmp)
         tmp = torch.flatten(tmp, start_dim=0, end_dim=1)
-        cmip[var] = tmp.numpy()
+        months = tmp.shape[0]
+        up_tmp = np.zeros((months, 24 * ratio, 72 * ratio))
+        for j in range(months):
+            up_tmp[j] = upsample(tmp[j], ratio)
+        dict_cmip[var] = up_tmp
+        breakpoint()
+
     tmp = np.array(cmip_label['nino'][:, 12:24])
     last_year_nino = np.array(cmip_label['nino'][-1, -12:].reshape((1, 12)))
     tmp = np.concatenate((tmp, last_year_nino), axis=0)
-    cmip['label'] = tmp.flatten()
-
-    dict_cmip = dict()
-    for var in ['sst', 't300', 'ua', 'va', 'label']:
-        dict_cmip[var] = cmip[var]
+    dict_cmip['label'] = tmp.flatten()
 
     return dict_cmip
 

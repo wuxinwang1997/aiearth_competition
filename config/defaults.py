@@ -51,7 +51,7 @@ _C.DATASETS.Y_DIM = 24
 _C.DATASETS.Z_DIM = 48
 
 # Upscale ratio
-_C.DATASETS.UP_RATIO = 1
+_C.DATASETS.UP_RATIO = 2
 
 # # List of the dataset names for training, as present in paths_catalog.py
 # _C.DATASETS.TRAIN = ()
