@@ -16,6 +16,7 @@ from tqdm import tqdm
 import pandas as pd
 from solver.build import make_optimizer
 from solver.lr_scheduler import make_scheduler
+from layers import myloss
 warnings.filterwarnings("ignore")
 
 class Fitter:
@@ -35,8 +36,8 @@ class Fitter:
         self.model = model
         self.device = device
         self.model.to(self.device)
-        self.loss = torch.nn.MSELoss(reduce=True, size_average=True)
-
+        self.mseloss = torch.nn.MSELoss(reduce=True, size_average=True)
+        self.wrmseloss = myloss()
         self.optimizer = make_optimizer(cfg, model)
 
         self.scheduler = make_scheduler(cfg, self.optimizer, train_loader)
@@ -111,6 +112,8 @@ class Fitter:
     def train_one_epoch(self):
         self.model.train()
         summary_loss = AverageMeter()
+        mse_loss = AverageMeter()
+        wrmse_loss = AverageMeter()
         t = time.time()
         train_loader = tqdm(self.train_loader, total=len(self.train_loader), desc="Training")
         for step, ((sst, t300, ua, va), labels) in enumerate(train_loader):
@@ -121,11 +124,14 @@ class Fitter:
             labels = labels.to(self.device).float()
             self.optimizer.zero_grad()
             outputs = self.model((sst, t300, ua, va))
-            loss = self.loss(outputs, labels)
-
+            mse = self.mseloss(outputs, labels)
+            wrmse = self.wrmseloss(outputs, labels)
+            loss = 0.5*mse + 0.5*wrmse
             loss.backward()
 
             summary_loss.update(loss.item(), sst.shape[0])
+            mse_loss.update(mse.item(), sst.shape[0])
+            wrmse_loss.update(wrmse.item(), sst.shape[0])
             self.optimizer.step()
 
             # if self.do_scheduler:
@@ -133,10 +139,12 @@ class Fitter:
             train_loader.set_description(f'Train Step {step}/{len(self.train_loader)}, ' + \
                                          f'Learning rate {self.optimizer.param_groups[0]["lr"]}, ' + \
                                          f'summary_loss: {summary_loss.avg:.5f}, ' + \
+                                         f'mse_loss: {mse_loss.avg:.5f}, ' + \
+                                         f'wrmse_loss: {wrmse_loss.avg:.5f}, ' + \
                                          f'time: {(time.time() - t):.5f}')
         
-       # if self.do_scheduler:
-       #     self.scheduler.step()
+        if self.do_scheduler:
+            self.scheduler.step()
         return summary_loss
 
     def save(self, path):

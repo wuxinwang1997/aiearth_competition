@@ -28,9 +28,9 @@ _C.SEED = 66
 _C.VERBOSE = True
 
 _C.MODEL = CN()
-_C.MODEL.DEVICE = "cuda"
+_C.MODEL.DEVICE = "cpu"
 _C.MODEL.NUM_CLASSES = 2
-_C.MODEL.PRETRAINED_IMAGENET = '/home/wangxiang/dat01/WWX/aiearth/pretrained/resnet18.pth'
+_C.MODEL.PRETRAINED_IMAGENET = '' #'/home/wangxiang/dat01/WWX/aiearth/pretrained/resnet18.pth'
 
 # -----------------------------------------------------------------------------
 # INPUT
@@ -42,7 +42,7 @@ _C.INPUT = CN()
 # -----------------------------------------------------------------------------
 _C.DATASETS = CN()
 # Root dir of dataset
-_C.DATASETS.ROOT_DIR = "/home/wangxiang/dat01/WWX/aiearth/data/enso_round1_train_20210201/"
+_C.DATASETS.ROOT_DIR = ''#"/home/wangxiang/dat01/WWX/aiearth/data/enso_round1_train_20210201/"
 _C.DATASETS.TEST_DIR = "../tcdata/enso_round1_test_20210201/"
 # Fold to validate
 
@@ -100,11 +100,11 @@ _C.SOLVER.IMS_PER_BATCH = 64
 # see 2 images per batch
 _C.TEST = CN()
 _C.TEST.IMS_PER_BATCH = 64
-_C.TEST.WEIGHT = "../usr_data/model_data/baseline/best-model.bin"
+_C.TEST.WEIGHT = "../usr_data/model_data/myloss_resnet18/best-model.bin"
 
 # ---------------------------------------------------------------------------- #
 # Misc options
 # ---------------------------------------------------------------------------- #
-_C.OUTPUT_DIR = os.path.abspath(os.path.join(os.getcwd(), "./usr_data/model_data/baseline/"))
+_C.OUTPUT_DIR = os.path.abspath(os.path.join(os.getcwd(), "./usr_data/model_data/myloss_resnet18/"))
 _C.RESULT_DIR = "../result/"
 _C.RESULT_PATH = "../result.zip"

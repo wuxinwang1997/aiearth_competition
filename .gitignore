@@ -133,5 +133,6 @@ usr_data/model_data/*.bin
 usr_data/model_data/baseline/*.bin
 slurm*
 
+.idea/
 # MacOS
 .DS_Store
