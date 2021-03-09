@@ -15,6 +15,7 @@ import torch
 import torch.utils.data as data
 from .datasets.dataset import EarthDataset, TestDataset
 from .transforms.build import build_transforms
+import matplotlib.pyplot as plt
 from .collate_batch import collate_batch
 
 
@@ -50,7 +51,6 @@ def fill_nan(cmip_data):
                         pt[np.isnan(pt)] = np.nanmean(pt)
     print('reshape')
     for i in range(4):
-        print(f'var_{i}')
         year = 0
         while year < 15 * 151:
             train_data[i, year, :, :, :] = cmip6[i, int(year / 151), year % 151, :, :, :]
@@ -93,12 +93,12 @@ def prepare_cmip_data(cfg):
         tmp = np.nan_to_num(tmp)
         tmp = torch.tensor(tmp)
         tmp = torch.flatten(tmp, start_dim=0, end_dim=1)
-        months = tmp.shape[0]
-        up_tmp = np.zeros((months, 24 * ratio, 72 * ratio))
-        for j in range(months):
-            up_tmp[j] = upsample(tmp[j], ratio)
-        dict_cmip[var] = up_tmp
-        breakpoint()
+        # months = tmp.shape[0]
+        # up_tmp = np.zeros((months, 24 * ratio, 72 * ratio))
+        # for j in range(months):
+        #     up_tmp[j] = upsample(tmp[j], ratio)
+        # dict_cmip[var] = up_tmp
+        dict_cmip[var] = tmp
 
     tmp = np.array(cmip_label['nino'][:, 12:24])
     last_year_nino = np.array(cmip_label['nino'][-1, -12:].reshape((1, 12)))
