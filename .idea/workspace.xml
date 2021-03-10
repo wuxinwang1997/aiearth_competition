@@ -2,16 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68c37ce9-2442-44cb-a869-809c8fef2e9b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/aiearth_competition.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/aiearth_competition.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/defaults.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/defaults.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/fitter.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/fitter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/engine/predicter.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/predicter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modeling/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modeling/multiresnet.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/multiresnet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modeling/simplecnn.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/simplecnn.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/result/log.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/result/log.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/usr_data/model_data/baseline/log.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/usr_data/model_data/best-model.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/usr_data/model_data/log.txt" beforeDir="false" />
@@ -245,7 +241,10 @@
       <workItem from="1614994917601" duration="11325000" />
       <workItem from="1615170554710" duration="9872000" />
       <workItem from="1615212422873" duration="8842000" />
-      <workItem from="1615289913992" duration="216000" />
+      <workItem from="1615289913992" duration="2807000" />
+      <workItem from="1615299996969" duration="3676000" />
+      <workItem from="1615340906323" duration="35000" />
+      <workItem from="1615361305593" duration="1128000" />
     </task>
     <servers />
   </component>

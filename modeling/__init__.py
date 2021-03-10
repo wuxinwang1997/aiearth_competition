@@ -5,8 +5,8 @@
 """
 
 from .multiresnet import MultiResnet
-
+from .model import Model
 
 def build_model(cfg):
-    model = MultiResnet(cfg)
+    model = Model(cfg)
     return model

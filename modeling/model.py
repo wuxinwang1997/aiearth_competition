@@ -8,18 +8,18 @@ import torch
 from torch import nn
 import torch.nn.functional as F
 import torchvision.models as models
-from .simplecnn import SimpleCNN
+from .multiresnet import MultiResnet
 
-class MultiResnet(nn.Module):
+class Model(nn.Module):
 
     def __init__(self, cfg):
         super().__init__()
-        self.cnn = nn.ModuleList([SimpleCNN(cfg) for i in range(10)])
+        self.multicnn = nn.ModuleList([MultiResnet(cfg) for i in range(24)])
 
     def forward(self, x):
         sst, t300, ua, va = x
         outputs = []
-        for i in range(10):
-            outputs.append(self.cnn[i](torch.cat([sst, t300, ua, va], dim=1)))
+        for i in range(24):
+            outputs.append(self.multicnn[i](sst[:, i:i+3], t300[:, i:i+3], ua[:,i:i+3], va[:,i:i+3]))
 
         return outputs

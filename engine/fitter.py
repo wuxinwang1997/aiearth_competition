@@ -16,7 +16,6 @@ from tqdm import tqdm
 import pandas as pd
 from solver.build import make_optimizer
 from solver.lr_scheduler import make_scheduler
-from layers import myloss
 warnings.filterwarnings("ignore")
 
 class Fitter:
@@ -36,8 +35,7 @@ class Fitter:
         self.model = model
         self.device = device
         self.model.to(self.device)
-        self.mseloss = torch.nn.MSELoss(reduce=True, size_average=True)
-        self.wrmseloss = myloss()
+        self.loss = torch.nn.MSELoss(reduce=True, size_average=True)
         self.optimizer = make_optimizer(cfg, model)
 
         self.scheduler = make_scheduler(cfg, self.optimizer, train_loader)
@@ -69,16 +67,16 @@ class Fitter:
             self.save(f'{self.base_dir}/last-checkpoint.bin')
 
             t = time.time()
-            best_final_score = self.validation()
+            score, val_loss = self.validation()
 
-            self.logger.info( f'[RESULT]: Val. Epoch: {self.epoch}, Best Score: {best_final_score:.5f}, time: {(time.time() - t):.5f}')
-            if best_final_score > self.best_final_score:
-                self.best_final_score = best_final_score
+            self.logger.info( f'[RESULT]: Val. Epoch: {self.epoch}, Val loss: {val_loss.avg:.5f}, Score: {score:.5f}, Best Score: {self.best_final_score:.5f}, time: {(time.time() - t):.5f}')
+            if score > self.best_final_score:
+                self.best_final_score = score
                 self.model.eval()
                 self.save(f'{self.base_dir}/best-checkpoint.bin')
                 self.save_model(f'{self.base_dir}/best-model.bin')
 
-            self.early_stop(best_final_score)
+            self.early_stop(score)
             if self.early_stop_epochs > self.config.SOLVER.EARLY_STOP_PATIENCE:
                 self.logger.info('Early Stopping!')
                 break
@@ -90,7 +88,7 @@ class Fitter:
         t = time.time()
         y_true = []
         y_pred = []
-        torch.cuda.empty_cache()
+        summary_loss = AverageMeter()
         valid_loader = tqdm(self.val_loader, total=len(self.val_loader), desc="Validating")
         with torch.no_grad():
             for step, ((sst, t300, ua, va), labels) in enumerate(valid_loader):
@@ -99,9 +97,15 @@ class Fitter:
                 ua = ua.to(self.device).float()
                 va = va.to(self.device).float()
                 outputs = self.model((sst, t300, ua, va))
+                loss = 0
+                for i in range(24):
+                    for j in range(10):
+                        loss += self.loss(outputs[i][j], labels[j])
+                summary_loss.update(loss.item(), sst.shape[0])
                 y_pred.append(outputs)
                 y_true.append(labels)
                 valid_loader.set_description(f'Validate Step {step}/{len(self.val_loader)}, ' + \
+                                             f'summary_loss: {summary_loss.avg:.5f}, ' + \
                                              f'time: {(time.time() - t):.5f}')
         y_true = torch.cat(y_true, axis=0)
         y_pred = torch.cat(y_pred, axis=0)
@@ -112,8 +116,6 @@ class Fitter:
     def train_one_epoch(self):
         self.model.train()
         summary_loss = AverageMeter()
-        mse_loss = AverageMeter()
-        wrmse_loss = AverageMeter()
         t = time.time()
         train_loader = tqdm(self.train_loader, total=len(self.train_loader), desc="Training")
         for step, ((sst, t300, ua, va), labels) in enumerate(train_loader):
@@ -124,14 +126,13 @@ class Fitter:
             labels = labels.to(self.device).float()
             self.optimizer.zero_grad()
             outputs = self.model((sst, t300, ua, va))
-            mse = self.mseloss(outputs, labels)
-            wrmse = self.wrmseloss(outputs, labels)
-            loss = 0.5*mse + 0.5*wrmse
+            loss = 0
+            for i in range(24):
+                for j in range(10):
+                    loss += self.loss(outputs[i][j], labels[j])
             loss.backward()
 
             summary_loss.update(loss.item(), sst.shape[0])
-            mse_loss.update(mse.item(), sst.shape[0])
-            wrmse_loss.update(wrmse.item(), sst.shape[0])
             self.optimizer.step()
 
             # if self.do_scheduler:
@@ -139,8 +140,6 @@ class Fitter:
             train_loader.set_description(f'Train Step {step}/{len(self.train_loader)}, ' + \
                                          f'Learning rate {self.optimizer.param_groups[0]["lr"]}, ' + \
                                          f'summary_loss: {summary_loss.avg:.5f}, ' + \
-                                         f'mse_loss: {mse_loss.avg:.5f}, ' + \
-                                         f'wrmse_loss: {wrmse_loss.avg:.5f}, ' + \
                                          f'time: {(time.time() - t):.5f}')
         
         if self.do_scheduler:
