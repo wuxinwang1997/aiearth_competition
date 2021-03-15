@@ -108,8 +108,8 @@ def build_dataset(cfg):
                                                        generator=torch.Generator().manual_seed(cfg.SEED))
     else:
         len_val = int(dataset_cmip.len * 0.2)
-        train_dataset, val_dataset = data.random_split(dataset_soda,
-                                                       lengths=[dataset_soda.len - len_val, len_val],
+        train_dataset, val_dataset = data.random_split(dataset_cmip,
+                                                       lengths=[dataset_cmip.len - len_val, len_val],
                                                        generator=torch.Generator().manual_seed(cfg.SEED))
 
     return train_dataset, val_dataset
