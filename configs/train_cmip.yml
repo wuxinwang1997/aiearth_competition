@@ -1,0 +1,4 @@
+DATASETS:
+  SODA = False
+
+OUTPUT_DIR: "../usr_data/model_data/resnet18_lstm-lr1e4-epoch30-cmip/"
