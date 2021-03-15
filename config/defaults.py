@@ -28,10 +28,23 @@ _C.SEED = 66
 _C.VERBOSE = True
 
 _C.MODEL = CN()
-_C.MODEL.DEVICE = "cpu"
+_C.MODEL.DEVICE = "cuda"
 _C.MODEL.NUM_CLASSES = 2
-_C.MODEL.PRETRAINED_IMAGENET = '' # '/home/wangxiang/dat01/WWX/aiearth/pretrained/resnet50.pth'
-
+_C.MODEL.BACKBONE.PRETRAIN = True
+_C.MODEL.BACKBONE.PRETRAIN_PATH = '/home/wangxiang/dat01/WWX/aiearth/pretrained/resnet18.pth'
+_C.MODEL.BACKBONE.LAST_STRIDE = 2
+_C.MODEL.BACKBONE.NORM = "BN"
+# Mini-batch split of Ghost BN
+_C.MODEL.BACKBONE.NORM_SPLIT = 1
+_C.MODEL.BACKBONE.RATIO = 16
+# If use IBN block in backbone
+_C.MODEL.BACKBONE.WITH_IBN = False
+# If use SE block in backbone
+_C.MODEL.BACKBONE.WITH_SE = False
+# If use Non-local block in backbone
+_C.MODEL.BACKBONE.WITH_NL = False
+_C.MODEL.BACKBONE.DEPTH = 18
+_C.MODEL.PRETRAINED_CMIP  = os.path.abspath(os.path.join(os.getcwd(), "./usr_data/model_data/resnet18-lr3e4-epoch30-cmip/")) + "/best-model.bin"
 # -----------------------------------------------------------------------------
 # INPUT
 # -----------------------------------------------------------------------------
@@ -43,11 +56,16 @@ _C.INPUT = CN()
 _C.DATASETS = CN()
 # Root dir of dataset
 _C.DATASETS.ROOT_DIR = "/home/wangxiang/dat01/WWX/aiearth/data/enso_round1_train_20210201/"
+_C.DATASETS.TEST_DIR = "../tcdata/enso_round1_test_20210201/"
 # Fold to validate
 
 _C.DATASETS.X_DIM = 72
 _C.DATASETS.Y_DIM = 24
 _C.DATASETS.Z_DIM = 48
+
+# Upscale ratio
+_C.DATASETS.UP_RATIO = 1
+
 # # List of the dataset names for training, as present in paths_catalog.py
 # _C.DATASETS.TRAIN = ()
 # # List of the dataset names for testing, as present in paths_catalog.py
@@ -58,7 +76,7 @@ _C.DATASETS.Z_DIM = 48
 # -----------------------------------------------------------------------------
 _C.DATALOADER = CN()
 # Number of data loading threads
-_C.DATALOADER.NUM_WORKERS = 2
+_C.DATALOADER.NUM_WORKERS = 0
 
 # ---------------------------------------------------------------------------- #
 # Solver
@@ -66,12 +84,12 @@ _C.DATALOADER.NUM_WORKERS = 2
 _C.SOLVER = CN()
 _C.SOLVER.OPTIMIZER_NAME = "Adam"
 _C.SOLVER.SCHEDULER_NAME = "CosineAnnealingWarmRestarts"
-_C.SOLVER.COS_CPOCH = 5
-_C.SOLVER.T_MUL = 2
+_C.SOLVER.COS_EPOCH = 25
+_C.SOLVER.T_MUL = 1
 
-_C.SOLVER.MAX_EPOCHS = 80
+_C.SOLVER.MAX_EPOCHS = 30
 
-_C.SOLVER.BASE_LR = 1e-3
+_C.SOLVER.BASE_LR = 1e-4
 _C.SOLVER.BIAS_LR_FACTOR = 1
 
 _C.SOLVER.MOMENTUM = 0.9
@@ -95,10 +113,11 @@ _C.SOLVER.IMS_PER_BATCH = 64
 # see 2 images per batch
 _C.TEST = CN()
 _C.TEST.IMS_PER_BATCH = 64
-_C.TEST.WEIGHT = os.path.abspath(os.path.join(os.getcwd(), "../usr_data/model_data/"))+"/best-model.bin"
+_C.TEST.WEIGHT = "../usr_data/model_data/resnet18-lr1e4-epoch30-soda/best-model.bin"
 
 # ---------------------------------------------------------------------------- #
 # Misc options
 # ---------------------------------------------------------------------------- #
-_C.OUTPUT_DIR = os.path.abspath(os.path.join(os.getcwd(), "../usr_data/model_data/"))
-_C.RESULT_DIR = os.path.abspath(os.path.join(os.getcwd(), "../result"))
+_C.OUTPUT_DIR = os.path.abspath(os.path.join(os.getcwd(), "./usr_data/model_data/resnet18-lr1e4-epoch30-soda/"))
+_C.RESULT_DIR = "../result/"
+_C.RESULT_PATH = "../result.zip"

@@ -128,8 +128,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-usr_data/model_data/*.bin
-usr_data/model_data/cmip/
+.idea/
+.usr_data/model_data/*
 slurm*
 
 # MacOS

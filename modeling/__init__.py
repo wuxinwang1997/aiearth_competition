@@ -4,9 +4,9 @@
 @contact: wuxin.wang@whu.edu.cn
 """
 
-from .multiresnet import MultiResnet
+from .model import AIEarthModel
 
 
 def build_model(cfg):
-    model = MultiResnet(cfg)
+    model = AIEarthModel(cfg)
     return model

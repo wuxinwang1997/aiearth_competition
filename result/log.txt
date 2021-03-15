@@ -1,10 +1,11 @@
-2021-03-01 01:07:56,425 resnet18 INFO: Using 0 GPUS
-2021-03-01 01:07:56,426 resnet18 INFO: Namespace(config_file='', opts=[])
-2021-03-01 01:07:56,427 resnet18 INFO: Running with config:
+2021-03-03 11:47:22,562 cnnlstm INFO: Using 0 GPUS
+2021-03-03 11:47:22,563 cnnlstm INFO: Namespace(config_file='', opts=[])
+2021-03-03 11:47:22,563 cnnlstm INFO: Running with config:
 DATALOADER:
   NUM_WORKERS: 2
 DATASETS:
   ROOT_DIR: /home/wangxiang/dat01/WWX/aiearth/data/enso_round1_train_20210201/
+  TEST_DIR: /dat01/wangxiang/WWX/aiearth/baseline/aiearth_competition/tcdata/enso_round1_test_20210201/
   X_DIM: 72
   Y_DIM: 24
   Z_DIM: 48
@@ -12,29 +13,32 @@ DEBUG: False
 INPUT:
   
 MODEL:
-  DEVICE: cpu
+  DEVICE: cuda
   NUM_CLASSES: 2
-  PRETRAINED_IMAGENET: 
-OUTPUT_DIR: /opt/project/usr_data/model_data
-RESULT_DIR: /opt/project/result
+  PRETRAINED_IMAGENET: /home/wangxiang/dat01/WWX/aiearth/pretrained/resnet18.pth
+OUTPUT_DIR: /dat01/wangxiang/WWX/aiearth/baseline/aiearth_competition/usr_data/model_data/baseline
+RESULT_DIR: /dat01/wangxiang/WWX/aiearth/baseline/aiearth_competition/result
+RESULT_PATH: /dat01/wangxiang/WWX/aiearth/baseline/aiearth_competition/result.zip
 SEED: 66
 SOLVER:
-  BASE_LR: 0.001
+  BASE_LR: 8e-05
   BIAS_LR_FACTOR: 1
-  COS_CPOCH: 5
+  COS_EPOCH: 50
   EARLY_STOP_PATIENCE: 40
   IMS_PER_BATCH: 64
-  MAX_EPOCHS: 80
+  MAX_EPOCHS: 22
   MOMENTUM: 0.9
   OPTIMIZER_NAME: Adam
   SCHEDULER_NAME: CosineAnnealingWarmRestarts
   TRAIN_CHECKPOINT: False
-  T_MUL: 2
-  WARMUP_EPOCHS: 5
+  T_MUL: 1
+  WARMUP_EPOCHS: 0
   WEIGHT_DECAY: 0.0005
   WEIGHT_DECAY_BIAS: 0
   WEIGHT_DECAY_BN: 0
 TEST:
   IMS_PER_BATCH: 64
-  WEIGHT: /opt/project/usr_data/model_data/best-model.bin
+  WEIGHT: /dat01/wangxiang/WWX/aiearth/baseline/aiearth_competition/usr_data/model_data/baseline/best-model.bin
 VERBOSE: True
+2021-03-03 11:47:28,059 cnnlstm INFO: Fitter prepared. Device is cuda
+2021-03-03 11:47:28,060 cnnlstm INFO: Start testing

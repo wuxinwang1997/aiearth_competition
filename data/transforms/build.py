@@ -9,6 +9,7 @@ from torchvision import transforms
 
 def get_train_transforms(cfg):
     train_transforms = transforms.Compose([
+        RandomErasing(),
         transforms.ToTensor(),
         # transforms.Normalize(mean, std)
     ])
