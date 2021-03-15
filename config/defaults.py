@@ -29,7 +29,7 @@ _C.VERBOSE = True
 
 _C.MODEL = CN()
 _C.MODEL.DEVICE = "cuda"
-_C.MODEL.PRETRAINED_CMIP  = os.path.abspath(os.path.join(os.getcwd(), "./usr_data/model_data/resnet18-lr1e4-epoch30-cmip/")) + "/best-model.bin"
+_C.MODEL.PRETRAINED_CMIP  = os.path.abspath(os.path.join(os.getcwd(), "./usr_data/model_data/resnet18_lstm-lr1e4-epoch30-cmip/")) + "/best-model.bin"
 
 _C.MODEL.BACKBONE = CN()
 _C.MODEL.BACKBONE.DEPTH = 18
