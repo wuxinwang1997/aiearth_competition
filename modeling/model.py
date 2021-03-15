@@ -6,7 +6,7 @@
 
 import torch
 from torch import nn
-from modeling.backbone.resnet import build_resnet_backbone
+from .backbone import build_resnet_backbone
 
 class AIEarthModel(nn.Module):
 
