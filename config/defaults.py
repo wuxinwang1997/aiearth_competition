@@ -105,7 +105,7 @@ _C.SOLVER.WARMUP_EPOCHS = 5
 
 _C.SOLVER.EARLY_STOP_PATIENCE = 40
 
-_C.SOLVER.TRAIN_SODA = True
+_C.SOLVER.TRAIN_SODA = False
 _C.SOLVER.TRAIN_CHECKPOINT = False
 
 # Number of images per batch
@@ -122,6 +122,6 @@ _C.TEST.WEIGHT = "../usr_data/model_data/resnet18_lstm-lr1e4-epoch30-cmip/best-m
 # ---------------------------------------------------------------------------- #
 # Misc options
 # ---------------------------------------------------------------------------- #
-_C.OUTPUT_DIR = os.path.abspath(os.path.join(os.getcwd(), "./usr_data/model_data/resnet18_lstm-lr1e4-epoch30-cmip/"))
+_C.OUTPUT_DIR = "./usr_data/model_data/resnet18_lstm-lr1e4-epoch30-cmip/"
 _C.RESULT_DIR = "../result/"
 _C.RESULT_PATH = "../result.zip"
