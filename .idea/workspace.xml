@@ -2,28 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68c37ce9-2442-44cb-a869-809c8fef2e9b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/modeling/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/defaults.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/defaults.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/build.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/datasets/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/datasets/dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/transforms/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/transforms/build.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/transforms/transforms.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/transforms/transforms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/engine/fitter.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/fitter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evaluate/calculate_score.py" beforeDir="false" afterPath="$PROJECT_DIR$/evaluate/calculate_score.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evaluate/evaluate.py" beforeDir="false" afterPath="$PROJECT_DIR$/evaluate/evaluate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modeling/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modeling/multiresnet.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modeling/simpleresnet.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/result/log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/solver/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/solver/build.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/solver/lr_scheduler.py" beforeDir="false" afterPath="$PROJECT_DIR$/solver/lr_scheduler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/submit-1GPU.sh" beforeDir="false" afterPath="$PROJECT_DIR$/submit-1GPU.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/tools/predict.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/train_net.py" beforeDir="false" afterPath="$PROJECT_DIR$/tools/train_cmip.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/result/log.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -248,7 +229,7 @@
       <workItem from="1614511500259" duration="939000" />
       <workItem from="1614559184756" duration="9879000" />
       <workItem from="1614757773436" duration="315000" />
-      <workItem from="1615770350914" duration="1724000" />
+      <workItem from="1615770350914" duration="2364000" />
     </task>
     <servers />
   </component>

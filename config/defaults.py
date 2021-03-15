@@ -29,9 +29,10 @@ _C.VERBOSE = True
 
 _C.MODEL = CN()
 _C.MODEL.DEVICE = "cuda"
-_C.MODEL.NUM_CLASSES = 2
-_C.MODEL.BACKBONE.PRETRAIN = True
-_C.MODEL.BACKBONE.PRETRAIN_PATH = '/home/wangxiang/dat01/WWX/aiearth/pretrained/resnet18.pth'
+_C.MODEL.PRETRAINED_CMIP  = os.path.abspath(os.path.join(os.getcwd(), "./usr_data/model_data/resnet18-lr3e4-epoch30-cmip/")) + "/best-model.bin"
+
+_C.MODEL.BACKBONE = CN()
+_C.MODEL.BACKBONE.DEPTH = 18
 _C.MODEL.BACKBONE.LAST_STRIDE = 2
 _C.MODEL.BACKBONE.NORM = "BN"
 # Mini-batch split of Ghost BN
@@ -43,8 +44,8 @@ _C.MODEL.BACKBONE.WITH_IBN = False
 _C.MODEL.BACKBONE.WITH_SE = False
 # If use Non-local block in backbone
 _C.MODEL.BACKBONE.WITH_NL = False
-_C.MODEL.BACKBONE.DEPTH = 18
-_C.MODEL.PRETRAINED_CMIP  = os.path.abspath(os.path.join(os.getcwd(), "./usr_data/model_data/resnet18-lr3e4-epoch30-cmip/")) + "/best-model.bin"
+_C.MODEL.BACKBONE.PRETRAIN = True
+_C.MODEL.BACKBONE.PRETRAIN_PATH = '/home/wangxiang/dat01/WWX/aiearth/pretrained/resnet18.pth'
 # -----------------------------------------------------------------------------
 # INPUT
 # -----------------------------------------------------------------------------
