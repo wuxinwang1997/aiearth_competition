@@ -36,8 +36,11 @@ def train(cfg, logger):
     if cfg.MODEL.PRETRAINED_CMIP != '':
         model.load_state_dict(torch.load(cfg.MODEL.PRETRAINED_CMIP)['model_state_dict'])
         for k,v in model.named_parameters():
-             if k.startswith('cnn.0.model.0') or k.startswith('cnn.0.model.1') or k.startswith('cnn.0.model.4') or k.startswith('cnn.1.model.4') or k.startswith('cnn.1.model.0') or k.startswith('cnn.1.model.1') or k.startswith('cnn.1.model.4') or k.startswith('cnn.2.model.0') or k.startswith('cnn.2.model.1') or k.startswith('cnn.2.model.4') or k.startswith('cnn.3.model.0') or k.startswith('cnn.3.model.1') or k.startswith('cnn.3.model.4'):
-                      v.requires_grad = False
+             if k.startswith('backbones.0.conv1') or k.startswith('backbones.0.bn1') or k.startswith('backbones.0.layer1') \
+                or k.startswith('backbones.1.conv1') or k.startswith('backbones.1.bn1') or k.startswith('backbones.1.layer1') \
+                or k.startswith('backbones.2.conv1') or k.startswith('backbones.2.bn1') or k.startswith('backbones.2.layer1') \
+                or k.startswith('backbones.3.conv1') or k.startswith('backbones.3.bn1') or k.startswith('backbones.3.layer1'):
+                 v.requires_grad = False
     if torch.cuda.is_available():
         device = 'cuda'
     else:
