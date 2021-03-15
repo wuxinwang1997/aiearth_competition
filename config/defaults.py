@@ -115,11 +115,11 @@ _C.SOLVER.IMS_PER_BATCH = 64
 # see 2 images per batch
 _C.TEST = CN()
 _C.TEST.IMS_PER_BATCH = 64
-_C.TEST.WEIGHT = "../usr_data/model_data/resnet18-lr1e4-epoch30-soda/best-model.bin"
+_C.TEST.WEIGHT = "../usr_data/model_data/resnet18_lstm-lr1e4-epoch30-cmip/best-model.bin"
 
 # ---------------------------------------------------------------------------- #
 # Misc options
 # ---------------------------------------------------------------------------- #
-_C.OUTPUT_DIR = os.path.abspath(os.path.join(os.getcwd(), "./usr_data/model_data/resnet18-lr1e4-epoch30-soda/"))
+_C.OUTPUT_DIR = os.path.abspath(os.path.join(os.getcwd(), "./usr_data/model_data/resnet18_lstm-lr1e4-epoch30-cmip/"))
 _C.RESULT_DIR = "../result/"
 _C.RESULT_PATH = "../result.zip"

@@ -19,7 +19,7 @@ def make_optimizer(cfg, model):
             weight_decay = cfg.SOLVER.WEIGHT_DECAY_BIAS
         if "bn" in key:
             weight_decay = cfg.SOLVER.WEIGHT_DECAY_BN
-        if cfg.TRAIN_SODA is True:
+        if cfg.SOLVER.TRAIN_SODA is True:
             if "linear" in key:
                 lr = cfg.SOLVER.BASE_LR * 0.5
         params += [{"params": [value], "lr": lr, "weight_decay": weight_decay}]
