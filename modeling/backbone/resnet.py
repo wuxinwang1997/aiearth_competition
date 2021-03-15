@@ -276,4 +276,6 @@ def build_resnet_backbone(cfg):
             state_dict = new_state_dict
             logger.info(f"Loading pretrained model from {pretrain_path}")
         incompatible = model.load_state_dict(state_dict, strict=False)
+    model.conv1 = nn.Conv2d(12, 64, kernel_size=7, stride=2, padding=3, bias=False)
+    nn.init.kaiming_normal_(model.conv1.weight, mode='fan_out', nonlinearity='relu')
     return model
