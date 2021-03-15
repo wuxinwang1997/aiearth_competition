@@ -43,21 +43,6 @@ def prepare_cmip_data(cfg):
 
 
 def prepare_soda_data(cfg):
-    #soda_data = nc4.Dataset(cfg.DATASETS.ROOT_DIR + 'SODA_train.nc')
-    #soda_label = nc4.Dataset(cfg.DATASETS.ROOT_DIR + 'SODA_label.nc')
-    #soda_sst = np.array(soda_data.variables['sst'][:, 0:12, :, :])
-    #soda_t300 = np.array(soda_data.variables['t300'][:, 0:12, :, :])
-    #soda_ua = np.array(soda_data.variables['ua'][:, 0:12, :, :])
-    #soda_va = np.array(soda_data.variables['va'][:, 0:12, :, :])
-    #soda_label = np.array(soda_label.variables['nino'][:, 12:36])
-    #dict_soda = {
-    #   'sst':soda_sst,
-    #   't300':soda_t300,
-    #   'ua':soda_ua,
-    #   'va':soda_va,
-    #   'label':soda_label
-    #}
-    #return dict_soda
     root_dir = cfg.DATASETS.ROOT_DIR
     soda_data = nc4.Dataset(root_dir + 'SODA_train.nc').variables
     soda_label = nc4.Dataset(root_dir + 'SODA_label.nc').variables
@@ -74,9 +59,6 @@ def prepare_soda_data(cfg):
     last_year_nino = np.array(soda_label['nino'][-1, -12:].reshape((1, 12)))
     tmp = np.concatenate((tmp, last_year_nino), axis=0)
     soda['label'] = tmp.flatten()
-
-    #soda['label'] = np.array(soda_label['nino'][:, 12:36])
-    #soda['label'] = np.array(soda['label']).flatten()
 
     dict_soda = dict()
     for var in ['sst', 't300', 'ua', 'va', 'label']:
@@ -110,18 +92,25 @@ def prepare_test_data(cfg):
 
 def build_dataset(cfg):
     dict_cmip, dict_soda = prepare_cmip_data(cfg), prepare_soda_data(cfg)
-    train_dataset_cmip = EarthDataset(
+    dataset_cmip = EarthDataset(
         data_dict=dict_cmip,
         transforms=build_transforms(cfg, is_train=True),
     )
 
-    val_dataset_soda = EarthDataset(
+    dataset_soda = EarthDataset(
         data_dict=dict_soda,
         transforms=build_transforms(cfg, is_train=False),
     )
-    len_val = int(val_dataset_soda.len*0.2)
-    train_dataset, val_dataset = data.random_split(val_dataset_soda, lengths=[val_dataset_soda.len-len_val, len_val] , generator=torch.Generator().manual_seed(cfg.SEED))
-    #train_dataset = data.ConcatDataset([train_dataset_cmip, train_dataset_soda])
+    if cfg.DATASETS.SODA:
+        len_val = int(dataset_soda.len*0.2)
+        train_dataset, val_dataset = data.random_split(dataset_soda,
+                                                       lengths=[dataset_soda.len-len_val, len_val],
+                                                       generator=torch.Generator().manual_seed(cfg.SEED))
+    else:
+        len_val = int(dataset_cmip.len * 0.2)
+        train_dataset, val_dataset = data.random_split(dataset_soda,
+                                                       lengths=[dataset_soda.len - len_val, len_val],
+                                                       generator=torch.Generator().manual_seed(cfg.SEED))
 
     return train_dataset, val_dataset
 
