@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68c37ce9-2442-44cb-a869-809c8fef2e9b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/defaults.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/defaults.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modeling/backbone/resnet.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/backbone/resnet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modeling/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/result/log.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -228,7 +231,7 @@
       <workItem from="1614511500259" duration="939000" />
       <workItem from="1614559184756" duration="9879000" />
       <workItem from="1614757773436" duration="315000" />
-      <workItem from="1615770350914" duration="3282000" />
+      <workItem from="1615770350914" duration="4306000" />
     </task>
     <servers />
   </component>

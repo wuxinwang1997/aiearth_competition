@@ -11,8 +11,8 @@ from .backbone import build_resnet_backbone
 class AIEarthModel(nn.Module):
 
     def __init__(self, cfg):
-        super(AIEarthModel).__init__()
-        self.cnn = nn.ModuleList([build_resnet_backbone(cfg) for i in range(4)])
+        super().__init__()
+        self.backbones = nn.ModuleList([build_resnet_backbone(cfg) for i in range(4)])
         self.avgpool = nn.AdaptiveAvgPool2d((1,128))
         self.lstm = nn.LSTM(input_size=3 * 4 ,hidden_size=64,num_layers=2,batch_first=True,bidirectional=True)
         self.batch_norm = nn.BatchNorm1d(512, affine=False)
@@ -21,10 +21,10 @@ class AIEarthModel(nn.Module):
     def forward(self, x):
         sst, t300, ua, va = x
         
-        sst = self.cnn[0](sst)
-        t300 = self.cnn[1](t300)
-        ua = self.cnn[2](ua)
-        va = self.cnn[3](va)
+        sst = self.backbones[0](sst)
+        t300 = self.backbones[1](t300)
+        ua = self.backbones[2](ua)
+        va = self.backbones[3](va)
 
         sst = torch.flatten(sst, start_dim=2)
         t300 = torch.flatten(t300, start_dim=2)

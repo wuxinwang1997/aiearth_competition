@@ -252,7 +252,7 @@ def build_resnet_backbone(cfg):
     if pretrain:
         if not with_ibn:
             try:
-                state_dict = torch.load(pretrain_path)['model']
+                state_dict = torch.load(pretrain_path)
                 # Remove module.encoder in name
                 new_state_dict = {}
                 for k in state_dict:
