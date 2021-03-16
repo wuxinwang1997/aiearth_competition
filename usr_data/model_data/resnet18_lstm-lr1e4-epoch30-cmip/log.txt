@@ -1,6 +1,6 @@
-2021-03-16 15:33:57,101 resnet18 INFO: Using 1 GPUS
-2021-03-16 15:33:57,102 resnet18 INFO: Namespace(config_file='', opts=['OUTPUT_DIR', '("./usr_data/model_data/resnet18_lstm-lr1e4-epoch30-cmip/")', 'DATASETS.SODA', '(False)', 'MODEL.BACKBONE.PRETRAIN', '(True)', 'SOLVER.TRAIN_SODA', '(False)'])
-2021-03-16 15:33:57,102 resnet18 INFO: Running with config:
+2021-03-16 16:44:33,672 resnet18 INFO: Using 1 GPUS
+2021-03-16 16:44:33,672 resnet18 INFO: Namespace(config_file='', opts=[])
+2021-03-16 16:44:33,672 resnet18 INFO: Running with config:
 DATALOADER:
   NUM_WORKERS: 0
 DATASETS:
