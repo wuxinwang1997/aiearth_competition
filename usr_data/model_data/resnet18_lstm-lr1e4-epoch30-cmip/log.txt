@@ -1,0 +1,55 @@
+2021-03-16 15:33:57,101 resnet18 INFO: Using 1 GPUS
+2021-03-16 15:33:57,102 resnet18 INFO: Namespace(config_file='', opts=['OUTPUT_DIR', '("./usr_data/model_data/resnet18_lstm-lr1e4-epoch30-cmip/")', 'DATASETS.SODA', '(False)', 'MODEL.BACKBONE.PRETRAIN', '(True)', 'SOLVER.TRAIN_SODA', '(False)'])
+2021-03-16 15:33:57,102 resnet18 INFO: Running with config:
+DATALOADER:
+  NUM_WORKERS: 0
+DATASETS:
+  ROOT_DIR: /home/wangxiang/dat01/WWX/aiearth/data/enso_round1_train_20210201/
+  SODA: False
+  TEST_DIR: ../tcdata/enso_round1_test_20210201/
+  UP_RATIO: 1
+  X_DIM: 72
+  Y_DIM: 24
+  Z_DIM: 48
+DEBUG: False
+INPUT:
+  
+MODEL:
+  BACKBONE:
+    DEPTH: 18
+    LAST_STRIDE: 2
+    NORM: BN
+    NORM_SPLIT: 1
+    PRETRAIN: True
+    PRETRAIN_PATH: /home/wangxiang/dat01/WWX/aiearth/pretrained/resnet18.pth
+    RATIO: 16
+    WITH_IBN: False
+    WITH_NL: False
+    WITH_SE: False
+  DEVICE: cuda
+  PRETRAINED_CMIP: /Users/lujingze/Programming/ai-earth/aiearth_competition/usr_data/model_data/resnet18_lstm-lr1e4-epoch30-cmip/best-model.bin
+OUTPUT_DIR: ./usr_data/model_data/resnet18_lstm-lr1e4-epoch30-cmip/
+RESULT_DIR: ../result/
+RESULT_PATH: ../result.zip
+SEED: 66
+SOLVER:
+  BASE_LR: 0.0001
+  BIAS_LR_FACTOR: 1
+  COS_EPOCH: 25
+  EARLY_STOP_PATIENCE: 40
+  IMS_PER_BATCH: 64
+  MAX_EPOCHS: 30
+  MOMENTUM: 0.9
+  OPTIMIZER_NAME: Adam
+  SCHEDULER_NAME: CosineAnnealingWarmRestarts
+  TRAIN_CHECKPOINT: False
+  TRAIN_SODA: False
+  T_MUL: 1
+  WARMUP_EPOCHS: 5
+  WEIGHT_DECAY: 0.0005
+  WEIGHT_DECAY_BIAS: 0
+  WEIGHT_DECAY_BN: 0
+TEST:
+  IMS_PER_BATCH: 64
+  WEIGHT: ../usr_data/model_data/resnet18_lstm-lr1e4-epoch30-cmip/best-model.bin
+VERBOSE: True

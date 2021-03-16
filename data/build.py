@@ -19,6 +19,7 @@ import pandas as pd
 import torch.multiprocessing
 torch.multiprocessing.set_sharing_strategy('file_system')
 
+
 def prepare_cmip_data(cfg):
     root_dir = cfg.DATASETS.ROOT_DIR
     cmip_data = nc4.Dataset(root_dir + 'CMIP_train.nc').variables
@@ -64,6 +65,7 @@ def prepare_soda_data(cfg):
     for var in ['sst', 't300', 'ua', 'va', 'label']:
         dict_soda[var] = soda[var]
     return dict_soda
+
 
 def prepare_test_data(cfg):
     test_path = cfg.DATASETS.TEST_DIR
