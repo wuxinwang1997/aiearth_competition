@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68c37ce9-2442-44cb-a869-809c8fef2e9b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/modeling/backbone/resnet.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/backbone/resnet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/fitter.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/fitter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/solver/lr_scheduler.py" beforeDir="false" afterPath="$PROJECT_DIR$/solver/lr_scheduler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/train_cmip.py" beforeDir="false" afterPath="$PROJECT_DIR$/tools/train_cmip.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usr_data/model_data/resnet18_lstm-lr1e4-epoch30-cmip/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/usr_data/model_data/resnet18_lstm-lr1e4-epoch30-cmip/log.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -229,7 +233,7 @@
       <workItem from="1614559184756" duration="9879000" />
       <workItem from="1614757773436" duration="315000" />
       <workItem from="1615770350914" duration="9006000" />
-      <workItem from="1615857215110" duration="8032000" />
+      <workItem from="1615857215110" duration="10398000" />
     </task>
     <servers />
   </component>

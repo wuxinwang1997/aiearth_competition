@@ -1,6 +1,6 @@
-2021-03-16 16:44:33,672 resnet18 INFO: Using 1 GPUS
-2021-03-16 16:44:33,672 resnet18 INFO: Namespace(config_file='', opts=[])
-2021-03-16 16:44:33,672 resnet18 INFO: Running with config:
+2021-03-16 21:15:06,587 resnet18 INFO: Using 1 GPUS
+2021-03-16 21:15:06,587 resnet18 INFO: Namespace(config_file='', opts=[])
+2021-03-16 21:15:06,588 resnet18 INFO: Running with config:
 DATALOADER:
   NUM_WORKERS: 0
 DATASETS:
@@ -53,3 +53,8 @@ TEST:
   IMS_PER_BATCH: 64
   WEIGHT: ../usr_data/model_data/resnet18_lstm-lr1e4-epoch30-cmip/best-model.bin
 VERBOSE: True
+2021-03-16 21:18:12,351 resnet18 INFO: Fitter prepared. Device is cpu
+2021-03-16 21:18:12,353 resnet18 INFO: Start training
+2021-03-16 21:18:12,354 resnet18 INFO: 
+2021-03-16T13:18:12.354270
+LR: 2e-05
