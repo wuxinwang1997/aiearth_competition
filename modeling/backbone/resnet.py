@@ -270,7 +270,6 @@ def build_resnet_backbone(cfg):
                 state_dict = torch.load(pretrain_path)
                 # Remove module.encoder in name
                 new_state_dict = {}
-                breakpoint()
                 for k in state_dict:
                     new_k = '.'.join(k.split('.')[2:])
                     if new_k in model.state_dict() and (model.state_dict()[new_k].shape == state_dict[k].shape):
