@@ -117,7 +117,7 @@ class Fitter:
                 labels = labels.to(self.device).float()
                 if self.do_swa_scheduler:
                     outputs = self.swa_model((sst, t300, ua, va))
-                elif self.do_base_scheduler:
+                else:
                     outputs = self.model((sst, t300, ua, va))
                 loss = self.loss(outputs, labels)
                 summary_loss.update(loss.item(), sst.shape[0])
