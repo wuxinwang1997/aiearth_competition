@@ -13,9 +13,6 @@ import torch
 import torch.utils.data as data
 from .datasets.dataset import EarthDataset, TestDataset
 from .transforms.build import build_transforms
-from .collate_batch import collate_batch
-from sklearn.model_selection import train_test_split
-import pandas as pd
 import torch.multiprocessing
 torch.multiprocessing.set_sharing_strategy('file_system')
 

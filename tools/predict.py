@@ -27,6 +27,7 @@ def seed_everything(seed):
 def predict(cfg):
     seed_everything(cfg.SEED)
     model = build_model(cfg)
+
     model.load_state_dict(torch.load(cfg.TEST.WEIGHT, map_location=cfg.MODEL.DEVICE)['model_state_dict'])
     device = cfg.MODEL.DEVICE
 

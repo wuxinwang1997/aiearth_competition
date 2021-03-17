@@ -8,19 +8,13 @@ import os
 import time
 import numpy as np
 import warnings
-from datetime import datetime
 import torch
-from .average import AverageMeter
-from evaluate.evaluate import evaluate
 from tqdm import tqdm
-import pandas as pd
 import zipfile
-from solver.build import make_optimizer
-from solver.lr_scheduler import make_scheduler
 warnings.filterwarnings("ignore")
 
 class Predicter:
-    def __init__(self, model, device, cfg, test_loader, logger):
+    def __init__(self, model, device, cfg, test_loader):
         self.config = cfg
         self.test_loader = test_loader
 
@@ -29,14 +23,9 @@ class Predicter:
             os.makedirs(self.base_dir)
         self.result_path = f'{self.config.RESULT_PATH}'
 
-        self.logger = logger
-
         self.model = model
         self.device = device
         self.model.to(self.device)
-
-        self.logger.info(f'Fitter prepared. Device is {self.device}')
-        self.logger.info("Start testing")
 
     def predict(self):
         self.model.eval()

@@ -14,12 +14,8 @@ class TestDataset(Dataset):
         self.len = len(self.data_dict['sst'])
 
     def __getitem__(self, idx):
-        idx = idx % self.len
-        sst = self.data_preoccess(self.data_dict['sst'][idx].transpose(0, 2, 3, 1))
-        t300 = self.data_preoccess(self.data_dict['t300'][idx].transpose(0, 2, 3, 1))
-        ua = self.data_preoccess(self.data_dict['ua'][idx].transpose(0, 2, 3, 1))
-        va = self.data_preoccess(self.data_dict['va'][idx].transpose(0, 2, 3, 1))
-        return (sst, t300, ua, va), self.data_dict['name'][idx]
+        idx = idx%self.len
+        return  (self.data_dict['sst'][idx], self.data_dict['t300'][idx], self.data_dict['ua'][idx], self.data_dict['va'][idx]), self.data_dict['name'][idx]
 
     def __len__(self):
         return self.len
@@ -28,7 +24,6 @@ class TestDataset(Dataset):
         for i in range(4):
             data[i] = self.transform(data[i])
         return data
-
 
 class EarthDataset(Dataset):
     """

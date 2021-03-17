@@ -28,12 +28,12 @@ _C.SEED = 66
 _C.VERBOSE = True
 
 _C.MODEL = CN()
-_C.MODEL.DEVICE = "cuda"
+_C.MODEL.DEVICE = "cpu"
 _C.MODEL.PRETRAINED_CMIP  = os.path.abspath(os.path.join(os.getcwd(), "./usr_data/model_data/resnet18_lstm-lr1e4-epoch30-cmip/")) + "/best-model.bin"
 
 _C.MODEL.BACKBONE = CN()
 _C.MODEL.BACKBONE.DEPTH = 18
-_C.MODEL.BACKBONE.LAST_STRIDE = 2
+_C.MODEL.BACKBONE.LAST_STRIDE = 1
 _C.MODEL.BACKBONE.NORM = "BN"
 # Mini-batch split of Ghost BN
 _C.MODEL.BACKBONE.NORM_SPLIT = 1
@@ -44,7 +44,7 @@ _C.MODEL.BACKBONE.WITH_IBN = False
 _C.MODEL.BACKBONE.WITH_SE = False
 # If use Non-local block in backbone
 _C.MODEL.BACKBONE.WITH_NL = False
-_C.MODEL.BACKBONE.PRETRAIN = True
+_C.MODEL.BACKBONE.PRETRAIN = False
 _C.MODEL.BACKBONE.PRETRAIN_PATH = '/home/wangxiang/dat01/WWX/aiearth/pretrained/resnet18.pth'
 # -----------------------------------------------------------------------------
 # INPUT
@@ -117,7 +117,7 @@ _C.SOLVER.IMS_PER_BATCH = 64
 # see 2 images per batch
 _C.TEST = CN()
 _C.TEST.IMS_PER_BATCH = 64
-_C.TEST.WEIGHT = "../usr_data/model_data/resnet18_lstm-lr1e4-epoch30-cmip/best-model.bin"
+_C.TEST.WEIGHT = "../usr_data/model_data/resnet18_lstm-lr1e4-epoch30-soda/best-model.bin"
 
 # ---------------------------------------------------------------------------- #
 # Misc options
