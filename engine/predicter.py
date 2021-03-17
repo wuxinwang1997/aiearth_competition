@@ -33,12 +33,14 @@ class Predicter:
         test_predicts_dict = {}
         test_loader = tqdm(self.test_loader, total=len(self.test_loader), desc="Validating")
         with torch.no_grad():
-            for step, ((sst, t300, ua, va), name) in enumerate(test_loader):
+            # for step, ((sst, t300, ua, va), name) in enumerate(test_loader):
+            for step, ((sst,), name) in enumerate(test_loader):
                 sst = sst.to(self.device).float()
-                t300 = t300.to(self.device).float()
-                ua = ua.to(self.device).float()
-                va = va.to(self.device).float()
-                outputs = self.model((sst, t300, ua, va))
+                # t300 = t300.to(self.device).float()
+                # ua = ua.to(self.device).float()
+                # va = va.to(self.device).float()
+                # outputs = self.model((sst, t300, ua, va))
+                outputs = self.model((sst, ))
                 for i in range(len(name)):
                     test_predicts_dict[name[i]] = outputs[i].reshape(-1, )
                 test_loader.set_description(f'Test Step {step}/{len(self.test_loader)}, ' + \

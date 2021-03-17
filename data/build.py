@@ -14,7 +14,9 @@ import torch.utils.data as data
 from .datasets.dataset import EarthDataset, TestDataset
 from .transforms.build import build_transforms
 import torch.multiprocessing
+
 torch.multiprocessing.set_sharing_strategy('file_system')
+
 
 def prepare_cmip_data(cfg):
     root_dir = cfg.DATASETS.ROOT_DIR
@@ -62,6 +64,7 @@ def prepare_soda_data(cfg):
         dict_soda[var] = soda[var]
     return dict_soda
 
+
 def prepare_test_data(cfg):
     test_path = cfg.DATASETS.TEST_DIR
     files = os.listdir(test_path)
@@ -99,9 +102,9 @@ def build_dataset(cfg):
         transforms=build_transforms(cfg, is_train=False),
     )
     if cfg.DATASETS.SODA:
-        len_val = int(dataset_soda.len*0.2)
+        len_val = int(dataset_soda.len * 0.2)
         train_dataset, val_dataset = data.random_split(dataset_soda,
-                                                       lengths=[dataset_soda.len-len_val, len_val],
+                                                       lengths=[dataset_soda.len - len_val, len_val],
                                                        generator=torch.Generator().manual_seed(cfg.SEED))
     else:
         len_val = int(dataset_cmip.len * 0.2)
