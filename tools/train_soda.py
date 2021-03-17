@@ -19,6 +19,7 @@ import random
 import torch
 import numpy as np
 from utils.logger import setup_logger
+from torch.optim.swa_utils import AveragedModel
 
 
 def seed_everything(seed):
@@ -34,6 +35,7 @@ def seed_everything(seed):
 def train(cfg, logger):
     seed_everything(cfg.SEED)
     model = build_model(cfg)
+    model = AveragedModel(model)
     if cfg.MODEL.PRETRAINED_CMIP != '':
         model.load_state_dict(torch.load(cfg.MODEL.PRETRAINED_CMIP)['model_state_dict'])
         for k, v in model.named_parameters():
