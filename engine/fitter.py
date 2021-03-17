@@ -17,7 +17,7 @@ import pandas as pd
 from solver.build import make_optimizer
 from solver.lr_scheduler import make_scheduler
 from layers import myloss
-from torch.optim.swa_utils import SWALR
+from torch.optim.swa_utils import AveragedModel, SWALR, update_bn
 
 warnings.filterwarnings("ignore")
 
@@ -37,18 +37,21 @@ class Fitter:
         self.best_final_loss = 9999.0
 
         self.model = model
+        self.swa_model = AveragedModel(model)
         self.device = device
         self.model.to(self.device)
+        self.swa_model.to(self.device)
         self.loss = torch.nn.MSELoss(reduce=True, size_average=True)
         self.optimizer = make_optimizer(cfg, model)
 
-        self.scheduler = make_scheduler(cfg, self.optimizer, train_loader)
+        self.base_scheduler = make_scheduler(cfg, self.optimizer, train_loader)
         self.swa_scheduler = SWALR(self.optimizer, swa_lr=cfg.SOLVER.BASE_LR)
 
         self.logger.info(f'Fitter prepared. Device is {self.device}')
         self.early_stop_epochs = 0
         self.early_stop_patience = self.config.SOLVER.EARLY_STOP_PATIENCE
-        self.do_scheduler = True
+        self.do_base_scheduler = True
+        self.do_swa_scheduler = True
         self.logger.info("Start training")
 
     def fit(self):
@@ -57,9 +60,14 @@ class Fitter:
                 lr_scale = min(1., float(epoch + 1) / float(self.config.SOLVER.WARMUP_EPOCHS))
                 for pg in self.optimizer.param_groups:
                     pg['lr'] = lr_scale * self.config.SOLVER.BASE_LR
-                self.do_scheduler = False
+                self.do_base_scheduler = False
             else:
-                self.do_scheduler = True
+                self.do_base_scheduler = True
+            if epoch < self.config.SOLVER.SWA_EPOCHS:
+                self.do_swa_scheduler = False
+            else:
+                self.do_swa_scheduler = True
+
             if self.config.VERBOSE:
                 lr = self.optimizer.param_groups[0]['lr']
                 timestamp = datetime.utcnow().isoformat()
@@ -78,6 +86,7 @@ class Fitter:
             if val_loss.avg < self.best_final_loss:
                 self.best_final_loss = val_loss.avg
                 self.model.eval()
+                self.swa_model.eval()
                 self.save(f'{self.base_dir}/best-checkpoint.bin')
                 self.save_model(f'{self.base_dir}/best-model.bin')
             self.logger.info(
@@ -88,9 +97,12 @@ class Fitter:
                 break
 
             self.epoch += 1
+        # Update bn statistics for the swa_model at the end
+        update_bn(self.train_loader, self.swa_model)
 
     def validation(self):
         self.model.eval()
+        self.swa_model.eval()
         t = time.time()
         y_true = []
         y_pred = []
@@ -103,7 +115,10 @@ class Fitter:
                 ua = ua.to(self.device).float()
                 va = va.to(self.device).float()
                 labels = labels.to(self.device).float()
-                outputs = self.model((sst, t300, ua, va))
+                if self.do_swa_scheduler:
+                    outputs = self.swa_model((sst, t300, ua, va))
+                elif self.do_base_scheduler:
+                    outputs = self.model((sst, t300, ua, va))
                 loss = self.loss(outputs, labels)
                 summary_loss.update(loss.item(), sst.shape[0])
                 y_pred.append(outputs)
@@ -119,6 +134,7 @@ class Fitter:
 
     def train_one_epoch(self):
         self.model.train()
+        self.swa_model.train()
         summary_loss = AverageMeter()
         mse_loss = AverageMeter()
         wrmse_loss = AverageMeter()
@@ -134,38 +150,56 @@ class Fitter:
             outputs = self.model((sst, t300, ua, va))
             loss = self.loss(outputs, labels)
             loss.backward()
-
             summary_loss.update(loss.item(), sst.shape[0])
             self.optimizer.step()
 
-            if self.do_scheduler:
-                # self.scheduler.step()
-                self.swa_scheduler.step()
+            if not self.do_swa_scheduler and self.do_base_scheduler:
+                self.base_scheduler.step()
+
             train_loader.set_description(f'Train Step {step}/{len(self.train_loader)}, ' + \
                                          f'Learning rate {self.optimizer.param_groups[0]["lr"]}, ' + \
                                          f'summary_loss: {summary_loss.avg:.5f}, ' + \
                                          f'time: {(time.time() - t):.5f}')
 
-        # if self.do_scheduler:
-        #    self.scheduler.step()
+        if self.do_swa_scheduler:
+            self.swa_model.update_parameters(self.model)
+            self.swa_scheduler.step()
+
         return summary_loss
 
     def save(self, path):
         self.model.eval()
-        torch.save({
-            'model_state_dict': self.model.state_dict(),
-            'optimizer_state_dict': self.optimizer.state_dict(),
-            'scheduler_state_dict': self.scheduler.state_dict(),
-            'best_final_loss': self.best_final_loss,
-            'epoch': self.epoch,
-        }, path)
+        self.swa_model.eval()
+        if self.do_swa_scheduler:
+            torch.save({
+                'model_state_dict': self.swa_model.state_dict(),
+                'optimizer_state_dict': self.optimizer.state_dict(),
+                'scheduler_state_dict': self.swa_scheduler.state_dict(),
+                'best_final_loss': self.best_final_loss,
+                'epoch': self.epoch,
+            }, path)
+        else:
+            torch.save({
+                'model_state_dict': self.model.state_dict(),
+                'optimizer_state_dict': self.optimizer.state_dict(),
+                'scheduler_state_dict': self.base_scheduler.state_dict(),
+                'best_final_loss': self.best_final_loss,
+                'epoch': self.epoch,
+            }, path)
 
     def save_model(self, path):
         self.model.eval()
-        torch.save({
-            'model_state_dict': self.model.state_dict(),
-            'best_final_loss': self.best_final_loss,
-        }, path)
+        self.swa_model.eval()
+        if self.do_swa_scheduler:
+            torch.save({
+                'model_state_dict': self.swa_model.state_dict(),
+                'best_final_loss': self.best_final_loss,
+            }, path)
+        else:
+            torch.save({
+                'model_state_dict': self.model.state_dict(),
+                'best_final_loss': self.best_final_loss,
+            }, path)
 
     def save_predictions(self, path):
         df = pd.DataFrame(self.all_predictions)
@@ -175,7 +209,7 @@ class Fitter:
         checkpoint = torch.load(path)
         self.model.load_state_dict(checkpoint['model_state_dict'])
         self.optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
-        self.scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
+        self.base_scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
         self.best_final_loss = checkpoint['best_final_loss']
         self.epoch = checkpoint['epoch'] + 1
 
