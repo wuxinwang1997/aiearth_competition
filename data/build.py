@@ -69,12 +69,12 @@ def prepare_cmip_data(cfg):
     else:
         root_dir = cfg.DATASETS.ROOT_DIR
     cmip_data = nc4.Dataset(root_dir + 'CMIP_train.nc').variables
-    cmip_data = fill_nan(cmip_data)
+    # cmip_data = fill_nan(cmip_data)
     cmip_label = nc4.Dataset(root_dir + 'CMIP_label.nc').variables
 
     cmip = dict()
     for i, var in enumerate(['sst', 't300', 'ua', 'va']):
-        tmp = np.array(cmip_data[i][:, 0:12, :, :])
+        tmp = np.array(cmip_data[var][:, 0:12, :, :])
         tmp = np.nan_to_num(tmp)
         tmp = torch.tensor(tmp)
         tmp = torch.flatten(tmp, start_dim=0, end_dim=1)
