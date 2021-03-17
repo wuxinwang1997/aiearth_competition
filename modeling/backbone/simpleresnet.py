@@ -13,8 +13,8 @@ class SimpleResNet(nn.Module):
     def __init__(self, cfg):
         super().__init__()
         resnet = models.resnet18(pretrained=False)
-        if cfg.MODEL.PRETRAINED_IMAGENET is not '':
-           resnet.load_state_dict(torch.load(cfg.MODEL.PRETRAINED_IMAGENET))
+        if cfg.MODEL.BACKBONE.PRETRAIN:
+           resnet.load_state_dict(torch.load(cfg.MODEL.BACKBONE.PRETRAIN_PATH))
         self.conv1 = nn.Conv2d(12, 64, kernel_size=7, stride=2, padding=3, bias=False)
         self.bn1 = resnet.bn1
         self.relu = resnet.relu
