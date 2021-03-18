@@ -136,7 +136,7 @@ def make_data_loader(cfg, is_train=True):
         drop_last=False,
         num_workers=num_workers,
         pin_memory=False,
-        shuffle=True)
+        shuffle=False)
 
     val_loader = data.DataLoader(
         val_dataset,
