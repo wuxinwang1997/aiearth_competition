@@ -20,7 +20,7 @@ def make_optimizer(cfg, model):
         if "bn" in key:
             weight_decay = cfg.SOLVER.WEIGHT_DECAY_BN
         if cfg.SOLVER.TRAIN_SODA:
-            if "linear" in key:
+            if "fc" in key:
                 lr = cfg.SOLVER.BASE_LR * 0.5
         params += [{"params": [value], "lr": lr, "weight_decay": weight_decay}]
     if cfg.SOLVER.OPTIMIZER_NAME is 'SGD':

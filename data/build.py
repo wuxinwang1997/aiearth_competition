@@ -22,7 +22,7 @@ def prepare_cmip_data(cfg):
     cmip_label = nc4.Dataset(root_dir + 'CMIP_label.nc').variables
 
     cmip = dict()
-    for var in ['sst', 't300', 'ua', 'va']:
+    for var in ['sst', 't300']:#, 'ua', 'va']:
         tmp = np.array(cmip_data[var][:, 0:12, :, :])
         tmp = np.nan_to_num(tmp)
         tmp = torch.tensor(tmp)
@@ -34,7 +34,7 @@ def prepare_cmip_data(cfg):
     cmip['label'] = tmp.flatten()
 
     dict_cmip = dict()
-    for var in ['sst', 't300', 'ua', 'va', 'label']:
+    for var in ['sst', 't300', 'label']:#'ua', 'va', 'label']:
         dict_cmip[var] = cmip[var]
     return dict_cmip
 
@@ -45,7 +45,7 @@ def prepare_soda_data(cfg):
     soda_label = nc4.Dataset(root_dir + 'SODA_label.nc').variables
 
     soda = dict()
-    for var in ['sst', 't300', 'ua', 'va']:
+    for var in ['sst', 't300']:#, 'ua', 'va']:
         tmp = np.array(soda_data[var][:, 0:12, :, :])
         tmp = np.nan_to_num(tmp)
         tmp = torch.tensor(tmp)
@@ -58,7 +58,7 @@ def prepare_soda_data(cfg):
     soda['label'] = tmp.flatten()
 
     dict_soda = dict()
-    for var in ['sst', 't300', 'ua', 'va', 'label']:
+    for var in ['sst', 't300', 'label']:#'ua', 'va', 'label']:
         dict_soda[var] = soda[var]
     return dict_soda
 
@@ -67,21 +67,21 @@ def prepare_test_data(cfg):
     files = os.listdir(test_path)
     test_sst = np.zeros((len(files), 12, 24, 72))
     test_t300 = np.zeros((len(files), 12, 24, 72))
-    test_ua = np.zeros((len(files), 12, 24, 72))
-    test_va = np.zeros((len(files), 12, 24, 72))
+    #test_ua = np.zeros((len(files), 12, 24, 72))
+    #test_va = np.zeros((len(files), 12, 24, 72))
     for i in range(len(files)):
         file = np.load(test_path + files[i])
         sst, t300, ua, va = np.split(file, 4, axis=3)
         test_sst[i, :, :, :] = sst.transpose(3, 0, 1, 2)
         test_t300[i, :, :, :] = t300.transpose(3, 0, 1, 2)
-        test_ua[i, :, :, :] = ua.transpose(3, 0, 1, 2)
-        test_va[i, :, :, :] = va.transpose(3, 0, 1, 2)
+        #test_ua[i, :, :, :] = ua.transpose(3, 0, 1, 2)
+        #test_va[i, :, :, :] = va.transpose(3, 0, 1, 2)
 
     dict_test = {
         'sst': test_sst,
         't300': test_t300,
-        'ua': test_ua,
-        'va': test_va,
+     #   'ua': test_ua,
+     #   'va': test_va,
         'name': np.array(files)
     }
     return dict_test

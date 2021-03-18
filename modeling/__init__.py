@@ -5,8 +5,8 @@
 """
 
 from .multiresnet import MultiResnet
-
+from .simplecnn import SimpleCNN
 
 def build_model(cfg):
-    model = MultiResnet(cfg)
+    model = SimpleCNN(cfg)
     return model

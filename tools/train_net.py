@@ -27,7 +27,7 @@ def seed_everything(seed):
     torch.manual_seed(seed)
     torch.cuda.manual_seed(seed)
     torch.backends.cudnn.deterministic = True
-    torch.backends.cudnn.benchmark = True
+    torch.backends.cudnn.benchmark = False
 
 
 def train(cfg, logger):
@@ -36,8 +36,8 @@ def train(cfg, logger):
     if cfg.SOLVER.TRAIN_SODA and cfg.MODEL.PRETRAINED_CMIP != '':
         model.load_state_dict(torch.load(cfg.MODEL.PRETRAINED_CMIP)['model_state_dict']) 
         for k,v in model.named_parameters():
-             if k.startswith('cnn.0.model.0') or k.startswith('cnn.0.model.1') or k.startswith('cnn.0.model.4') or k.startswith('cnn.1.model.4') or k.startswith('cnn.1.model.0') or k.startswith('cnn.1.model.1') or k.startswith('cnn.1.model.4') or k.startswith('cnn.2.model.0') or k.startswith('cnn.2.model.1') or k.startswith('cnn.2.model.4') or k.startswith('cnn.3.model.0') or k.startswith('cnn.3.model.1') or k.startswith('cnn.3.model.4'):
-                      v.requires_grad = False
+             if k.startswith('model.conv1') or k.startswith('model.bn1') or k.startswith('model.layer1'):
+                  v.requires_grad = False
     if torch.cuda.is_available():
         device = 'cuda'
     else:

@@ -20,7 +20,7 @@ from solver.lr_scheduler import make_scheduler
 warnings.filterwarnings("ignore")
 
 class Predicter:
-    def __init__(self, model, device, cfg, test_loader):
+    def __init__(self, model, device, cfg, test_loader, logger):
         self.config = cfg
         self.test_loader = test_loader
 
@@ -29,9 +29,14 @@ class Predicter:
             os.makedirs(self.base_dir)
         self.result_path = f'{self.config.RESULT_PATH}'
 
+        self.logger = logger
+
         self.model = model
         self.device = device
         self.model.to(self.device)
+
+        self.logger.info(f'Fitter prepared. Device is {self.device}')
+        self.logger.info("Start testing")
 
     def predict(self):
         self.model.eval()

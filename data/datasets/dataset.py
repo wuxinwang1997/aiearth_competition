@@ -16,10 +16,10 @@ class TestDataset(Dataset):
     def __getitem__(self, idx):
         idx = idx % self.len
         sst = self.data_dict['sst'][idx]
-        t300 = self.data_dict['t300'][idx]
-        ua = self.data_dict['ua'][idx]
-        va = self.data_dict['va'][idx]
-        return (sst, t300, ua, va), self.data_dict['name'][idx]
+        #t300 = self.data_dict['t300'][idx]
+        #ua = self.data_dict['ua'][idx]
+        #va = self.data_dict['va'][idx]
+        return sst, self.data_dict['name'][idx]#, ua, va), self.data_dict['name'][idx]
 
     def __len__(self):
         return self.len
@@ -46,11 +46,13 @@ class EarthDataset(Dataset):
 
     def __getitem__(self, idx):
         idx = idx % self.len
-        return (self.data_dict['sst'][idx:idx + self.feature_months],
-                self.data_dict['t300'][idx:idx + self.feature_months],
-                self.data_dict['ua'][idx:idx + self.feature_months],
-                self.data_dict['va'][idx:idx + self.feature_months]),\
-                self.data_dict['label'][idx:idx + self.label_months]
+        sst = self.data_dict['sst'][idx:idx + self.feature_months]
+        return sst, self.data_dict['label'][idx:idx + self.label_months]
+        #(self.data_dict['sst'][idx:idx + self.feature_months],
+                #self.data_dict['t300'][idx:idx + self.feature_months]),\
+                #self.data_dict['ua'][idx:idx + self.feature_months],
+                #self.data_dict['va'][idx:idx + self.feature_months]),\
+                #self.data_dict['label'][idx:idx + self.label_months]
 
     def __len__(self):
         return self.len

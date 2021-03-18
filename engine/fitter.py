@@ -91,13 +91,10 @@ class Fitter:
         summary_loss = AverageMeter()
         valid_loader = tqdm(self.val_loader, total=len(self.val_loader), desc="Validating")
         with torch.no_grad():
-            for step, ((sst, t300, ua, va), labels) in enumerate(valid_loader):
+            for step, (sst, labels) in enumerate(valid_loader):
                 sst = sst.to(self.device).float()
-                t300 = t300.to(self.device).float()
-                ua = ua.to(self.device).float()
-                va = va.to(self.device).float()
                 labels = labels.to(self.device).float()
-                outputs = self.model((sst, t300, ua, va))
+                outputs = self.model(sst)#, ua, va))
                 loss = self.loss(outputs, labels)
                 summary_loss.update(loss.item(), sst.shape[0])
                 y_pred.append(outputs)
@@ -118,14 +115,11 @@ class Fitter:
         wrmse_loss = AverageMeter()
         t = time.time()
         train_loader = tqdm(self.train_loader, total=len(self.train_loader), desc="Training")
-        for step, ((sst, t300, ua, va), labels) in enumerate(train_loader):
+        for step, (sst, labels) in enumerate(train_loader):
             sst = sst.to(self.device).float()
-            t300 = t300.to(self.device).float()
-            ua = ua.to(self.device).float()
-            va = va.to(self.device).float()
             labels = labels.to(self.device).float()
             self.optimizer.zero_grad()
-            outputs = self.model((sst, t300, ua, va))
+            outputs = self.model(sst)#, ua, va))
             loss = self.loss(outputs, labels)
             loss.backward()
 

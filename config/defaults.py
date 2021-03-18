@@ -30,7 +30,7 @@ _C.VERBOSE = True
 _C.MODEL = CN()
 _C.MODEL.DEVICE = "cuda"
 _C.MODEL.NUM_CLASSES = 2
-_C.MODEL.PRETRAINED_CMIP  = "./usr_data/model_data/resnet18-lr3e4-epoch30-cmip/best-model.bin"
+_C.MODEL.PRETRAINED_CMIP  = "./usr_data/model_data/resnet18-lr1e4-sst-epoch30-cmip/best-model.bin"
 
 _C.MODEL.BACKBONE = CN()
 _C.MODEL.BACKBONE.PRETRAIN = False
@@ -75,10 +75,10 @@ _C.DATALOADER.NUM_WORKERS = 0
 _C.SOLVER = CN()
 _C.SOLVER.OPTIMIZER_NAME = "Adam"
 _C.SOLVER.SCHEDULER_NAME = "CosineAnnealingWarmRestarts"
-_C.SOLVER.COS_EPOCH = 25
+_C.SOLVER.COS_EPOCH = 45
 _C.SOLVER.T_MUL = 1
 
-_C.SOLVER.MAX_EPOCHS = 30
+_C.SOLVER.MAX_EPOCHS = 50
 
 _C.SOLVER.BASE_LR = 1e-4
 _C.SOLVER.BIAS_LR_FACTOR = 1
@@ -105,11 +105,11 @@ _C.SOLVER.IMS_PER_BATCH = 64
 # see 2 images per batch
 _C.TEST = CN()
 _C.TEST.IMS_PER_BATCH = 64
-_C.TEST.WEIGHT = "../usr_data/model_data/resnet18-lr1e4-epoch30-soda/best-model.bin"
+_C.TEST.WEIGHT = "../usr_data/model_data/resnet18_lstm-lr1e4-epoch30-soda/best-model.bin"
 
 # ---------------------------------------------------------------------------- #
 # Misc options
 # ---------------------------------------------------------------------------- #
-_C.OUTPUT_DIR = "./usr_data/model_data/resnet18-lr1e4-epoch30-soda/"
+_C.OUTPUT_DIR = "./usr_data/model_data/resnet18_lstm-lr1e4-epoch30-soda/"
 _C.RESULT_DIR = "../result/"
 _C.RESULT_PATH = "../result.zip"
