@@ -98,7 +98,7 @@ class Fitter:
 
             self.epoch += 1
         # Update bn statistics for the swa_model at the end
-        update_bn(self.train_loader.to(self.device), self.swa_model)
+        update_bn(self.train_loader, self.swa_model.to('cpu'))
 
     def validation(self):
         self.model.eval()
