@@ -6,6 +6,7 @@
 
 import torch
 from torch import nn
+import torch.nn.functional as F
 import torchvision.models as models
 from .simplecnn import SimpleCNN
 
@@ -17,15 +18,11 @@ class MultiResnet(nn.Module):
         self.avgpool = nn.AdaptiveAvgPool2d((1,128))
         self.lstm = nn.LSTM(input_size=3 * 4 ,hidden_size=64,num_layers=2,batch_first=True,bidirectional=True)
         self.batch_norm = nn.BatchNorm1d(512, affine=False)
-        self.relu = nn.ReLU(inplace=True)
         self.linear = nn.Linear(128, 24)
-        nn.init.orthogonal_(self.lstm.weight_ih_l0)
-        nn.init.orthogonal_(self.lstm.weight_hh_l0)
-        nn.init.zeros_(self.lstm.bias_ih_l0)
-        nn.init.zeros_(self.lstm.bias_hh_l0)
 
     def forward(self, x):
         sst, t300, ua, va = x
+        
         sst = self.cnn[0](sst)
         t300 = self.cnn[1](t300)
         ua = self.cnn[2](ua)
@@ -38,7 +35,6 @@ class MultiResnet(nn.Module):
 
         output = torch.cat([sst, t300, ua, va], dim=-1)
         output = self.batch_norm(output)
-        output = self.relu(output)
         output, _ = self.lstm(output)
         output = self.avgpool(output).squeeze(dim=-2)
         output = self.linear(output)

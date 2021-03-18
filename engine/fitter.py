@@ -31,13 +31,12 @@ class Fitter:
             os.makedirs(self.base_dir)
 
         self.logger = logger
-        self.best_final_score = -9999.0
+        self.best_final_loss = 9999.0
 
         self.model = model
         self.device = device
         self.model.to(self.device)
-        self.mseloss = torch.nn.MSELoss(reduce=True, size_average=True)
-        self.wrmseloss = myloss()
+        self.loss = torch.nn.MSELoss(reduce=True, size_average=True)
         self.optimizer = make_optimizer(cfg, model)
 
         self.scheduler = make_scheduler(cfg, self.optimizer, train_loader)
@@ -69,16 +68,15 @@ class Fitter:
             self.save(f'{self.base_dir}/last-checkpoint.bin')
 
             t = time.time()
-            best_final_score = self.validation()
+            score, val_loss = self.validation()
 
-            self.logger.info( f'[RESULT]: Val. Epoch: {self.epoch}, Best Score: {best_final_score:.5f}, time: {(time.time() - t):.5f}')
-            if best_final_score > self.best_final_score:
-                self.best_final_score = best_final_score
+            if val_loss.avg < self.best_final_loss:
+                self.best_final_loss = val_loss.avg
                 self.model.eval()
                 self.save(f'{self.base_dir}/best-checkpoint.bin')
                 self.save_model(f'{self.base_dir}/best-model.bin')
-
-            self.early_stop(best_final_score)
+            self.logger.info( f'[RESULT]: Val. Epoch: {self.epoch}, Val loss: {val_loss.avg:.5f}, Best Val loss: {self.best_final_loss:.5f}, Score: {score:.5f}, time: {(time.time() - t):.5f}')
+            self.early_stop(val_loss.avg)
             if self.early_stop_epochs > self.config.SOLVER.EARLY_STOP_PATIENCE:
                 self.logger.info('Early Stopping!')
                 break
@@ -90,7 +88,7 @@ class Fitter:
         t = time.time()
         y_true = []
         y_pred = []
-        torch.cuda.empty_cache()
+        summary_loss = AverageMeter()
         valid_loader = tqdm(self.val_loader, total=len(self.val_loader), desc="Validating")
         with torch.no_grad():
             for step, ((sst, t300, ua, va), labels) in enumerate(valid_loader):
@@ -98,16 +96,20 @@ class Fitter:
                 t300 = t300.to(self.device).float()
                 ua = ua.to(self.device).float()
                 va = va.to(self.device).float()
+                labels = labels.to(self.device).float()
                 outputs = self.model((sst, t300, ua, va))
+                loss = self.loss(outputs, labels)
+                summary_loss.update(loss.item(), sst.shape[0])
                 y_pred.append(outputs)
                 y_true.append(labels)
                 valid_loader.set_description(f'Validate Step {step}/{len(self.val_loader)}, ' + \
+                                             f'summary_loss: {summary_loss.avg:.5f}, ' + \
                                              f'time: {(time.time() - t):.5f}')
         y_true = torch.cat(y_true, axis=0)
         y_pred = torch.cat(y_pred, axis=0)
         score = evaluate(y_true.cpu().detach().numpy(), y_pred.cpu().detach().numpy())
 
-        return score
+        return score, summary_loss
 
     def train_one_epoch(self):
         self.model.train()
@@ -124,27 +126,21 @@ class Fitter:
             labels = labels.to(self.device).float()
             self.optimizer.zero_grad()
             outputs = self.model((sst, t300, ua, va))
-            mse = self.mseloss(outputs, labels)
-            wrmse = self.wrmseloss(outputs, labels)
-            loss = 0.5*mse + 0.5*wrmse
+            loss = self.loss(outputs, labels)
             loss.backward()
 
             summary_loss.update(loss.item(), sst.shape[0])
-            mse_loss.update(mse.item(), sst.shape[0])
-            wrmse_loss.update(wrmse.item(), sst.shape[0])
             self.optimizer.step()
 
-            # if self.do_scheduler:
-            #     self.scheduler.step()
+            if self.do_scheduler:
+                self.scheduler.step()
             train_loader.set_description(f'Train Step {step}/{len(self.train_loader)}, ' + \
                                          f'Learning rate {self.optimizer.param_groups[0]["lr"]}, ' + \
                                          f'summary_loss: {summary_loss.avg:.5f}, ' + \
-                                         f'mse_loss: {mse_loss.avg:.5f}, ' + \
-                                         f'wrmse_loss: {wrmse_loss.avg:.5f}, ' + \
                                          f'time: {(time.time() - t):.5f}')
         
-        if self.do_scheduler:
-            self.scheduler.step()
+        #if self.do_scheduler:
+        #    self.scheduler.step()
         return summary_loss
 
     def save(self, path):
@@ -153,7 +149,7 @@ class Fitter:
             'model_state_dict': self.model.state_dict(),
             'optimizer_state_dict': self.optimizer.state_dict(),
             'scheduler_state_dict': self.scheduler.state_dict(),
-            'best_final_score': self.best_final_score,
+            'best_final_loss': self.best_final_loss,
             'epoch': self.epoch,
         }, path)
 
@@ -161,7 +157,7 @@ class Fitter:
         self.model.eval()
         torch.save({
             'model_state_dict': self.model.state_dict(),
-            'best_final_score': self.best_final_score,
+            'best_final_loss': self.best_final_loss,
         }, path)
 
     def save_predictions(self, path):
@@ -173,11 +169,11 @@ class Fitter:
         self.model.load_state_dict(checkpoint['model_state_dict'])
         self.optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
         self.scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
-        self.best_final_score = checkpoint['best_final_score']
+        self.best_final_loss = checkpoint['best_final_loss']
         self.epoch = checkpoint['epoch'] + 1
 
-    def early_stop(self, score):
-        if score < self.best_final_score:
+    def early_stop(self, loss):
+        if loss > self.best_final_loss:
             self.early_stop_epochs += 1
         else:
             self.early_stop_epochs = 0

@@ -12,8 +12,8 @@ class SimpleCNN(nn.Module):
     def __init__(self, cfg):
         super().__init__()
         resnet = models.resnet18(pretrained=False)
-        if cfg.MODEL.PRETRAINED_IMAGENET is not '':
-           resnet.load_state_dict(torch.load(cfg.MODEL.PRETRAINED_IMAGENET))
+        if cfg.MODEL.BACKBONE.PRETRAIN:
+           resnet.load_state_dict(torch.load(cfg.MODEL.BACKBONE.PRETRAIN_PATH))
         resnet.conv1 = nn.Conv2d(12, 64, kernel_size=7, stride=2, padding=3, bias=False)
         nn.init.kaiming_normal_(resnet.conv1.weight, mode='fan_out', nonlinearity='relu')
         self.model = nn.Sequential(
