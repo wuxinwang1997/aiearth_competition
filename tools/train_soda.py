@@ -8,7 +8,6 @@ import argparse
 import os
 import sys
 sys.path.append('.')
-from os import mkdir
 from config import cfg
 from data import make_data_loader
 from engine.fitter import Fitter
@@ -76,7 +75,7 @@ def main():
 
     output_dir = cfg.OUTPUT_DIR
     if output_dir and not os.path.exists(output_dir):
-        mkdir(output_dir)
+        os.makedirs(output_dir)
 
     logger = setup_logger("resnet18", output_dir, 0)
     logger.info("Using {} GPUS".format(num_gpus))
