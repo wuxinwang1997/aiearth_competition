@@ -17,7 +17,9 @@ import pandas as pd
 from solver.build import make_optimizer
 from solver.lr_scheduler import make_scheduler
 from layers import myloss
+
 warnings.filterwarnings("ignore")
+
 
 class Fitter:
     def __init__(self, model, device, cfg, train_loader, val_loader, logger):
@@ -48,7 +50,7 @@ class Fitter:
         self.logger.info("Start training")
 
     def fit(self):
-        for epoch in range(self.epoch, self.config.SOLVER.MAX_EPOCHS ):
+        for epoch in range(self.epoch, self.config.SOLVER.MAX_EPOCHS):
             if epoch < self.config.SOLVER.WARMUP_EPOCHS:
                 lr_scale = min(1., float(epoch + 1) / float(self.config.SOLVER.WARMUP_EPOCHS))
                 for pg in self.optimizer.param_groups:
@@ -64,7 +66,8 @@ class Fitter:
             t = time.time()
             summary_loss = self.train_one_epoch()
 
-            self.logger.info(f'[RESULT]: Train. Epoch: {self.epoch}, summary_loss: {summary_loss.avg:.5f}, time: {(time.time() - t):.5f}')
+            self.logger.info(
+                f'[RESULT]: Train. Epoch: {self.epoch}, summary_loss: {summary_loss.avg:.5f}, time: {(time.time() - t):.5f}')
             self.save(f'{self.base_dir}/last-checkpoint.bin')
 
             t = time.time()
@@ -75,7 +78,8 @@ class Fitter:
                 self.model.eval()
                 self.save(f'{self.base_dir}/best-checkpoint.bin')
                 self.save_model(f'{self.base_dir}/best-model.bin')
-            self.logger.info( f'[RESULT]: Val. Epoch: {self.epoch}, Val loss: {val_loss.avg:.5f}, Best Val loss: {self.best_final_loss:.5f}, Score: {score:.5f}, time: {(time.time() - t):.5f}')
+            self.logger.info(
+                f'[RESULT]: Val. Epoch: {self.epoch}, Val loss: {val_loss.avg:.5f}, Best Val loss: {self.best_final_loss:.5f}, Score: {score:.5f}, time: {(time.time() - t):.5f}')
             self.early_stop(val_loss.avg)
             if self.early_stop_epochs > self.config.SOLVER.EARLY_STOP_PATIENCE:
                 self.logger.info('Early Stopping!')
@@ -94,7 +98,7 @@ class Fitter:
             for step, (sst, labels) in enumerate(valid_loader):
                 sst = sst.to(self.device).float()
                 labels = labels.to(self.device).float()
-                outputs = self.model(sst)#, ua, va))
+                outputs = self.model(sst)  # , ua, va))
                 loss = self.loss(outputs, labels)
                 summary_loss.update(loss.item(), sst.shape[0])
                 y_pred.append(outputs)
@@ -119,7 +123,7 @@ class Fitter:
             sst = sst.to(self.device).float()
             labels = labels.to(self.device).float()
             self.optimizer.zero_grad()
-            outputs = self.model(sst)#, ua, va))
+            outputs = self.model(sst)  # , ua, va))
             loss = self.loss(outputs, labels)
             loss.backward()
 
@@ -132,8 +136,8 @@ class Fitter:
                                          f'Learning rate {self.optimizer.param_groups[0]["lr"]}, ' + \
                                          f'summary_loss: {summary_loss.avg:.5f}, ' + \
                                          f'time: {(time.time() - t):.5f}')
-        
-        #if self.do_scheduler:
+
+        # if self.do_scheduler:
         #    self.scheduler.step()
         return summary_loss
 

@@ -4,8 +4,9 @@
 @contact: wuxin.wang@whu.edu.cn
 """
 
-from .simplecnn import SimpleCNN
+from .simplest import SimplestCNN
+
 
 def build_model(cfg):
-    model = SimpleCNN(cfg)
+    model = SimplestCNN(cfg)
     return model

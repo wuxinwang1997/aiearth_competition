@@ -14,15 +14,20 @@ import torch.utils.data as data
 from .datasets.dataset import EarthDataset, TestDataset
 from .transforms.build import build_transforms
 import torch.multiprocessing
+
 torch.multiprocessing.set_sharing_strategy('file_system')
 
+
 def prepare_cmip_data(cfg):
-    root_dir = cfg.DATASETS.ROOT_DIR
+    if socket.gethostname() == 'lujingzedeMacBook-Pro.local':
+        root_dir = '/Users/lujingze/Programming/ai-earth/data/enso_round1_train_20210201/'
+    else:
+        root_dir = cfg.DATASETS.ROOT_DIR
     cmip_data = nc4.Dataset(root_dir + 'CMIP_train.nc').variables
     cmip_label = nc4.Dataset(root_dir + 'CMIP_label.nc').variables
 
     cmip = dict()
-    for var in ['sst', 't300']:#, 'ua', 'va']:
+    for var in ['sst', 't300']:  # , 'ua', 'va']:
         tmp = np.array(cmip_data[var][:, 0:12, :, :])
         tmp = np.nan_to_num(tmp)
         tmp = torch.tensor(tmp)
@@ -34,18 +39,21 @@ def prepare_cmip_data(cfg):
     cmip['label'] = tmp.flatten()
 
     dict_cmip = dict()
-    for var in ['sst', 't300', 'label']:#'ua', 'va', 'label']:
+    for var in ['sst', 't300', 'label']:  # 'ua', 'va', 'label']:
         dict_cmip[var] = cmip[var]
     return dict_cmip
 
 
 def prepare_soda_data(cfg):
-    root_dir = cfg.DATASETS.ROOT_DIR
+    if socket.gethostname() == 'lujingzedeMacBook-Pro.local':
+        root_dir = '/Users/lujingze/Programming/ai-earth/data/enso_round1_train_20210201/'
+    else:
+        root_dir = cfg.DATASETS.ROOT_DIR
     soda_data = nc4.Dataset(root_dir + 'SODA_train.nc').variables
     soda_label = nc4.Dataset(root_dir + 'SODA_label.nc').variables
 
     soda = dict()
-    for var in ['sst', 't300']:#, 'ua', 'va']:
+    for var in ['sst', 't300']:  # , 'ua', 'va']:
         tmp = np.array(soda_data[var][:, 0:12, :, :])
         tmp = np.nan_to_num(tmp)
         tmp = torch.tensor(tmp)
@@ -58,30 +66,31 @@ def prepare_soda_data(cfg):
     soda['label'] = tmp.flatten()
 
     dict_soda = dict()
-    for var in ['sst', 't300', 'label']:#'ua', 'va', 'label']:
+    for var in ['sst', 't300', 'label']:  # 'ua', 'va', 'label']:
         dict_soda[var] = soda[var]
     return dict_soda
+
 
 def prepare_test_data(cfg):
     test_path = cfg.DATASETS.TEST_DIR
     files = [x for x in os.listdir(test_path) if x.endswith('.npy')]
     test_sst = np.zeros((len(files), 12, 24, 72))
     test_t300 = np.zeros((len(files), 12, 24, 72))
-    #test_ua = np.zeros((len(files), 12, 24, 72))
-    #test_va = np.zeros((len(files), 12, 24, 72))
+    # test_ua = np.zeros((len(files), 12, 24, 72))
+    # test_va = np.zeros((len(files), 12, 24, 72))
     for i in range(len(files)):
         file = np.load(test_path + files[i])
         sst, t300, ua, va = np.split(file, 4, axis=3)
         test_sst[i, :, :, :] = sst.transpose(3, 0, 1, 2)
         test_t300[i, :, :, :] = t300.transpose(3, 0, 1, 2)
-        #test_ua[i, :, :, :] = ua.transpose(3, 0, 1, 2)
-        #test_va[i, :, :, :] = va.transpose(3, 0, 1, 2)
+        # test_ua[i, :, :, :] = ua.transpose(3, 0, 1, 2)
+        # test_va[i, :, :, :] = va.transpose(3, 0, 1, 2)
 
     dict_test = {
         'sst': test_sst,
         't300': test_t300,
-     #   'ua': test_ua,
-     #   'va': test_va,
+        #   'ua': test_ua,
+        #   'va': test_va,
         'name': np.array(files)
     }
     return dict_test
@@ -99,9 +108,9 @@ def build_dataset(cfg):
         transforms=build_transforms(cfg, is_train=False),
     )
     if cfg.DATASETS.SODA:
-        len_val = int(dataset_soda.len*0.2)
+        len_val = int(dataset_soda.len * 0.2)
         train_dataset, val_dataset = data.random_split(dataset_soda,
-                                                       lengths=[dataset_soda.len-len_val, len_val],
+                                                       lengths=[dataset_soda.len - len_val, len_val],
                                                        generator=torch.Generator().manual_seed(cfg.SEED))
     else:
         len_val = int(dataset_cmip.len * 0.2)
