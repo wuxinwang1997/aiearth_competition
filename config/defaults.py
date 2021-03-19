@@ -28,7 +28,7 @@ _C.SEED = 66
 _C.VERBOSE = True
 
 _C.MODEL = CN()
-_C.MODEL.DEVICE = "cuda"
+_C.MODEL.DEVICE = "cpu"
 _C.MODEL.NUM_CLASSES = 2
 _C.MODEL.PRETRAINED_CMIP  = "./usr_data/model_data/resnet18-lr1e4-sst-epoch30-cmip/best-model.bin"
 
@@ -105,11 +105,11 @@ _C.SOLVER.IMS_PER_BATCH = 64
 # see 2 images per batch
 _C.TEST = CN()
 _C.TEST.IMS_PER_BATCH = 64
-_C.TEST.WEIGHT = "../usr_data/model_data/resnet18_lstm-lr1e4-epoch30-soda/best-model.bin"
+_C.TEST.WEIGHT = "../usr_data/model_data/resnet18-lr1e4-epoch30-soda/best-model.bin"
 
 # ---------------------------------------------------------------------------- #
 # Misc options
 # ---------------------------------------------------------------------------- #
-_C.OUTPUT_DIR = "./usr_data/model_data/resnet18_lstm-lr1e4-epoch30-soda/"
+_C.OUTPUT_DIR = "./usr_data/model_data/resnet18-lr1e4-epoch30-soda/"
 _C.RESULT_DIR = "../result/"
 _C.RESULT_PATH = "../result.zip"

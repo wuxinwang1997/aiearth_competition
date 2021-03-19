@@ -20,7 +20,7 @@ from solver.lr_scheduler import make_scheduler
 warnings.filterwarnings("ignore")
 
 class Predicter:
-    def __init__(self, model, device, cfg, test_loader, logger):
+    def __init__(self, model, device, cfg, test_loader):
         self.config = cfg
         self.test_loader = test_loader
 
@@ -29,14 +29,9 @@ class Predicter:
             os.makedirs(self.base_dir)
         self.result_path = f'{self.config.RESULT_PATH}'
 
-        self.logger = logger
-
         self.model = model
         self.device = device
         self.model.to(self.device)
-
-        self.logger.info(f'Fitter prepared. Device is {self.device}')
-        self.logger.info("Start testing")
 
     def predict(self):
         self.model.eval()
@@ -44,12 +39,9 @@ class Predicter:
         test_predicts_dict = {}
         test_loader = tqdm(self.test_loader, total=len(self.test_loader), desc="Validating")
         with torch.no_grad():
-            for step, ((sst, t300, ua, va), name) in enumerate(test_loader):
+            for step, (sst, name) in enumerate(test_loader):
                 sst = sst.to(self.device).float()
-                t300 = t300.to(self.device).float()
-                ua = ua.to(self.device).float()
-                va = va.to(self.device).float()
-                outputs = self.model((sst, t300, ua, va))
+                outputs = self.model(sst)
                 for i in range(len(name)):
                     test_predicts_dict[name[i]] = outputs[i].reshape(-1, )
                 test_loader.set_description(f'Test Step {step}/{len(self.test_loader)}, ' + \

@@ -64,7 +64,7 @@ def prepare_soda_data(cfg):
 
 def prepare_test_data(cfg):
     test_path = cfg.DATASETS.TEST_DIR
-    files = os.listdir(test_path)
+    files = [x for x in os.listdir(test_path) if x.endswith('.npy')]
     test_sst = np.zeros((len(files), 12, 24, 72))
     test_t300 = np.zeros((len(files), 12, 24, 72))
     #test_ua = np.zeros((len(files), 12, 24, 72))
