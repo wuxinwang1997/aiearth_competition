@@ -134,5 +134,15 @@ usr_data/model_data/baseline/*.bin
 slurm*
 
 .idea/
+
 # MacOS
 .DS_Store
+
+# Idea
+.idea/workspace.xml
+
+# compiled bytecode of Python source files
+.pyc
+
+# saved files
+.bin

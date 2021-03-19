@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68c37ce9-2442-44cb-a869-809c8fef2e9b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/aiearth_competition.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/aiearth_competition.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -253,6 +251,7 @@
       <workItem from="1616042376986" duration="3061000" />
       <workItem from="1616057167417" duration="3872000" />
       <workItem from="1616081956742" duration="873000" />
+      <workItem from="1616115839399" duration="154000" />
     </task>
     <servers />
   </component>
