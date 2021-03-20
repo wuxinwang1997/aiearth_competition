@@ -19,7 +19,7 @@ class TestDataset(Dataset):
         #t300 = self.data_dict['t300'][idx]
         #ua = self.data_dict['ua'][idx]
         #va = self.data_dict['va'][idx]
-        return sst, self.data_dict['name'][idx]#, ua, va), self.data_dict['name'][idx]
+        return sst, self.data_dict['name'][idx]
 
     def __len__(self):
         return self.len

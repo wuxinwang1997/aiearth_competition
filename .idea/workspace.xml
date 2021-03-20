@@ -2,12 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68c37ce9-2442-44cb-a869-809c8fef2e9b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/defaults.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/defaults.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/datasets/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/datasets/dataset.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/fitter.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/fitter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modeling/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modeling/simplecnn.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/simplecnn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modeling/simplecnn.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modeling/simplest.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/tools/predict.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usr_data/model_data/resnet18-lr1e4-sst-epoch30-cmip/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/usr_data/model_data/resnet18-lr1e4-sst-epoch30-cmip/log.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +60,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.alibabacloud.intellij.config.ImportExportConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -73,16 +78,16 @@
       <option name="autoVersion" value="false" />
       <option name="clusterType" value="ALI" />
       <option name="configFilePath" />
-      <option name="contextDirectory" value="D:\Study\Lab\Competition\AIEarth\code\baseline\test\aiearth_competition" />
+      <option name="contextDirectory" value="$PROJECT_DIR$" />
       <option name="controllerType" />
       <option name="customRegistryId" value="0" />
       <option name="customRepository" value="false" />
-      <option name="dockerfile" value="D:\Study\Lab\Competition\AIEarth\code\baseline\test\aiearth_competition\Dockerfile" />
-      <option name="imageRepoName" value="aiearth" />
-      <option name="imageRepoNamespace" value="27wilson" />
+      <option name="dockerfile" value="$PROJECT_DIR$/Dockerfile" />
+      <option name="imageRepoName" value="baseline" />
+      <option name="imageRepoNamespace" value="ai-earth" />
       <option name="imageRepoRegionId" value="cn-shenzhen" />
       <option name="imageRepoStatus" />
-      <option name="imageRepoTagName" value="cuda-transfer1.0" />
+      <option name="imageRepoTagName" value="simplest-cnn-sst-v1" />
       <option name="imageRepoType" />
       <option name="k8sClusterId" />
       <option name="k8sClusterName" />
@@ -257,7 +262,8 @@
       <workItem from="1616057167417" duration="3872000" />
       <workItem from="1616081956742" duration="873000" />
       <workItem from="1616115839399" duration="154000" />
-      <workItem from="1616122239141" duration="4308000" />
+      <workItem from="1616122239141" duration="8115000" />
+      <workItem from="1616222275713" duration="13536000" />
     </task>
     <servers />
   </component>
@@ -282,5 +288,6 @@
     <SUITE FILE_PATH="coverage/aiearth_competition$predict.coverage" NAME="predict Coverage Results" MODIFIED="1616042640462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tools" />
     <SUITE FILE_PATH="coverage/aiearth_competition$train_net.coverage" NAME="train_net Coverage Results" MODIFIED="1613995197763" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/train/tools" />
     <SUITE FILE_PATH="coverage/aiearth_competition$text.coverage" NAME="text Coverage Results" MODIFIED="1614561055136" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/aiearth_simple$predict.coverage" NAME="predict Coverage Results" MODIFIED="1616161614038" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tools" />
   </component>
 </project>

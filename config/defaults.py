@@ -28,7 +28,7 @@ _C.SEED = 66
 _C.VERBOSE = True
 
 _C.MODEL = CN()
-_C.MODEL.DEVICE = "cuda"
+_C.MODEL.DEVICE = "cpu"
 _C.MODEL.NUM_CLASSES = 2
 _C.MODEL.PRETRAINED_CMIP = "./usr_data/model_data/resnet18-lr1e4-sst-epoch30-cmip/best-model.bin"
 

@@ -1,6 +1,6 @@
-2021-03-19 20:49:22,003 resnet18 INFO: Using 1 GPUS
-2021-03-19 20:49:22,003 resnet18 INFO: Namespace(config_file='', opts=['OUTPUT_DIR', '("./usr_data/model_data/resnet18-lr1e4-sst-epoch30-cmip/")', 'DATASETS.SODA', '(False)', 'MODEL.BACKBONE.PRETRAIN', '(True)', 'SOLVER.TRAIN_SODA', '(False)'])
-2021-03-19 20:49:22,003 resnet18 INFO: Running with config:
+2021-03-20 21:37:24,542 resnet18 INFO: Using 1 GPUS
+2021-03-20 21:37:24,542 resnet18 INFO: Namespace(config_file='', opts=['OUTPUT_DIR', '("./usr_data/model_data/resnet18-lr1e4-sst-epoch30-cmip/")', 'DATASETS.SODA', '(False)', 'MODEL.BACKBONE.PRETRAIN', '(True)', 'SOLVER.TRAIN_SODA', '(False)'])
+2021-03-20 21:37:24,542 resnet18 INFO: Running with config:
 DATALOADER:
   NUM_WORKERS: 0
 DATASETS:
@@ -46,8 +46,8 @@ TEST:
   IMS_PER_BATCH: 64
   WEIGHT: ../usr_data/model_data/resnet18-lr1e4-epoch30-soda/best-model.bin
 VERBOSE: True
-2021-03-19 20:49:30,993 resnet18 INFO: Fitter prepared. Device is cpu
-2021-03-19 20:49:30,994 resnet18 INFO: Start training
-2021-03-19 20:49:30,995 resnet18 INFO: 
-2021-03-19T12:49:30.994888
+2021-03-20 21:37:31,537 resnet18 INFO: Fitter prepared. Device is cpu
+2021-03-20 21:37:31,538 resnet18 INFO: Start training
+2021-03-20 21:37:31,540 resnet18 INFO: 
+2021-03-20T13:37:31.540500
 LR: 2e-05

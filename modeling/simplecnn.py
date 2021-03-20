@@ -4,21 +4,36 @@
 @contact: wuxin.wang@whu.edu.cn
 """
 
-import torch
 from torch import nn
-import torchvision.models as models
 
 
 class SimpleCNN(nn.Module):
     def __init__(self, cfg):
         super().__init__()
-        self.model = models.resnet18(pretrained=False)
-        if cfg.MODEL.BACKBONE.PRETRAIN:
-            self.model.load_state_dict(torch.load(cfg.MODEL.BACKBONE.PRETRAIN_PATH))
-        self.model.conv1 = nn.Conv2d(12, 64, kernel_size=7, stride=2, padding=3, bias=False)
-        nn.init.kaiming_normal_(self.model.conv1.weight, mode='fan_out', nonlinearity='relu')
-        fc_features = self.model.fc.in_features
-        self.model.fc = nn.Linear(fc_features, 24)
+        self.layer1 = nn.Sequential(
+            nn.Conv2d(3, 15, kernel_size=(4, 8), stride=1, padding=(1, 3), padding_mode='zeros'),
+            nn.Tanh(),
+            nn.MaxPool2d(kernel_size=2),
+            # nn.Dropout(p=0.2)
+        )
+        self.layer2 = nn.Sequential(
+            nn.Conv2d(15, 15, kernel_size=(2, 4), stride=1, padding=(1, 2), padding_mode='zeros'),
+            nn.Tanh(),
+            nn.MaxPool2d(kernel_size=2),
+            # nn.Dropout(p=0.2)
+        )
+        self.layer3 = nn.Sequential(
+            nn.Conv2d(15, 15, kernel_size=(2, 4), stride=1, padding=(0, 1), padding_mode='zeros'),
+            nn.Tanh(),
+        )
+        self.fc = nn.Linear(1275, 1)
 
     def forward(self, x):
-        return self.model(x)
+        # Input 3 month sst
+        out = self.layer1(x)
+        out = self.layer2(out)
+        out = self.layer3(out)
+        out = out.reshape(out.size(0), -1)
+        out = self.fc(out)
+
+        return out

@@ -89,6 +89,7 @@ class Fitter:
 
     def validation(self):
         self.model.eval()
+        batch_size = self.config.SOLVER.IMS_PER_BATCH
         t = time.time()
         y_true = []
         y_pred = []
@@ -98,8 +99,17 @@ class Fitter:
             for step, (sst, labels) in enumerate(valid_loader):
                 sst = sst.to(self.device).float()
                 labels = labels.to(self.device).float()
-                outputs = self.model(sst)  # , ua, va))
-                loss = self.loss(outputs, labels)
+                expanded_labels = torch.tensor(np.zeros((batch_size, 24, 10)))
+                for i in range(batch_size):
+                    for j in range(24):
+                        for k in range(10):
+                            expanded_labels[i, j, k] = labels[i, j]
+
+                outputs = self.model(sst)
+                loss = 0
+                for i in range(24):
+                    loss += self.loss(outputs[:, i, :], expanded_labels[:, i, :])
+                loss /= 10
                 summary_loss.update(loss.item(), sst.shape[0])
                 y_pred.append(outputs)
                 y_true.append(labels)
@@ -114,17 +124,25 @@ class Fitter:
 
     def train_one_epoch(self):
         self.model.train()
+        batch_size = self.config.SOLVER.IMS_PER_BATCH
         summary_loss = AverageMeter()
-        mse_loss = AverageMeter()
-        wrmse_loss = AverageMeter()
         t = time.time()
         train_loader = tqdm(self.train_loader, total=len(self.train_loader), desc="Training")
         for step, (sst, labels) in enumerate(train_loader):
             sst = sst.to(self.device).float()
             labels = labels.to(self.device).float()
+            expanded_labels = torch.tensor(np.zeros((batch_size, 24, 10)))
+            for i in range(batch_size):
+                for j in range(24):
+                    for k in range(10):
+                        expanded_labels[i, j, k] = labels[i, j]
             self.optimizer.zero_grad()
-            outputs = self.model(sst)  # , ua, va))
-            loss = self.loss(outputs, labels)
+            outputs = self.model(sst)
+
+            loss = 0
+            for i in range(24):
+                loss += self.loss(outputs[:, i, :], expanded_labels[:, i, :])
+            loss /= 10
             loss.backward()
 
             summary_loss.update(loss.item(), sst.shape[0])

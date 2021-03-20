@@ -7,6 +7,7 @@
 import argparse
 import os
 import sys
+
 sys.path.append('.')
 from config import cfg
 from data import make_test_data_loader
@@ -17,11 +18,13 @@ import torch
 import numpy as np
 from utils.logger import setup_logger
 
+
 def seed_everything(seed):
     random.seed(seed)
     os.environ['PYTHONHASHSEED'] = str(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
+
 
 def predict(cfg):
     seed_everything(cfg.SEED)
@@ -33,6 +36,7 @@ def predict(cfg):
 
     predicter = Predicter(model=model, device=device, cfg=cfg, test_loader=test_loader)
     predicter.predict()
+
 
 def main():
     parser = argparse.ArgumentParser(description="PyTorch Template MNIST Training")
