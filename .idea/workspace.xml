@@ -2,17 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68c37ce9-2442-44cb-a869-809c8fef2e9b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/defaults.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/defaults.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/build.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/datasets/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/datasets/dataset.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/fitter.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/fitter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modeling/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modeling/simplecnn.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modeling/simplest.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/tools/predict.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usr_data/model_data/resnet18-lr1e4-sst-epoch30-cmip/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/usr_data/model_data/resnet18-lr1e4-sst-epoch30-cmip/log.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -263,7 +254,7 @@
       <workItem from="1616081956742" duration="873000" />
       <workItem from="1616115839399" duration="154000" />
       <workItem from="1616122239141" duration="8115000" />
-      <workItem from="1616222275713" duration="13536000" />
+      <workItem from="1616222275713" duration="13993000" />
     </task>
     <servers />
   </component>

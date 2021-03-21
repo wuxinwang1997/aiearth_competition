@@ -89,7 +89,6 @@ class Fitter:
 
     def validation(self):
         self.model.eval()
-        batch_size = self.config.SOLVER.IMS_PER_BATCH
         t = time.time()
         y_true = []
         y_pred = []
@@ -98,6 +97,7 @@ class Fitter:
         with torch.no_grad():
             for step, (sst, labels) in enumerate(valid_loader):
                 sst = sst.to(self.device).float()
+                batch_size = sst.shape[0]
                 labels = labels.to(self.device).float()
                 expanded_labels = torch.tensor(np.zeros((batch_size, 24, 10)))
                 for i in range(batch_size):
@@ -124,12 +124,12 @@ class Fitter:
 
     def train_one_epoch(self):
         self.model.train()
-        batch_size = self.config.SOLVER.IMS_PER_BATCH
         summary_loss = AverageMeter()
         t = time.time()
         train_loader = tqdm(self.train_loader, total=len(self.train_loader), desc="Training")
         for step, (sst, labels) in enumerate(train_loader):
             sst = sst.to(self.device).float()
+            batch_size = sst.shape[0]
             labels = labels.to(self.device).float()
             expanded_labels = torch.tensor(np.zeros((batch_size, 24, 10)))
             for i in range(batch_size):
