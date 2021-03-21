@@ -20,7 +20,7 @@ class Model(nn.Module):
         self.multicnn = nn.ModuleList([MultiResnet(cfg) for i in range(24)])
 
     def forward(self, x):
-        batch_size = self.config.SOLVER.IMS_PER_BATCH
+        batch_size = x.shape[0]
         output = torch.tensor(np.zeros((batch_size, 24, 10)))
         for i in range(24):
             output[:, i, :] = self.multicnn[i](x)

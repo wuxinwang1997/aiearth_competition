@@ -23,7 +23,7 @@ class MultiResnet(nn.Module):
 
     def forward(self, x):
         # Input 12 month sst
-        batch_size = self.config.SOLVER.IMS_PER_BATCH
+        batch_size = x.shape[0]
         all_pred = torch.tensor(np.zeros((10, batch_size, 1)))
         for i in range(10):
             one_pred = self.cnn[i](x[:, i:i + 3, :, :])
