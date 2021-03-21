@@ -109,7 +109,6 @@ class Fitter:
                 loss = 0
                 for i in range(24):
                     loss += self.loss(outputs[:, i, :], expanded_labels[:, i, :])
-                loss /= 10
                 summary_loss.update(loss.item(), sst.shape[0])
                 y_pred.append(outputs)
                 y_true.append(expanded_labels)
@@ -144,7 +143,6 @@ class Fitter:
             loss = 0
             for i in range(24):
                 loss += self.loss(outputs[:, i, :], expanded_labels[:, i, :])
-            loss /= 10
             loss.backward()
 
             summary_loss.update(loss.item(), sst.shape[0])
