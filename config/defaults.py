@@ -80,7 +80,7 @@ _C.SOLVER.T_MUL = 1
 
 _C.SOLVER.MAX_EPOCHS = 30
 
-_C.SOLVER.BASE_LR = 2e-4
+_C.SOLVER.BASE_LR = 4e-4
 _C.SOLVER.BIAS_LR_FACTOR = 1
 
 _C.SOLVER.MOMENTUM = 0.9
@@ -99,7 +99,7 @@ _C.SOLVER.TRAIN_CHECKPOINT = False
 # Number of images per batch
 # This is global, so if we have 8 GPUs and IMS_PER_BATCH = 16, each GPU will
 # see 2 images per batch
-_C.SOLVER.IMS_PER_BATCH = 64
+_C.SOLVER.IMS_PER_BATCH = 256
 
 # This is global, so if we have 8 GPUs and IMS_PER_BATCH = 16, each GPU will
 # see 2 images per batch

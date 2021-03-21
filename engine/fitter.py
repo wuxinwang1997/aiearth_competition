@@ -112,12 +112,14 @@ class Fitter:
                 loss /= 10
                 summary_loss.update(loss.item(), sst.shape[0])
                 y_pred.append(outputs)
-                y_true.append(labels)
+                y_true.append(expanded_labels)
                 valid_loader.set_description(f'Validate Step {step}/{len(self.val_loader)}, ' + \
                                              f'summary_loss: {summary_loss.avg:.5f}, ' + \
                                              f'time: {(time.time() - t):.5f}')
         y_true = torch.cat(y_true, axis=0)
         y_pred = torch.cat(y_pred, axis=0)
+        y_true = torch.mean(y_true, 2)
+        y_pred = torch.mean(y_pred, 2)
         score = evaluate(y_true.cpu().detach().numpy(), y_pred.cpu().detach().numpy())
 
         return score, summary_loss
