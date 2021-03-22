@@ -42,6 +42,7 @@ class Predicter:
             for step, (sst, name) in enumerate(test_loader):
                 sst = sst.to(self.device).float()
                 outputs = self.model(sst)
+                outputs = torch.mean(outputs, 2)
                 for i in range(len(name)):
                     test_predicts_dict[name[i]] = outputs[i].reshape(-1, )
                 test_loader.set_description(f'Test Step {step}/{len(self.test_loader)}, ' + \
