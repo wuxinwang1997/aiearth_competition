@@ -4,9 +4,9 @@
 @contact: wuxin.wang@whu.edu.cn
 """
 
-from .multiresnet import MultiResnet
 from .simplecnn import SimpleCNN
-
+from .simplepcb import PCB
+from .model import AIEarthModel
 def build_model(cfg):
     model = SimpleCNN(cfg)
     return model

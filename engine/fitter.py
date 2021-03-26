@@ -16,7 +16,7 @@ from tqdm import tqdm
 import pandas as pd
 from solver.build import make_optimizer
 from solver.lr_scheduler import make_scheduler
-from layers import myloss
+from utils.modelema import ModelEMA
 warnings.filterwarnings("ignore")
 
 class Fitter:
@@ -94,7 +94,7 @@ class Fitter:
             for step, (sst, labels) in enumerate(valid_loader):
                 sst = sst.to(self.device).float()
                 labels = labels.to(self.device).float()
-                outputs = self.model(sst)#, ua, va))
+                outputs = self.model(sst)
                 loss = self.loss(outputs, labels)
                 summary_loss.update(loss.item(), sst.shape[0])
                 y_pred.append(outputs)
@@ -111,30 +111,24 @@ class Fitter:
     def train_one_epoch(self):
         self.model.train()
         summary_loss = AverageMeter()
-        mse_loss = AverageMeter()
-        wrmse_loss = AverageMeter()
         t = time.time()
         train_loader = tqdm(self.train_loader, total=len(self.train_loader), desc="Training")
         for step, (sst, labels) in enumerate(train_loader):
             sst = sst.to(self.device).float()
             labels = labels.to(self.device).float()
             self.optimizer.zero_grad()
-            outputs = self.model(sst)#, ua, va))
+            outputs = self.model(sst)
             loss = self.loss(outputs, labels)
             loss.backward()
 
             summary_loss.update(loss.item(), sst.shape[0])
             self.optimizer.step()
-
             if self.do_scheduler:
                 self.scheduler.step()
             train_loader.set_description(f'Train Step {step}/{len(self.train_loader)}, ' + \
                                          f'Learning rate {self.optimizer.param_groups[0]["lr"]}, ' + \
                                          f'summary_loss: {summary_loss.avg:.5f}, ' + \
                                          f'time: {(time.time() - t):.5f}')
-        
-        #if self.do_scheduler:
-        #    self.scheduler.step()
         return summary_loss
 
     def save(self, path):
@@ -154,13 +148,10 @@ class Fitter:
             'best_final_loss': self.best_final_loss,
         }, path)
 
-    def save_predictions(self, path):
-        df = pd.DataFrame(self.all_predictions)
-        df.to_csv(path, index=False)
-
     def load(self, path):
         checkpoint = torch.load(path)
         self.model.load_state_dict(checkpoint['model_state_dict'])
+        #self.ema.load_state_dict(checkpoint['ema_state_dict'])
         self.optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
         self.scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
         self.best_final_loss = checkpoint['best_final_loss']

@@ -1,6 +1,6 @@
 # Base Images
 ## 从天池基础镜像构建
-FROM registry.cn-shanghai.aliyuncs.com/tcc-public/python:3
+FROM registry.cn-shanghai.aliyuncs.com/tcc-public/pytorch:1.6-cuda10.1-py3
 
 ## 把当前文件夹里的文件构建到镜像的根目录下（.后面有空格，不能直接跟/）
 ADD . /

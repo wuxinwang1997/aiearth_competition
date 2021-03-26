@@ -20,7 +20,7 @@ from solver.lr_scheduler import make_scheduler
 warnings.filterwarnings("ignore")
 
 class Predicter:
-    def __init__(self, model, device, cfg, test_loader, logger):
+    def __init__(self, models, device, cfg, test_loader):
         self.config = cfg
         self.test_loader = test_loader
 
@@ -29,27 +29,26 @@ class Predicter:
             os.makedirs(self.base_dir)
         self.result_path = f'{self.config.RESULT_PATH}'
 
-        self.logger = logger
-
-        self.model = model
+        self.models = models
         self.device = device
-        self.model.to(self.device)
-
-        self.logger.info(f'Fitter prepared. Device is {self.device}')
-        self.logger.info("Start testing")
+        for model in self.models:
+            model.to(self.device)
 
     def predict(self):
-        self.model.eval()
+        for model in self.models:
+            model.eval()
         t = time.time()
         test_predicts_dict = {}
         test_loader = tqdm(self.test_loader, total=len(self.test_loader), desc="Validating")
         with torch.no_grad():
-            for step, ((sst, t300, ua, va), name) in enumerate(test_loader):
+            for step, (sst, name) in enumerate(test_loader):
                 sst = sst.to(self.device).float()
-                t300 = t300.to(self.device).float()
-                ua = ua.to(self.device).float()
-                va = va.to(self.device).float()
-                outputs = self.model((sst, t300, ua, va))
+                outputs = []
+                for i in range(25):
+                    print(self.models[i](sst).shape)
+                    outputs.append(torch.unsqueeze(self.models[i](sst), dim=2))
+                outputs = torch.cat(outputs, dim=2)
+                outputs = torch.mean(outputs, dim=2)
                 for i in range(len(name)):
                     test_predicts_dict[name[i]] = outputs[i].reshape(-1, )
                 test_loader.set_description(f'Test Step {step}/{len(self.test_loader)}, ' + \
@@ -57,12 +56,12 @@ class Predicter:
         for file_name, val in test_predicts_dict.items():
             np.save(self.base_dir + file_name, val.cpu().detach().numpy())
             val = np.load(self.base_dir+file_name)
-            print("----type----")
-            print(type(val))
-            print("----shape----")
-            print(val.shape)
-            print("----data----")
-            print(val)
+            #print("----type----")
+            #print(type(val))
+            #print("----shape----")
+            #print(val.shape)
+            #print("----data----")
+            #print(val)
         self.make_zip(self.base_dir, self.result_path)
 
     # 打包目录为zip文件（未压缩）

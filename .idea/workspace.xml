@@ -3,8 +3,20 @@
   <component name="ChangeListManager">
     <list default="true" id="68c37ce9-2442-44cb-a869-809c8fef2e9b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/defaults.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/defaults.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/fitter.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/fitter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/predicter.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/predicter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modeling/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modeling/simplecnn.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/simplecnn.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/run.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/submit-1GPU.sh" beforeDir="false" afterPath="$PROJECT_DIR$/submit-1GPU.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tools/predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/tools/predict.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/result/log.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/train_net.py" beforeDir="false" afterPath="$PROJECT_DIR$/tools/train_net.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,17 +57,20 @@
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Dockerfile" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../cnnlstm/aiearth_competition" />
     <property name="settings.editor.selected.configurable" value="com.alibabacloud.intellij.config.DockerRegistryConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Study\Lab\Competition\AIEarth\code\baseline\onlyresnet\aiearth_competition\modeling" />
+      <recent name="D:\Study\Lab\Competition\AIEarth\code\baseline\onlyresnet\aiearth_competition\tcdata\enso_round1_test_20210201" />
       <recent name="D:\Study\Lab\Competition\AIEarth\code\baseline\test\aiearth_competition\tools" />
       <recent name="D:\Study\Lab\Competition\AIEarth\code\baseline\aiearth_competition\engine" />
     </key>
@@ -63,23 +78,23 @@
       <recent name="D:\Study\Lab\Competition\AIEarth\code\baseline\test\aiearth_competition\usr_data\model_data\resnet18-lr1e4-epoch30-soda" />
     </key>
   </component>
-  <component name="RunManager" selected="Deploy to Registry / Kubernetes.Deploy to Registry">
+  <component name="RunManager" selected="Python.predict">
     <configuration name="Deploy to Registry" type="DEPLOY_ACS_RUN_CONFIGURATION" factoryName="Deploy to ACR">
       <option name="acrRegistryAddress" value="registry.cn-shenzhen.aliyuncs.com" />
       <option name="alreadyReset" value="true" />
       <option name="autoVersion" value="false" />
       <option name="clusterType" value="ALI" />
       <option name="configFilePath" />
-      <option name="contextDirectory" value="D:\Study\Lab\Competition\AIEarth\code\baseline\test\aiearth_competition" />
+      <option name="contextDirectory" value="D:\Study\Lab\Competition\AIEarth\code\baseline\onlyresnet\aiearth_competition" />
       <option name="controllerType" />
       <option name="customRegistryId" value="0" />
       <option name="customRepository" value="false" />
-      <option name="dockerfile" value="D:\Study\Lab\Competition\AIEarth\code\baseline\test\aiearth_competition\Dockerfile" />
+      <option name="dockerfile" value="D:\Study\Lab\Competition\AIEarth\code\baseline\onlyresnet\aiearth_competition\Dockerfile" />
       <option name="imageRepoName" value="aiearth" />
       <option name="imageRepoNamespace" value="27wilson" />
       <option name="imageRepoRegionId" value="cn-shenzhen" />
       <option name="imageRepoStatus" />
-      <option name="imageRepoTagName" value="cuda-transfer1.0" />
+      <option name="imageRepoTagName" value="5transfer1.0" />
       <option name="imageRepoType" />
       <option name="k8sClusterId" />
       <option name="k8sClusterName" />
@@ -193,13 +208,12 @@
       <item itemvalue="Python.predict" />
       <item itemvalue="Python.resnet18_predict" />
       <item itemvalue="Python.text" />
-      <item itemvalue="Python tests.pytest in D:/Study/Lab/Competition/AIEarth/code/baseline/test/aiearth_competition/test/code/resnet_predict.py" />
+      <item itemvalue="Python 测试.pytest in D:/Study/Lab/Competition/AIEarth/code/baseline/test/aiearth_competition/test/code/resnet_predict.py" />
       <item itemvalue="Shell Script.run.sh" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.text" />
-        <item itemvalue="Python tests.pytest in D:/Study/Lab/Competition/AIEarth/code/baseline/test/aiearth_competition/test/code/resnet_predict.py" />
         <item itemvalue="Shell Script.run.sh" />
         <item itemvalue="Python.resnet18_predict" />
       </list>
@@ -252,6 +266,19 @@
       <workItem from="1616028370118" duration="5100000" />
       <workItem from="1616042376986" duration="3061000" />
       <workItem from="1616057167417" duration="3872000" />
+      <workItem from="1616075889569" duration="22713000" />
+      <workItem from="1616160865470" duration="6911000" />
+      <workItem from="1616203142833" duration="16000" />
+      <workItem from="1616329088551" duration="2043000" />
+      <workItem from="1616411358195" duration="69000" />
+      <workItem from="1616411605374" duration="12963000" />
+      <workItem from="1616511209237" duration="1345000" />
+      <workItem from="1616545217426" duration="10291000" />
+      <workItem from="1616595079192" duration="11226000" />
+      <workItem from="1616653457060" duration="730000" />
+      <workItem from="1616657748592" duration="8813000" />
+      <workItem from="1616720499608" duration="1539000" />
+      <workItem from="1616722217661" duration="2509000" />
     </task>
     <servers />
   </component>
@@ -274,7 +301,7 @@
     <SUITE FILE_PATH="coverage/aiearth_competition$text.coverage" NAME="text Coverage Results" MODIFIED="1614561055136" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/aiearth_competition$pytest_in_resnet_predict_py.coverage" NAME="pytest in resnet_predict.py Coverage Results" MODIFIED="1614233349444" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/code" />
     <SUITE FILE_PATH="coverage/aiearth_competition$resnet18_predict.coverage" NAME="resnet18_predict Coverage Results" MODIFIED="1613999784633" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/code" />
-    <SUITE FILE_PATH="coverage/aiearth_competition$predict.coverage" NAME="predict Coverage Results" MODIFIED="1616042640462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tools" />
+    <SUITE FILE_PATH="coverage/aiearth_competition$predict.coverage" NAME="predict Coverage Results" MODIFIED="1616511885958" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tools" />
     <SUITE FILE_PATH="coverage/aiearth_competition$train_net.coverage" NAME="train_net Coverage Results" MODIFIED="1613995197763" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/train/tools" />
   </component>
 </project>
