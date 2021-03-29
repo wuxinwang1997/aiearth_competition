@@ -8,6 +8,5 @@
 
 module load anaconda/3.7
 module load nvidia/cuda/10.1
-source activate aiearth
-python tools/train_net.py OUTPUT_DIR '("./usr_data/model_data/resnet18-lr1e4-sst-epoch30-cmip/")' DATASETS.SODA '(False)' MODEL.BACKBONE.PRETRAIN '(True)' SOLVER.TRAIN_SODA '(False)' SOLVER.BASE_LR '(4e-3)'
-python tools/train_net.py OUTPUT_DIR '("./usr_data/model_data/resnet18-lr1e4-sst-epoch30-soda/")' DATASETS.SODA '(True)' MODEL.BACKBONE.PRETRAIN '(False)' SOLVER.TRAIN_SODA '(True)' SOLVER.BASE_LR '(4e-4)'
+source activate keras-aiearth
+python tools/train_net.py DATASETS.SODA '(False)'

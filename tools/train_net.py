@@ -69,11 +69,13 @@ def train(cfg, logger):
     seq.fit(
         data,
         label,
-        batch_size=10,
+        batch_size=128,
         epochs=epochs,
         verbose=2,
         validation_split=0.2,
     )
+
+    seq.save(cfg.CONVLSTM_CMIP_MODEL)
 
 def main():
     parser = argparse.ArgumentParser(description="PyTorch Template MNIST Training")

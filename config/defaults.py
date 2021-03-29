@@ -107,6 +107,10 @@ _C.TEST = CN()
 _C.TEST.IMS_PER_BATCH = 64
 _C.TEST.WEIGHT = "../usr_data/model_data/resnet18-lr1e4-epoch30-soda/best-model.bin"
 
+_C.CONVLSTM = CN()
+_C.CONVLSTM_CMIP_MODEL = "./usr_data/model_data/convlstm/convlstm-cmip.bin"
+_C.CONVLSTM_SODA_MODEL = "./usr_data/model_data/convlstm/convlstm-soda.bin"
+
 # ---------------------------------------------------------------------------- #
 # Misc options
 # ---------------------------------------------------------------------------- #
