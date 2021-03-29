@@ -17,10 +17,12 @@ class SimpleCNN(nn.Module):
         self.cnn.conv1 = nn.Conv2d(12, 64, kernel_size=7, stride=2, padding=3, bias=False)
         nn.init.kaiming_normal_(self.cnn.conv1.weight, mode='fan_out', nonlinearity='relu')
         self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
+        self.batchnorm = nn.BatchNorm1d(512, affine=False)
         self.fc = nn.Linear(512, 24)
     def forward(self, x):
         x = self.cnn(x)
-        x = torch.squeeze(self.avgpool(x))
+        x = torch.flatten(self.avgpool(x), start_dim=2)
+        x = torch.squeeze(self.batchnorm(x))
         x = self.fc(x)
         return x
 

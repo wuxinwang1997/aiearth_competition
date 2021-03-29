@@ -45,7 +45,6 @@ class Predicter:
                 sst = sst.to(self.device).float()
                 outputs = []
                 for i in range(25):
-                    print(self.models[i](sst).shape)
                     outputs.append(torch.unsqueeze(self.models[i](sst), dim=2))
                 outputs = torch.cat(outputs, dim=2)
                 outputs = torch.mean(outputs, dim=2)

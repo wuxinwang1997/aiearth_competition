@@ -18,12 +18,12 @@ torch.multiprocessing.set_sharing_strategy('file_system')
 
 def prepare_cmip_data(cfg, cmip_data, cmip_label):
     cmip = dict()
-
-    tmp = np.array(cmip_data)
-    tmp = np.nan_to_num(tmp)
-    tmp = torch.tensor(tmp)
-    tmp = torch.flatten(tmp, start_dim=0, end_dim=1)
-    cmip['sst'] = tmp.numpy()
+    for name in ['sst']:
+        tmp = np.array(cmip_data[name])
+        tmp = np.nan_to_num(tmp)
+        tmp = torch.tensor(tmp)
+        tmp = torch.flatten(tmp, start_dim=0, end_dim=1)
+        cmip[name] = tmp.numpy()
     tmp = np.array(cmip_label[:, :])
     last_year_nino = np.array(cmip_label[-1, -12:].reshape((1, 12)))
     tmp = np.concatenate((tmp, last_year_nino), axis=0)
@@ -46,7 +46,8 @@ def prepare_cmips_data(cfg):
     end = cmip_year[0]
     dict_cmips = []
     for i in range(32):
-        dict_cmip = prepare_cmip_data(cfg, cmip_data['sst'][start:end,0:12,:,:], cmip_label['nino'][start:end,12:24])
+        dict_cmip = prepare_cmip_data(cfg, {'sst': cmip_data['sst'][start:end, 0:12, :, :]},
+                                      cmip_label['nino'][start:end, 12:24])
         if i < 31:
             start += cmip_year[i]
             end += cmip_year[i+1]
@@ -59,7 +60,7 @@ def prepare_soda_data(cfg):
     soda_label = nc4.Dataset(root_dir + 'SODA_label.nc').variables
 
     soda = dict()
-    for var in ['sst']:#, 'ua', 'va']:
+    for var in ['sst']:#, 't300', 'ua', 'va']:
         tmp = np.array(soda_data[var][:, 0:12, :, :])
         tmp = np.nan_to_num(tmp)
         tmp = torch.tensor(tmp)
@@ -80,7 +81,7 @@ def prepare_test_data(cfg):
     test_path = cfg.DATASETS.TEST_DIR
     files = os.listdir(test_path)
     test_sst = np.zeros((len(files), 12, 24, 72))
-    #test_t300 = np.zeros((len(files), 12, 24, 72))
+    test_t300 = np.zeros((len(files), 12, 24, 72))
     #test_ua = np.zeros((len(files), 12, 24, 72))
     #test_va = np.zeros((len(files), 12, 24, 72))
     for i in range(len(files)):
@@ -93,7 +94,7 @@ def prepare_test_data(cfg):
 
     dict_test = {
         'sst': test_sst,
-        #'t300': test_t300,
+     #   't300': test_t300,
      #   'ua': test_ua,
      #   'va': test_va,
         'name': np.array(files)

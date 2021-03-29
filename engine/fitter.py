@@ -16,7 +16,6 @@ from tqdm import tqdm
 import pandas as pd
 from solver.build import make_optimizer
 from solver.lr_scheduler import make_scheduler
-from utils.modelema import ModelEMA
 warnings.filterwarnings("ignore")
 
 class Fitter:
@@ -91,10 +90,11 @@ class Fitter:
         summary_loss = AverageMeter()
         valid_loader = tqdm(self.val_loader, total=len(self.val_loader), desc="Validating")
         with torch.no_grad():
-            for step, (sst, labels) in enumerate(valid_loader):
+            for step, ((sst, t300), labels) in enumerate(valid_loader):
                 sst = sst.to(self.device).float()
+                t300 = t300.to(self.device).float()
                 labels = labels.to(self.device).float()
-                outputs = self.model(sst)
+                outputs = self.model((sst, t300))
                 loss = self.loss(outputs, labels)
                 summary_loss.update(loss.item(), sst.shape[0])
                 y_pred.append(outputs)
@@ -105,7 +105,6 @@ class Fitter:
         y_true = torch.cat(y_true, axis=0)
         y_pred = torch.cat(y_pred, axis=0)
         score = evaluate(y_true.cpu().detach().numpy(), y_pred.cpu().detach().numpy())
-
         return score, summary_loss
 
     def train_one_epoch(self):
@@ -113,11 +112,12 @@ class Fitter:
         summary_loss = AverageMeter()
         t = time.time()
         train_loader = tqdm(self.train_loader, total=len(self.train_loader), desc="Training")
-        for step, (sst, labels) in enumerate(train_loader):
+        for step, ((sst, t300), labels) in enumerate(train_loader):
             sst = sst.to(self.device).float()
+            t300 = t300.to(self.device).float()
             labels = labels.to(self.device).float()
             self.optimizer.zero_grad()
-            outputs = self.model(sst)
+            outputs = self.model((sst, t300))
             loss = self.loss(outputs, labels)
             loss.backward()
 
@@ -151,7 +151,6 @@ class Fitter:
     def load(self, path):
         checkpoint = torch.load(path)
         self.model.load_state_dict(checkpoint['model_state_dict'])
-        #self.ema.load_state_dict(checkpoint['ema_state_dict'])
         self.optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
         self.scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
         self.best_final_loss = checkpoint['best_final_loss']

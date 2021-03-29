@@ -30,7 +30,7 @@ _C.VERBOSE = True
 _C.MODEL = CN()
 _C.MODEL.DEVICE = "cuda"
 _C.MODEL.NUM_CLASSES = 2
-_C.MODEL.PRETRAINED_CMIP  = "../usr_data/model_data/resnet-lr1e4-sst-epoch30-cmip/best-model.bin"
+_C.MODEL.PRETRAINED_CMIP = "../usr_data/model_data/resnet-lr1e4-sst-epoch30-cmip/best-model.bin"
 
 _C.MODEL.BACKBONE = CN()
 _C.MODEL.BACKBONE.DEPTH = 18
@@ -47,7 +47,7 @@ _C.MODEL.BACKBONE.WITH_SE = True
 _C.MODEL.BACKBONE.WITH_CB = False
 _C.MODEL.BACKBONE.WITH_NL = False
 _C.MODEL.BACKBONE.PRETRAIN = False
-_C.MODEL.BACKBONE.PRETRAIN_PATH = '../usr_data/pretrain_data/resnet18.pth'
+_C.MODEL.BACKBONE.PRETRAIN_PATH = '../external_data/resnet18.pth'
 # -----------------------------------------------------------------------------
 # INPUT
 # -----------------------------------------------------------------------------

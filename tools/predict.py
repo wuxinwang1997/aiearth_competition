@@ -58,7 +58,7 @@ def predict(cfg):
         models[20].load_state_dict(torch.load(cfg.TEST.WEIGHT_40)['model_state_dict'])
         models[21].load_state_dict(torch.load(cfg.TEST.WEIGHT_41)['model_state_dict'])
         models[22].load_state_dict(torch.load(cfg.TEST.WEIGHT_42)['model_state_dict'])
-        models[24].load_state_dict(torch.load(cfg.TEST.WEIGHT_43)['model_state_dict'])
+        models[23].load_state_dict(torch.load(cfg.TEST.WEIGHT_43)['model_state_dict'])
         models[24].load_state_dict(torch.load(cfg.TEST.WEIGHT_44)['model_state_dict'])
     else:
         device = 'cpu'
@@ -85,7 +85,7 @@ def predict(cfg):
         models[20].load_state_dict(torch.load(cfg.TEST.WEIGHT_40, map_location=device)['model_state_dict'])
         models[21].load_state_dict(torch.load(cfg.TEST.WEIGHT_41, map_location=device)['model_state_dict'])
         models[22].load_state_dict(torch.load(cfg.TEST.WEIGHT_42, map_location=device)['model_state_dict'])
-        models[24].load_state_dict(torch.load(cfg.TEST.WEIGHT_43, map_location=device)['model_state_dict'])
+        models[23].load_state_dict(torch.load(cfg.TEST.WEIGHT_43, map_location=device)['model_state_dict'])
         models[24].load_state_dict(torch.load(cfg.TEST.WEIGHT_44, map_location=device)['model_state_dict'])
 
     test_loader = make_test_data_loader(cfg)

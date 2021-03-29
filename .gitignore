@@ -132,6 +132,7 @@ dmypy.json
 usr_data/model_data/*.bin
 usr_data/model_data/baseline/*.bin
 slurm*
+.external_data/
 
 .idea/
 # MacOS
