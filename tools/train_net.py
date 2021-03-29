@@ -75,6 +75,8 @@ def train(cfg, logger):
         validation_split=0.2,
     )
 
+    if cfg.CONVLSTM_CMIP_MODEL != '':
+        os.makedirs(cfg.CONVLSTM_CMIP_MODEL, exist_ok=True)
     seq.save(cfg.CONVLSTM_CMIP_MODEL)
 
 def main():

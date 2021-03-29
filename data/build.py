@@ -21,7 +21,7 @@ def prepare_cmip_data(cfg):
     all_one_year = []
     all_half_year = []
     # TODO: Use other data
-    for start_month in range(0, 12, 2):
+    for start_month in range(0, 12, 4):
         one_year = cmip_data['sst'][:, start_month:start_month+12, :, :]
         one_year = np.nan_to_num(one_year)
         one_year = np.expand_dims(one_year, axis=4)
@@ -46,7 +46,7 @@ def prepare_soda_data(cfg):
     all_one_year = []
     all_half_year = []
     # TODO: Use other data
-    for start_month in range(0, 12, 2):
+    for start_month in range(0, 12, 4):
         one_year = soda_data['sst'][:, start_month:start_month+12, :, :]
         one_year = np.nan_to_num(one_year)
         one_year = np.expand_dims(one_year, axis=4)
