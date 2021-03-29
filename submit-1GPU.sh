@@ -9,4 +9,4 @@
 module load anaconda/3.7
 module load nvidia/cuda/10.1
 source activate keras-aiearth
-python tools/train_net.py DATASETS.SODA '(False)'
+python tools/train_net.py DATASETS.SODA '(True)'

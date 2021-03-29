@@ -64,7 +64,7 @@ def train(cfg, logger):
     )
     seq.compile(loss="binary_crossentropy", optimizer="adadelta")
 
-    epochs = 1  # In practice, you would need hundreds of epochs.
+    epochs = 100  # In practice, you would need hundreds of epochs.
 
     seq.fit(
         data,
@@ -77,8 +77,13 @@ def train(cfg, logger):
 
     if cfg.CONVLSTM_CMIP_MODEL != '':
         os.makedirs(cfg.CONVLSTM_CMIP_MODEL, exist_ok=True)
+    if cfg.CONVLSTM_SODA_MODEL != '':
+        os.makedirs(cfg.CONVLSTM_SODA_MODEL, exist_ok=True)
     # seq.save(cfg.CONVLSTM_CMIP_MODEL)
-    seq.save('convlstm-cmip')
+    if not cfg.DATASETS.SODA:
+        seq.save('convlstm-cmip')
+    else:
+        seq.save('convlstm-soda')
 
 def main():
     parser = argparse.ArgumentParser(description="PyTorch Template MNIST Training")
