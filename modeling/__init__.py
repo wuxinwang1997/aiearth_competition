@@ -9,5 +9,5 @@ from .simplepcb import PCB
 from .model import AIEarthModel
 from .threedcnn import generate_model
 def build_model(cfg):
-    model = generate_model(cfg.MODEL.BACKBONE.DEPTH)
+    model = AIEarthModel(cfg)
     return model

@@ -19,13 +19,13 @@ import torch
 import numpy as np
 from utils.logger import setup_logger
 
+
 def seed_everything(seed):
     random.seed(seed)
     os.environ['PYTHONHASHSEED'] = str(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
     torch.cuda.manual_seed(seed)
-    torch.cuda.manual_seed_all(seed)
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
 
@@ -34,9 +34,9 @@ def train(cfg, logger):
     seed_everything(cfg.SEED)
     model = build_model(cfg)
     if cfg.SOLVER.TRAIN_SODA and cfg.MODEL.PRETRAINED_CMIP != '':
-        model.load_state_dict(torch.load(cfg.MODEL.PRETRAINED_CMIP)['ema_state_dict'])
+        model.load_state_dict(torch.load(cfg.MODEL.PRETRAINED_CMIP)['model_state_dict'])
         for k,v in model.named_parameters():
-             if k.startswith('cnn.conv1') or k.startswith('cnn.bn1') or k.startswith('cnn.layer1'):
+             if k.startswith('cnn.conv1') or k.startswith('cnn.bn1'):# or k.startswith('model.layer1'):
                   v.requires_grad = False
     if torch.cuda.is_available():
         device = 'cuda'

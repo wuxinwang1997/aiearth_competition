@@ -13,12 +13,12 @@ class AIEarthModel(nn.Module):
 
     def __init__(self, cfg):
         super().__init__()
-        self.model = generate_model(cfg.MODEL.BACKBONE.DEPTH)
+        self.cnn = generate_model(cfg.MODEL.BACKBONE.DEPTH)
 
     def forward(self, x):
         sst = x
         sst = torch.unsqueeze(sst, dim=1)
-        return self.model(sst)
+        return self.cnn(sst)
     #     self.backbones = nn.ModuleList([build_resnet_backbone(cfg) for i in range(2)])
     #     self.avgpool = nn.AdaptiveAvgPool2d((1,96))
     #     self.lstm = nn.LSTM(input_size=3 * 2 ,hidden_size=32,num_layers=3,batch_first=True,bidirectional=True)

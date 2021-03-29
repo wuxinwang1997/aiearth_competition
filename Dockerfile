@@ -10,10 +10,10 @@ WORKDIR /
 
 ## Install Requirements（requirements.txt包含python包的版本）
 ## 这里使用清华镜像加速安装
-RUN apt install git -y
+#RUN apt install git -y
 RUN pip install -i https://pypi.mirrors.ustc.edu.cn/simple/  --upgrade pip
 RUN pip install -i https://pypi.mirrors.ustc.edu.cn/simple/  -r requirements.txt
-RUN pip install -U git+https://github.com.cnpmjs.org/fadel/pytorch_ema.git
+#RUN pip install -U git+https://github.com.cnpmjs.org/fadel/pytorch_ema.git
 #RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
 
 ## 镜像启动后统一执行 sh run.sh

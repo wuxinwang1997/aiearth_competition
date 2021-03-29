@@ -16,7 +16,6 @@ from layers import (
     SELayer,
     Non_local,
     get_norm,
-    ContextBlock
 )
 
 logger = logging.getLogger(__name__)
@@ -117,7 +116,7 @@ class Bottleneck(nn.Module):
 
 
 class ResNet(nn.Module):
-    def __init__(self, last_stride, bn_norm, num_splits, with_ibn, with_se, with_nl, with_cb, block, layers, non_layers, cb_layers, ratio):
+    def __init__(self, last_stride, bn_norm, num_splits, with_ibn, with_se, with_nl, block, layers, non_layers):
         self.inplanes = 64
         super().__init__()
         self.conv1 = nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3,
@@ -136,11 +135,6 @@ class ResNet(nn.Module):
             self._build_nonlocal(layers, non_layers, bn_norm, num_splits)
         else:
             self.NL_1_idx = self.NL_2_idx = self.NL_3_idx = self.NL_4_idx = []
-
-        if with_cb:
-            self._build_contextblock(layers, cb_layers, ratio)
-        else:
-            self.CB_1_idx = self.CB_2_idx = self.CB_3_idx = self.CB_4_idx = []
 
     def _make_layer(self, block, planes, blocks, stride=1, bn_norm="BN", num_splits=1, with_ibn=False, with_se=False):
         downsample = None
@@ -175,65 +169,51 @@ class ResNet(nn.Module):
             [Non_local(512, bn_norm, num_splits) for _ in range(non_layers[3])])
         self.NL_4_idx = sorted([layers[3] - (i + 1) for i in range(non_layers[3])])
 
-    def _build_contextblock(self, layers, cb_layers, ratio):
-        self.CB_1 = nn.ModuleList(
-            [ContextBlock(64, ratio) for _ in range(cb_layers[0])])
-        self.CB_1_idx = sorted([layers[0] - (i + 1) for i in range(cb_layers[0])])
-        self.CB_2 = nn.ModuleList(
-            [ContextBlock(128, ratio) for _ in range(cb_layers[1])])
-        self.CB_2_idx = sorted([layers[1] - (i + 1) for i in range(cb_layers[1])])
-        self.CB_3 = nn.ModuleList(
-            [ContextBlock(256, ratio) for _ in range(cb_layers[2])])
-        self.CB_3_idx = sorted([layers[2] - (i + 1) for i in range(cb_layers[2])])
-        self.CB_4 = nn.ModuleList(
-            [ContextBlock(512, ratio) for _ in range(cb_layers[3])])
-        self.CB_4_idx = sorted([layers[3] - (i + 1) for i in range(cb_layers[3])])
-
     def forward(self, x):
         x = self.conv1(x)
         x = self.bn1(x)
         x = self.relu(x)
         x = self.maxpool(x)
 
-        CB1_counter = 0
-        if len(self.CB_1_idx) == 0:
-            self.CB_1_idx = [-1]
+        NL1_counter = 0
+        if len(self.NL_1_idx) == 0:
+            self.NL_1_idx = [-1]
         for i in range(len(self.layer1)):
             x = self.layer1[i](x)
-            if i == self.CB_1_idx[CB1_counter]:
+            if i == self.NL_1_idx[NL1_counter]:
                 _, C, H, W = x.shape
-                x = self.CB_1[CB1_counter](x)
-                CB1_counter += 1
+                x = self.NL_1[NL1_counter](x)
+                NL1_counter += 1
         # Layer 2
-        CB2_counter = 0
-        if len(self.CB_2_idx) == 0:
-            self.CB_2_idx = [-1]
+        NL2_counter = 0
+        if len(self.NL_2_idx) == 0:
+            self.NL_2_idx = [-1]
         for i in range(len(self.layer2)):
             x = self.layer2[i](x)
-            if i == self.CB_2_idx[CB2_counter]:
+            if i == self.NL_2_idx[NL2_counter]:
                 _, C, H, W = x.shape
-                x = self.CB_2[CB2_counter](x)
-                CB2_counter += 1
+                x = self.NL_2[NL2_counter](x)
+                NL2_counter += 1
         # Layer 3
-        CB3_counter = 0
-        if len(self.CB_3_idx) == 0:
-            self.CB_3_idx = [-1]
+        NL3_counter = 0
+        if len(self.NL_3_idx) == 0:
+            self.NL_3_idx = [-1]
         for i in range(len(self.layer3)):
             x = self.layer3[i](x)
-            if i == self.CB_3_idx[CB3_counter]:
+            if i == self.NL_3_idx[NL3_counter]:
                 _, C, H, W = x.shape
-                x = self.CB_3[CB3_counter](x)
-                CB3_counter += 1
+                x = self.NL_3[NL3_counter](x)
+                NL3_counter += 1
         # Layer 4
-        CB4_counter = 0
-        if len(self.CB_4_idx) == 0:
-            self.CB_4_idx = [-1]
+        NL4_counter = 0
+        if len(self.NL_4_idx) == 0:
+            self.NL_4_idx = [-1]
         for i in range(len(self.layer4)):
             x = self.layer4[i](x)
-            if i == self.CB_4_idx[CB4_counter]:
+            if i == self.NL_4_idx[NL4_counter]:
                 _, C, H, W = x.shape
-                x = self.CB_4[CB4_counter](x)
-                CB4_counter += 1
+                x = self.NL_4[NL4_counter](x)
+                NL4_counter += 1
 
         return x
 
@@ -262,16 +242,13 @@ def build_resnet_backbone(cfg):
     with_ibn = cfg.MODEL.BACKBONE.WITH_IBN
     with_se = cfg.MODEL.BACKBONE.WITH_SE
     with_nl = cfg.MODEL.BACKBONE.WITH_NL
-    with_cb = cfg.MODEL.BACKBONE.WITH_CB
     depth = cfg.MODEL.BACKBONE.DEPTH
-    ratio = cfg.MODEL.BACKBONE.RATIO
 
     num_blocks_per_stage = {18: [2, 2, 2, 2], 34: [3, 4, 6, 3], 50: [3, 4, 6, 3], 101: [3, 4, 23, 3], 152: [3, 8, 36, 3], }[depth]
     nl_layers_per_stage = {18: [2, 2, 2, 2], 34: [3, 4, 6, 3], 50: [0, 2, 3, 0], 101: [0, 2, 9, 0]}[depth]
-    cb_layers_per_stage = {18: [2, 2, 2, 2], 34: [3, 4, 6, 3], 50: [0, 2, 3, 0], 101: [0, 2, 9, 0]}[depth]
     block = {18: BasicBlock, 34: BasicBlock, 50: Bottleneck, 101: Bottleneck}[depth]
-    model = ResNet(last_stride, bn_norm, num_splits, with_ibn, with_se, with_nl, with_cb, block,
-                   num_blocks_per_stage, nl_layers_per_stage, cb_layers_per_stage, ratio)
+    model = ResNet(last_stride, bn_norm, num_splits, with_ibn, with_se, with_nl, block,
+                   num_blocks_per_stage, nl_layers_per_stage)
     if pretrain:
         if not with_ibn:
             try:
