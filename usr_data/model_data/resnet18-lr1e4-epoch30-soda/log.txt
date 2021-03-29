@@ -1,0 +1,48 @@
+2021-03-29 09:35:27,388 resnet18 INFO: Using 1 GPUS
+2021-03-29 09:35:27,388 resnet18 INFO: Namespace(config_file='', opts=[])
+2021-03-29 09:35:27,388 resnet18 INFO: Running with config:
+DATALOADER:
+  NUM_WORKERS: 0
+DATASETS:
+  ROOT_DIR: /home/wangxiang/dat01/WWX/aiearth/data/enso_round1_train_20210201/
+  SODA: False
+  TEST_DIR: ../tcdata/enso_round1_test_20210201/
+  UP_RATIO: 1
+  X_DIM: 72
+  Y_DIM: 24
+  Z_DIM: 48
+DEBUG: False
+INPUT:
+  
+MODEL:
+  BACKBONE:
+    PRETRAIN: False
+    PRETRAIN_PATH: /home/wangxiang/dat01/WWX/aiearth/pretrained/resnet18.pth
+  DEVICE: cpu
+  NUM_CLASSES: 2
+  PRETRAINED_CMIP: ./usr_data/model_data/resnet18-lr1e4-sst-epoch30-cmip/best-model.bin
+OUTPUT_DIR: ./usr_data/model_data/resnet18-lr1e4-epoch30-soda/
+RESULT_DIR: ../result/
+RESULT_PATH: ../result.zip
+SEED: 66
+SOLVER:
+  BASE_LR: 0.0004
+  BIAS_LR_FACTOR: 1
+  COS_EPOCH: 45
+  EARLY_STOP_PATIENCE: 15
+  IMS_PER_BATCH: 256
+  MAX_EPOCHS: 30
+  MOMENTUM: 0.9
+  OPTIMIZER_NAME: Adam
+  SCHEDULER_NAME: CosineAnnealingWarmRestarts
+  TRAIN_CHECKPOINT: False
+  TRAIN_SODA: False
+  T_MUL: 1
+  WARMUP_EPOCHS: 5
+  WEIGHT_DECAY: 0.0005
+  WEIGHT_DECAY_BIAS: 0
+  WEIGHT_DECAY_BN: 0
+TEST:
+  IMS_PER_BATCH: 64
+  WEIGHT: ../usr_data/model_data/resnet18-lr1e4-epoch30-soda/best-model.bin
+VERBOSE: True

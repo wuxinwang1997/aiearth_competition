@@ -4,8 +4,6 @@
 @contact: wuxin.wang@whu.edu.cn
 """
 
-import torch
-
 
 def make_optimizer(cfg, model):
     params = []

@@ -4,25 +4,47 @@
 @contact: wuxin.wang@whu.edu.cn
 """
 
-import torch
-import numpy as np
-from torch import nn
-import torch.nn.functional as F
-import torchvision.models as models
-from .multiresnet import MultiResnet
+from keras.models import Sequential
+from keras.layers.convolutional_recurrent import ConvLSTM2D
 
-
-class Model(nn.Module):
+class Model():
 
     def __init__(self, cfg):
         super().__init__()
         self.config = cfg
-        self.multicnn = nn.ModuleList([MultiResnet(cfg) for i in range(24)])
+        self.seq = Sequential()
+        self.seq.add(ConvLSTM2D(
+            filters=15,
+            kernel_size=(3, 9),
+            strides=(1, 1),
+            padding="same",
+            data_format='channels_first',
+            dilation_rate=(1, 1),
+            activation="tanh",
+            recurrent_activation="hard_sigmoid",
+            use_bias=True,
+            kernel_initializer="glorot_uniform",
+            recurrent_initializer="orthogonal",
+            bias_initializer="zeros",
+            unit_forget_bias=True,
+            kernel_regularizer=None,
+            recurrent_regularizer=None,
+            bias_regularizer=None,
+            activity_regularizer=None,
+            kernel_constraint=None,
+            recurrent_constraint=None,
+            bias_constraint=None,
+            return_sequences=False,
+            return_state=False,
+            go_backwards=False,
+            stateful=False,
+            dropout=0.0,
+            recurrent_dropout=0.0,
+            #**kwargs
+        ))
+        self.seq.compile(loss='binary_crossentropy', optimizer='adadelta')
 
     def forward(self, x):
-        batch_size = x.shape[0]
-        output = torch.tensor(np.zeros((batch_size, 24, 10)))
-        for i in range(24):
-            output[:, i, :] = self.multicnn[i](x)
-
-        return output
+        pass
+        # (samples, time, rows, cols, channels)
+        # return self.convlstm(x)

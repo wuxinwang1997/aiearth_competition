@@ -9,14 +9,12 @@ import time
 import numpy as np
 import warnings
 from datetime import datetime
-import torch
 from .average import AverageMeter
 from evaluate.evaluate import evaluate
 from tqdm import tqdm
 import pandas as pd
 from solver.build import make_optimizer
 from solver.lr_scheduler import make_scheduler
-from layers import myloss
 
 warnings.filterwarnings("ignore")
 
@@ -37,8 +35,8 @@ class Fitter:
 
         self.model = model
         self.device = device
-        self.model.to(self.device)
-        self.loss = torch.nn.MSELoss(reduce=True, size_average=True)
+        # self.model.to(self.device)
+        # self.loss = torch.nn.MSELoss(reduce=True, size_average=True)
         self.optimizer = make_optimizer(cfg, model)
 
         self.scheduler = make_scheduler(cfg, self.optimizer, train_loader)
@@ -97,28 +95,18 @@ class Fitter:
         with torch.no_grad():
             for step, (sst, labels) in enumerate(valid_loader):
                 sst = sst.to(self.device).float()
-                batch_size = sst.shape[0]
                 labels = labels.to(self.device).float()
-                expanded_labels = torch.tensor(np.zeros((batch_size, 24, 10)))
-                for i in range(batch_size):
-                    for j in range(24):
-                        for k in range(10):
-                            expanded_labels[i, j, k] = labels[i, j]
 
                 outputs = self.model(sst)
-                loss = 0
-                for i in range(24):
-                    loss += self.loss(outputs[:, i, :], expanded_labels[:, i, :])
+                loss = self.loss(outputs, labels)
                 summary_loss.update(loss.item(), sst.shape[0])
                 y_pred.append(outputs)
-                y_true.append(expanded_labels)
+                y_true.append(labels)
                 valid_loader.set_description(f'Validate Step {step}/{len(self.val_loader)}, ' + \
                                              f'summary_loss: {summary_loss.avg:.5f}, ' + \
                                              f'time: {(time.time() - t):.5f}')
         y_true = torch.cat(y_true, axis=0)
         y_pred = torch.cat(y_pred, axis=0)
-        y_true = torch.mean(y_true, 2)
-        y_pred = torch.mean(y_pred, 2)
         score = evaluate(y_true.cpu().detach().numpy(), y_pred.cpu().detach().numpy())
 
         return score, summary_loss
@@ -130,19 +118,11 @@ class Fitter:
         train_loader = tqdm(self.train_loader, total=len(self.train_loader), desc="Training")
         for step, (sst, labels) in enumerate(train_loader):
             sst = sst.to(self.device).float()
-            batch_size = sst.shape[0]
             labels = labels.to(self.device).float()
-            expanded_labels = torch.tensor(np.zeros((batch_size, 24, 10)))
-            for i in range(batch_size):
-                for j in range(24):
-                    for k in range(10):
-                        expanded_labels[i, j, k] = labels[i, j]
             self.optimizer.zero_grad()
             outputs = self.model(sst)
 
-            loss = 0
-            for i in range(24):
-                loss += self.loss(outputs[:, i, :], expanded_labels[:, i, :])
+            loss = self.loss(outputs, labels)
             loss.backward()
 
             summary_loss.update(loss.item(), sst.shape[0])

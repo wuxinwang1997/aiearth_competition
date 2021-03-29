@@ -3,7 +3,7 @@
 @author:  wuxin.wang
 @contact: wuxin.wang@whu.edu.cn
 """
-import torch
+
 
 def make_scheduler(cfg, optimizer, train_loader):
     number_of_iteration_per_epoch = len(train_loader)

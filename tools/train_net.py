@@ -9,49 +9,71 @@ import os
 import sys
 sys.path.append('.')
 from config import cfg
-from data import make_data_loader
+from data import build_dataset
 from engine.fitter import Fitter
 from modeling import build_model
 from solver import make_optimizer
 import random
-import torch
 import numpy as np
 from utils.logger import setup_logger
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers
 
 
 def seed_everything(seed):
     random.seed(seed)
     os.environ['PYTHONHASHSEED'] = str(seed)
     np.random.seed(seed)
-    torch.manual_seed(seed)
-    torch.cuda.manual_seed(seed)
-    torch.backends.cudnn.deterministic = True
-    torch.backends.cudnn.benchmark = False
+    # torch.manual_seed(seed)
+    # torch.cuda.manual_seed(seed)
+    # torch.backends.cudnn.deterministic = True
+    # torch.backends.cudnn.benchmark = False
 
 
 def train(cfg, logger):
     seed_everything(cfg.SEED)
-    model = build_model(cfg)
-    if cfg.SOLVER.TRAIN_SODA and cfg.MODEL.PRETRAINED_CMIP != '':
-        model.load_state_dict(torch.load(cfg.MODEL.PRETRAINED_CMIP)['model_state_dict']) 
-        for k,v in model.named_parameters():
-             if k.startswith('model.conv1') or k.startswith('model.bn1') or k.startswith('model.layer1'):
-                  v.requires_grad = False
-    if torch.cuda.is_available():
-        device = 'cuda'
-    else:
-        device = 'cpu'
-    # device = cfg.MODEL.DEVICE
-    check = cfg.SOLVER.TRAIN_CHECKPOINT
 
-    train_loader, val_loader = make_data_loader(cfg, is_train=True)
+    data, label = build_dataset(cfg)
 
-    fitter = Fitter(model=model, device=device, cfg=cfg, train_loader=train_loader, val_loader=val_loader, logger=logger)
-    if check:
-        curPath = os.path.abspath(os.path.dirname(__file__))
-        fitter.load(f'{cfg.OUTPUT_DIR}/last-checkpoint.bin')
-    fitter.fit()
+    seq = keras.Sequential(
+        [
+            keras.Input(
+                shape=(None, 24, 72, 1)
+            ),  # Variable-length sequence of 40x40x1 frames
+            layers.ConvLSTM2D(
+                filters=16, kernel_size=(3, 3), padding="same", return_sequences=True
+            ),
+            layers.BatchNormalization(),
+            layers.ConvLSTM2D(
+                filters=16, kernel_size=(3, 3), padding="same", return_sequences=True
+            ),
+            layers.BatchNormalization(),
+            layers.ConvLSTM2D(
+                filters=16, kernel_size=(3, 3), padding="same", return_sequences=True
+            ),
+            layers.BatchNormalization(),
+            layers.ConvLSTM2D(
+                filters=16, kernel_size=(3, 3), padding="same", return_sequences=True
+            ),
+            layers.BatchNormalization(),
+            layers.Conv3D(
+                filters=1, kernel_size=(3, 3, 3), activation="sigmoid", padding="same"
+            ),
+        ]
+    )
+    seq.compile(loss="binary_crossentropy", optimizer="adadelta")
 
+    epochs = 1  # In practice, you would need hundreds of epochs.
+
+    seq.fit(
+        data,
+        label,
+        batch_size=10,
+        epochs=epochs,
+        verbose=2,
+        validation_split=0.2,
+    )
 
 def main():
     parser = argparse.ArgumentParser(description="PyTorch Template MNIST Training")
