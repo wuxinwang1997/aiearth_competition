@@ -77,7 +77,8 @@ def train(cfg, logger):
 
     if cfg.CONVLSTM_CMIP_MODEL != '':
         os.makedirs(cfg.CONVLSTM_CMIP_MODEL, exist_ok=True)
-    seq.save(cfg.CONVLSTM_CMIP_MODEL)
+    # seq.save(cfg.CONVLSTM_CMIP_MODEL)
+    seq.save('convlstm-cmip')
 
 def main():
     parser = argparse.ArgumentParser(description="PyTorch Template MNIST Training")
