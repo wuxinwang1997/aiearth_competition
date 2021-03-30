@@ -3,17 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="68c37ce9-2442-44cb-a869-809c8fef2e9b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/defaults.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/defaults.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/engine/fitter.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/fitter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_data/resnet18.pth" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modeling/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modeling/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modeling/resnet.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/resnet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modeling/simplecnn.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/simplecnn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layers/se_layer.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/se_layer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modeling/threedcnn.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/threedcnn.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/run.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/train_net.py" beforeDir="false" afterPath="$PROJECT_DIR$/tools/train_net.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,16 +55,16 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../cnnlstm/aiearth_competition" />
     <property name="settings.editor.selected.configurable" value="com.alibabacloud.intellij.config.DockerRegistryConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Study\Lab\Competition\AIEarth\code\baseline\onlyresnet\aiearth_competition\layers" />
       <recent name="D:\Study\Lab\Competition\AIEarth\code\baseline\onlyresnet\aiearth_competition" />
       <recent name="D:\Study\Lab\Competition\AIEarth\code\baseline\onlyresnet\aiearth_competition\modeling" />
       <recent name="D:\Study\Lab\Competition\AIEarth\code\baseline\onlyresnet\aiearth_competition\tcdata\enso_round1_test_20210201" />
       <recent name="D:\Study\Lab\Competition\AIEarth\code\baseline\test\aiearth_competition\tools" />
-      <recent name="D:\Study\Lab\Competition\AIEarth\code\baseline\aiearth_competition\engine" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Study\Lab\Competition\AIEarth\code\baseline\test\aiearth_competition\usr_data\model_data\resnet18-lr1e4-epoch30-soda" />
@@ -283,7 +277,11 @@
       <workItem from="1616825019206" duration="2121000" />
       <workItem from="1616845237923" duration="8912000" />
       <workItem from="1616899733028" duration="6018000" />
-      <workItem from="1616976890880" duration="13513000" />
+      <workItem from="1616976890880" duration="14463000" />
+      <workItem from="1617022662230" duration="4256000" />
+      <workItem from="1617032301322" duration="78000" />
+      <workItem from="1617032392760" duration="33000" />
+      <workItem from="1617064139290" duration="2553000" />
     </task>
     <servers />
   </component>

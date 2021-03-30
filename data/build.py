@@ -108,7 +108,7 @@ def build_cmip_dataset(cfg, dict_cmip):
         transforms=build_transforms(cfg, is_train=True),
     )
     if cfg.DEBUG:
-        fold_num = 1
+        fold_num = 2
         dataset0, dataset1, dataset2, dataset3, dataset4, dataset_other = data.random_split(dataset_cmip,
                                                                                                 lengths=[fold_num,
                                                                                                          fold_num,
@@ -135,7 +135,7 @@ def build_soda_dataset(cfg):
     )
 
     if cfg.DEBUG:
-        fold_num = 64
+        fold_num = 2
         dataset0, dataset1, dataset2, dataset3, dataset4, dataset_other = data.random_split(dataset_soda,
                                                                                  lengths=[fold_num, fold_num, fold_num,
                                                                                           fold_num,

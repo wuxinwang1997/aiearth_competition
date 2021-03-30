@@ -4,23 +4,7 @@ from functools import partial
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-
-class SELayer(nn.Module):
-    def __init__(self, channel, reduction=16):
-        super(SELayer, self).__init__()
-        self.avg_pool = nn.AdaptiveAvgPool3d(1)
-        self.fc = nn.Sequential(
-            nn.Linear(channel, int(channel / reduction), bias=False),
-            nn.ReLU(inplace=True),
-            nn.Linear(int(channel / reduction), channel, bias=False),
-            nn.Sigmoid()
-        )
-
-    def forward(self, x):
-        b, c, _, _, _ = x.size()
-        y = self.avg_pool(x).view(b, c)
-        y = self.fc(y).view(b, c, 1, 1, 1)
-        return x * y.expand_as(x)
+from layers import SELayer3D, CBAM, ContextBlock3D
 
 def get_inplanes():
     return [64, 128, 256, 512]
@@ -91,7 +75,7 @@ class Bottleneck(nn.Module):
         self.relu = nn.ReLU(inplace=True)
         self.downsample = downsample
         self.stride = stride
-        self.se = SELayer(planes * 4, 16)
+        self.cbam = CBAM(in_planes*4, reduction=16, kernel_size=3)
 
     def forward(self, x):
         residual = x
@@ -146,6 +130,7 @@ class ResNet(nn.Module):
         self.bn1 = nn.BatchNorm3d(self.in_planes)
         self.relu = nn.ReLU(inplace=True)
         self.maxpool = nn.MaxPool3d(kernel_size=3, stride=2, padding=1)
+        self.cbam = CBAM(in_planes=self.in_planes, reduction=16, kernel_size=7)
         self.layer1 = self._make_layer(block, block_inplanes[0], layers[0],
                                        shortcut_type)
         self.layer2 = self._make_layer(block,
@@ -210,6 +195,20 @@ class ResNet(nn.Module):
             layers.append(block(self.in_planes, planes))
 
         return nn.Sequential(*layers)
+
+    def _build_gcblock(self, layers, non_layers, bn_norm, num_splits):
+        self.CB_1 = nn.ModuleList(
+            [ContextBlock3D(64, bn_norm, num_splits) for _ in range(non_layers[0])])
+        self.CB_1_idx = sorted([layers[0] - (i + 1) for i in range(non_layers[0])])
+        self.CB_2 = nn.ModuleList(
+            [ContextBlock3D(128, bn_norm, num_splits) for _ in range(non_layers[1])])
+        self.CB_2_idx = sorted([layers[1] - (i + 1) for i in range(non_layers[1])])
+        self.CB_3 = nn.ModuleList(
+            [ContextBlock3D(256, bn_norm, num_splits) for _ in range(non_layers[2])])
+        self.CB_3_idx = sorted([layers[2] - (i + 1) for i in range(non_layers[2])])
+        self.CB_4 = nn.ModuleList(
+            [ContextBlock3D(512, bn_norm, num_splits) for _ in range(non_layers[3])])
+        self.CB_4_idx = sorted([layers[3] - (i + 1) for i in range(non_layers[3])])
 
     def forward(self, x):
         x = self.conv1(x)
