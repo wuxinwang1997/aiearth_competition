@@ -152,7 +152,7 @@ class ResNet(nn.Module):
                                        shortcut_type,
                                        stride=2)
         if with_cb:
-            self._build_nonlocal(layers, cb_layers, ratio=16)
+            self._build_gcblock(layers, cb_layers, ratio=16)
         else:
             self.CB_1_idx = self.CB_2_idx = self.CB_3_idx = self.CB_4_idx = []
 
