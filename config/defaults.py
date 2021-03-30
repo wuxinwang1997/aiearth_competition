@@ -23,6 +23,7 @@ from yacs.config import CfgNode as CN
 
 _C = CN()
 
+_C.GENERATE = False
 _C.DEBUG = False
 _C.SEED = 66
 _C.VERBOSE = True
@@ -93,7 +94,7 @@ _C.SOLVER.SCHEDULER_NAME = "CosineAnnealingWarmRestarts"
 _C.SOLVER.COS_EPOCH = 35
 _C.SOLVER.T_MUL = 1
 
-_C.SOLVER.MAX_EPOCHS = 40
+_C.SOLVER.MAX_EPOCHS = 10
 
 _C.SOLVER.BASE_LR = 3e-4
 _C.SOLVER.BIAS_LR_FACTOR = 1

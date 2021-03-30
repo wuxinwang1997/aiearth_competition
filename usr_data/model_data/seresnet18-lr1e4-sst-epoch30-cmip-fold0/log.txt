@@ -1,6 +1,6 @@
-2021-03-30 11:25:11,915 resnet18 INFO: Using 1 GPUS
-2021-03-30 11:25:11,915 resnet18 INFO: Namespace(config_file='', opts=['DATASETS.VAL_FOLD', '(0)', 'OUTPUT_DIR', '("./usr_data/model_data/seresnet18-lr1e4-sst-epoch30-cmip-fold0/")', 'DATASETS.SODA', '(False)', 'MODEL.BACKBONE.PRETRAIN', '(True)', 'SOLVER.TRAIN_SODA', '(False)'])
-2021-03-30 11:25:11,915 resnet18 INFO: Running with config:
+2021-03-30 16:54:31,494 resnet18 INFO: Using 1 GPUS
+2021-03-30 16:54:31,495 resnet18 INFO: Namespace(config_file='', opts=['GENERATE', '(False)', 'DATASETS.VAL_FOLD', '(0)', 'OUTPUT_DIR', '("./usr_data/model_data/seresnet18-lr1e4-sst-epoch30-cmip-fold0/")', 'DATASETS.SODA', '(False)', 'MODEL.BACKBONE.PRETRAIN', '(True)', 'SOLVER.TRAIN_SODA', '(False)'])
+2021-03-30 16:54:31,495 resnet18 INFO: Running with config:
 DATALOADER:
   NUM_WORKERS: 0
 DATASETS:
@@ -13,6 +13,7 @@ DATASETS:
   Y_DIM: 24
   Z_DIM: 48
 DEBUG: False
+GENERATE: False
 INPUT:
   
 MODEL:
@@ -80,3 +81,8 @@ TEST:
   WEIGHT_43: ../usr_data/model_data/resnet18-lr1e4-sst-epoch30-soda-fold43/best-model.bin
   WEIGHT_44: ../usr_data/model_data/resnet18-lr1e4-sst-epoch30-soda-fold44/best-model.bin
 VERBOSE: True
+2021-03-30 17:00:37,056 resnet18 INFO: Fitter prepared. Device is cpu
+2021-03-30 17:00:37,058 resnet18 INFO: Start training
+2021-03-30 17:00:37,059 resnet18 INFO: 
+2021-03-30T09:00:37.059125
+LR: 5.9999999999999995e-05

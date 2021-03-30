@@ -2,18 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68c37ce9-2442-44cb-a869-809c8fef2e9b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/aiearth_competition.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/aiearth_competition.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/defaults.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/defaults.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convlstm-cmip/saved_model.pb" beforeDir="false" afterPath="$PROJECT_DIR$/convlstm-cmip/saved_model.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convlstm-cmip/variables/variables.data-00000-of-00001" beforeDir="false" afterPath="$PROJECT_DIR$/convlstm-cmip/variables/variables.data-00000-of-00001" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convlstm-cmip/variables/variables.index" beforeDir="false" afterPath="$PROJECT_DIR$/convlstm-cmip/variables/variables.index" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convlstm-soda/saved_model.pb" beforeDir="false" afterPath="$PROJECT_DIR$/convlstm-soda/saved_model.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convlstm-soda/variables/variables.data-00000-of-00001" beforeDir="false" afterPath="$PROJECT_DIR$/convlstm-soda/variables/variables.data-00000-of-00001" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convlstm-soda/variables/variables.index" beforeDir="false" afterPath="$PROJECT_DIR$/convlstm-soda/variables/variables.index" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/build.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/engine/fitter.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/fitter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modeling/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modeling/threedcnn.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/threedcnn.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/tools/predict.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/datasets/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/datasets/dataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/submit-1GPU.sh" beforeDir="false" afterPath="$PROJECT_DIR$/submit-1GPU.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tools/train_net.py" beforeDir="false" afterPath="$PROJECT_DIR$/tools/train_net.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usr_data/model_data/seresnet18-lr1e4-sst-epoch30-cmip-fold0/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/usr_data/model_data/seresnet18-lr1e4-sst-epoch30-cmip-fold0/log.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,16 +63,16 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/data" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data" />
       <recent name="D:\Study\Lab\Competition\AIEarth\code\baseline\onlyresnet\aiearth_competition\layers" />
       <recent name="D:\Study\Lab\Competition\AIEarth\code\baseline\onlyresnet\aiearth_competition" />
       <recent name="D:\Study\Lab\Competition\AIEarth\code\baseline\onlyresnet\aiearth_competition\modeling" />
       <recent name="D:\Study\Lab\Competition\AIEarth\code\baseline\onlyresnet\aiearth_competition\tcdata\enso_round1_test_20210201" />
-      <recent name="D:\Study\Lab\Competition\AIEarth\code\baseline\test\aiearth_competition\tools" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Study\Lab\Competition\AIEarth\code\baseline\test\aiearth_competition\usr_data\model_data\resnet18-lr1e4-epoch30-soda" />
@@ -288,7 +290,7 @@
       <workItem from="1617032301322" duration="78000" />
       <workItem from="1617032392760" duration="33000" />
       <workItem from="1617064139290" duration="2553000" />
-      <workItem from="1617067571202" duration="5654000" />
+      <workItem from="1617067571202" duration="11437000" />
     </task>
     <servers />
   </component>

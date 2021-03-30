@@ -29,9 +29,8 @@ def prepare_cmip_data(cfg, cmip_data, cmip_label):
         tmp = torch.flatten(tmp, start_dim=0, end_dim=1)
         cmip[name] = tmp.numpy()
     tmp = np.array(cmip_label[:, :])
-    last_year_nino = np.array(cmip_label[-1, -12:].reshape((1, 12)))
-    tmp = np.concatenate((tmp, last_year_nino), axis=0)
-    cmip['label'] = tmp.flatten()
+    last_half_year_nino = np.array(cmip_label[-1, -6:])
+    cmip['label'] = np.concatenate((tmp.flatten(), last_half_year_nino), axis=0)
 
     dict_cmip = dict()
     for var in ['sst', 'label']:  # 'ua', 'va', 'label']:
@@ -57,13 +56,15 @@ def prepare_cmips_data(cfg):
     end = cmip_year[0]
     dict_cmips = []
     for i in range(32):
-        one_year_sst = cmip_data['sst'][start:end, 0:12, :, :]
+        one_year_sst = np.expand_dims(cmip_data['sst'][start:end, 0:12, :, :], axis=4)
         # (samples, time, rows, cols, channels)
-        gen_output = gen_model(one_year_sst)
-        breakpoint()
+        next_year_sst = gen_model(one_year_sst)
+        one_half_year_sst = np.concatenate((one_year_sst, next_year_sst), axis=0)[:, 0:6, :, :, :]
+        one_half_year_sst = np.squeeze(one_half_year_sst, axis=4)
         next_two_year_nino = cmip_label['nino'][start:end, 12:24]
-        dict_cmip = prepare_cmip_data(cfg, {'sst': one_year_sst},
-                                      next_two_year_nino)
+        one_year_nino = cmip_label['nino'][start:end, 18:30]
+        dict_cmip = prepare_cmip_data(cfg, {'sst': one_half_year_sst},
+                                      one_year_nino)
         # dict_cmip = prepare_cmip_data(cfg, {'sst': cmip_data['sst'][start:end, 0:12, :, :]},
         #                               cmip_label['nino'][start:end, 12:24])
         if i < 31:
@@ -81,19 +82,25 @@ def prepare_soda_data(cfg):
     # root_dir = cfg.DATASETS.ROOT_DIR
     soda_data = nc4.Dataset(root_dir + 'SODA_train.nc').variables
     soda_label = nc4.Dataset(root_dir + 'SODA_label.nc').variables
+    with tf.device('/cpu:0'):
+        gen_model = keras.models.load_model('convlstm-soda')
 
     soda = dict()
     for var in ['sst']:  # , 't300', 'ua', 'va']:
-        tmp = np.array(soda_data[var][:, 0:12, :, :])
-        tmp = np.nan_to_num(tmp)
-        tmp = torch.tensor(tmp)
-        tmp = torch.flatten(tmp, start_dim=0, end_dim=1)
-        soda[var] = tmp.numpy()
+        for i in range(soda_data[var].shape[0]):
+            tmp = np.array(soda_data[var][i, 0:12, :, :])
+            tmp = np.nan_to_num(tmp)
+            one_year_sst = np.expand_dims(tmp, axis=4)
+            next_year_sst = gen_model(tmp)
+            one_half_year_sst = np.concatenate((one_year_sst, next_year_sst), axis=0)[:, 0:6, :, :, :]
+            tmp = np.squeeze(one_half_year_sst, axis=4)
+            tmp = torch.tensor(tmp)
+            tmp = torch.flatten(tmp, start_dim=0, end_dim=1)
+            soda[var] = tmp.numpy()
 
-    tmp = np.array(soda_label['nino'][:, 12:24])
-    last_year_nino = np.array(soda_label['nino'][-1, -12:].reshape((1, 12)))
-    tmp = np.concatenate((tmp, last_year_nino), axis=0)
-    soda['label'] = tmp.flatten()
+    tmp = np.array(soda_label['nino'][:, 18:30])
+    last_half_year_nino = np.array(soda_label[-1, -6:])
+    soda['label'] = np.concatenate((tmp.flatten(), last_half_year_nino), axis=0)
 
     dict_soda = dict()
     for var in ['sst', 'label']:  # 'ua', 'va', 'label']:

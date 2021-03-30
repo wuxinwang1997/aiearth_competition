@@ -5,3 +5,4 @@
 """
 
 from .build import make_data_loader, make_test_data_loader
+from .build_generator import build_dataset

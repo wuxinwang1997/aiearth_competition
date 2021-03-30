@@ -40,8 +40,8 @@ class EarthDataset(Dataset):
     def __init__(self, data_dict, transforms):
         self.data_dict = data_dict
         self.transform = transforms
-        self.feature_months = 12
-        self.label_months = 24
+        self.feature_months = 18
+        self.label_months = 18
         self.len = len(self.data_dict['sst']) - self.feature_months
 
     def __getitem__(self, idx):

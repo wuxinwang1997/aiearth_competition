@@ -10,6 +10,7 @@ import sys
 sys.path.append('.')
 from config import cfg
 from data import make_data_loader
+from data import build_dataset
 from engine.fitter import Fitter
 from modeling import build_model
 from solver import make_optimizer
@@ -17,6 +18,9 @@ import random
 import torch
 import numpy as np
 from utils.logger import setup_logger
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers
 
 
 def seed_everything(seed):
@@ -27,6 +31,61 @@ def seed_everything(seed):
     torch.cuda.manual_seed(seed)
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
+
+
+def generate(cfg, logger):
+    seed_everything(cfg.SEED)
+
+    data, label = build_dataset(cfg)
+
+    seq = keras.Sequential(
+        [
+            keras.Input(
+                shape=(None, 24, 72, 1)
+            ),  # Variable-length sequence of 40x40x1 frames
+            layers.ConvLSTM2D(
+                filters=16, kernel_size=(3, 3), padding="same", return_sequences=True
+            ),
+            layers.BatchNormalization(),
+            layers.ConvLSTM2D(
+                filters=16, kernel_size=(3, 3), padding="same", return_sequences=True
+            ),
+            layers.BatchNormalization(),
+            layers.ConvLSTM2D(
+                filters=16, kernel_size=(3, 3), padding="same", return_sequences=True
+            ),
+            layers.BatchNormalization(),
+            layers.ConvLSTM2D(
+                filters=16, kernel_size=(3, 3), padding="same", return_sequences=True
+            ),
+            layers.BatchNormalization(),
+            layers.Conv3D(
+                filters=1, kernel_size=(3, 3, 3), activation="sigmoid", padding="same"
+            ),
+        ]
+    )
+    seq.compile(loss="binary_crossentropy", optimizer="adadelta")
+
+    epochs = 10  # In practice, you would need hundreds of epochs.
+
+    seq.fit(
+        data,
+        label,
+        batch_size=128,
+        epochs=epochs,
+        verbose=2,
+        validation_split=0.2,
+    )
+
+    if cfg.CONVLSTM_CMIP_MODEL != '':
+        os.makedirs(cfg.CONVLSTM_CMIP_MODEL, exist_ok=True)
+    if cfg.CONVLSTM_SODA_MODEL != '':
+        os.makedirs(cfg.CONVLSTM_SODA_MODEL, exist_ok=True)
+    # seq.save(cfg.CONVLSTM_CMIP_MODEL)
+    if not cfg.DATASETS.SODA:
+        seq.save('convlstm-cmip')
+    else:
+        seq.save('convlstm-soda')
 
 
 def train(cfg, logger):
@@ -85,7 +144,10 @@ def main():
             logger.info(config_str)
     logger.info("Running with config:\n{}".format(cfg))
 
-    train(cfg, logger)
+    if cfg.GENERATE:
+        generate(cfg, logger)
+    else:
+        train(cfg, logger)
 
 
 if __name__ == '__main__':
