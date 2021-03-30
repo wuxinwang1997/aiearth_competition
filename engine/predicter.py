@@ -55,12 +55,12 @@ class Predicter:
         for file_name, val in test_predicts_dict.items():
             np.save(self.base_dir + file_name, val.cpu().detach().numpy())
             val = np.load(self.base_dir+file_name)
-            #print("----type----")
-            #print(type(val))
-            #print("----shape----")
-            #print(val.shape)
-            #print("----data----")
-            #print(val)
+            print("----type----")
+            print(type(val))
+            print("----shape----")
+            print(val.shape)
+            print("----data----")
+            print(val)
         self.make_zip(self.base_dir, self.result_path)
 
     # 打包目录为zip文件（未压缩）

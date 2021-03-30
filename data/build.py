@@ -87,7 +87,7 @@ def prepare_test_data(cfg):
     for i in range(len(files)):
         file = np.load(test_path + files[i])
         sst, t300, ua, va = np.split(file, 4, axis=3)
-        #test_sst[i, :, :, :] = sst.transpose(3, 0, 1, 2)
+        test_sst[i, :, :, :] = sst.transpose(3, 0, 1, 2)
         #test_t300[i, :, :, :] = t300.transpose(3, 0, 1, 2)
         #test_ua[i, :, :, :] = ua.transpose(3, 0, 1, 2)
         #test_va[i, :, :, :] = va.transpose(3, 0, 1, 2)

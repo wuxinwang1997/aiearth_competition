@@ -11,15 +11,15 @@ import torch.nn.functional as F
 from torch import nn
 
 __all__ = [
-    "BatchNorm",
-    "IBN",
-    "GhostBatchNorm",
-    "FrozenBatchNorm",
-    "get_norm",
+    "BatchNorm3D",
+    "IBN3D",
+    "GhostBatchNorm3D",
+    "FrozenBatchNorm3D",
+    "get_norm_3d",
 ]
 
 
-class BatchNorm(nn.BatchNorm3d):
+class BatchNorm3D(nn.BatchNorm3d):
     def __init__(self, num_features, eps=1e-05, momentum=0.1, weight_freeze=False, bias_freeze=False, weight_init=1.0,
                  bias_init=0.0):
         super().__init__(num_features, eps=eps, momentum=momentum)
@@ -29,14 +29,14 @@ class BatchNorm(nn.BatchNorm3d):
         self.bias.requires_grad_(not bias_freeze)
 
 
-class IBN(nn.Module):
+class IBN3D(nn.Module):
     def __init__(self, planes, bn_norm, num_splits):
-        super(IBN, self).__init__()
+        super(IBN3D, self).__init__()
         half1 = int(planes / 2)
         self.half = half1
         half2 = planes - half1
         self.IN = nn.InstanceNorm3d(half1, affine=True)
-        self.BN = get_norm(bn_norm, half2, num_splits)
+        self.BN = get_norm_3d(bn_norm, half2, num_splits)
 
     def forward(self, x):
         split = torch.split(x, self.half, 1)
@@ -46,7 +46,7 @@ class IBN(nn.Module):
         return out
 
 
-class GhostBatchNorm(BatchNorm):
+class GhostBatchNorm3D(BatchNorm3D):
     def __init__(self, num_features, num_splits=1, **kwargs):
         super().__init__(num_features, **kwargs)
         self.num_splits = num_splits
@@ -71,7 +71,7 @@ class GhostBatchNorm(BatchNorm):
                 self.weight, self.bias, False, self.momentum, self.eps)
 
 
-class FrozenBatchNorm(BatchNorm):
+class FrozenBatchNorm3D(BatchNorm3D):
     """
     BatchNorm2d where the batch statistics and the affine parameters are fixed.
     It contains non-trainable buffers called
@@ -173,7 +173,7 @@ class FrozenBatchNorm(BatchNorm):
         return res
 
 
-def get_norm(norm, out_channels, num_splits=1, **kwargs):
+def get_norm_3d(norm, out_channels, num_splits=1, **kwargs):
     """
     Args:
         norm (str or callable):
@@ -184,9 +184,9 @@ def get_norm(norm, out_channels, num_splits=1, **kwargs):
         if len(norm) == 0:
             return None
         norm = {
-            "BN": BatchNorm(out_channels, **kwargs),
-            "GhostBN": GhostBatchNorm(out_channels, num_splits, **kwargs),
-            "FrozenBN": FrozenBatchNorm(out_channels),
-            "GN": nn.GroupNorm(32, out_channels),
+            "BN": BatchNorm3D(out_channels, **kwargs),
+            "GhostBN": GhostBatchNorm3D(out_channels, num_splits, **kwargs),
+            "FrozenBN": FrozenBatchNorm3D(out_channels),
+            "GN": nn.GroupNorm3D(32, out_channels),
         }[norm]
     return norm

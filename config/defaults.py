@@ -33,7 +33,7 @@ _C.MODEL.NUM_CLASSES = 2
 _C.MODEL.PRETRAINED_CMIP = "../usr_data/model_data/resnet-lr1e4-sst-epoch30-cmip/best-model.bin"
 
 _C.MODEL.BACKBONE = CN()
-_C.MODEL.BACKBONE.DEPTH = 18
+_C.MODEL.BACKBONE.DEPTH = 10
 _C.MODEL.BACKBONE.LAST_STRIDE = 2
 _C.MODEL.BACKBONE.NORM = "BN"
 # Mini-batch split of Ghost BN
