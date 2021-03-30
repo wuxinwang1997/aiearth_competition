@@ -3,3 +3,10 @@ yacs
 tqdm
 sklearn
 pandas
+tensorflow-gpu
+matplotlib
+keras
+pytorch
+torchaudio
+torchvision
+theano

@@ -8,7 +8,6 @@ import argparse
 import os
 import sys
 sys.path.append('.')
-from os import mkdir
 from config import cfg
 from data import make_test_data_loader
 from engine.predicter import Predicter
@@ -110,7 +109,7 @@ def main():
 
     result_dir = cfg.RESULT_DIR
     if result_dir and not os.path.exists(result_dir):
-        mkdir(result_dir)
+        os.makedirs(result_dir)
     predict(cfg)
 
 

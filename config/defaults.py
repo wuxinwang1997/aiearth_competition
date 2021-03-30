@@ -28,7 +28,7 @@ _C.SEED = 66
 _C.VERBOSE = True
 
 _C.MODEL = CN()
-_C.MODEL.DEVICE = "cuda"
+_C.MODEL.DEVICE = "cpu"
 _C.MODEL.NUM_CLASSES = 2
 _C.MODEL.PRETRAINED_CMIP = "../usr_data/model_data/resnet-lr1e4-sst-epoch30-cmip/best-model.bin"
 
@@ -59,8 +59,10 @@ _C.INPUT = CN()
 _C.DATASETS = CN()
 # Root dir of dataset
 _C.DATASETS.SODA = False
-_C.DATASETS.ROOT_DIR = "../tcdata/enso_round1_train_20210201/"
-_C.DATASETS.TEST_DIR = "../tcdata/enso_final_test_data_B/"
+_C.DATASETS.ROOT_DIR = "/home/wangxiang/dat01/WWX/aiearth/data/enso_round1_train_20210201/"
+_C.DATASETS.TEST_DIR = "../tcdata/enso_round1_test_20210201/"
+# _C.DATASETS.ROOT_DIR = "../tcdata/enso_round1_train_20210201/"
+# _C.DATASETS.TEST_DIR = "../tcdata/enso_final_test_data_B/"
 # Fold to validate
 _C.DATASETS.VAL_FOLD = 0
 _C.DATASETS.X_DIM = 72
