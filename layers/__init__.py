@@ -12,5 +12,5 @@ from .context_block3d import ContextBlock3D
 from .non_local import Non_local
 from .pooling import *
 from .se_layer import SELayer, SELayer3D
-from cbam import CBAM
+from .cbam import CBAM
 from .loss import My_loss as myloss

@@ -3,10 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="68c37ce9-2442-44cb-a869-809c8fef2e9b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/defaults.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/defaults.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/build.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/layers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layers/se_layer.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/se_layer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layers/cbam.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/cbam.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modeling/threedcnn.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/threedcnn.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -281,7 +280,7 @@
       <workItem from="1617022662230" duration="4256000" />
       <workItem from="1617032301322" duration="78000" />
       <workItem from="1617032392760" duration="33000" />
-      <workItem from="1617064139290" duration="2553000" />
+      <workItem from="1617064139290" duration="3996000" />
     </task>
     <servers />
   </component>

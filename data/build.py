@@ -81,13 +81,13 @@ def prepare_test_data(cfg):
     test_path = cfg.DATASETS.TEST_DIR
     files = os.listdir(test_path)
     test_sst = np.zeros((len(files), 12, 24, 72))
-    test_t300 = np.zeros((len(files), 12, 24, 72))
+    #test_t300 = np.zeros((len(files), 12, 24, 72))
     #test_ua = np.zeros((len(files), 12, 24, 72))
     #test_va = np.zeros((len(files), 12, 24, 72))
     for i in range(len(files)):
         file = np.load(test_path + files[i])
         sst, t300, ua, va = np.split(file, 4, axis=3)
-        test_sst[i, :, :, :] = sst.transpose(3, 0, 1, 2)
+        #test_sst[i, :, :, :] = sst.transpose(3, 0, 1, 2)
         #test_t300[i, :, :, :] = t300.transpose(3, 0, 1, 2)
         #test_ua[i, :, :, :] = ua.transpose(3, 0, 1, 2)
         #test_va[i, :, :, :] = va.transpose(3, 0, 1, 2)

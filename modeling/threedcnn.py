@@ -90,7 +90,7 @@ class Bottleneck(nn.Module):
 
         out = self.conv3(out)
         out = self.bn3(out)
-        out = self.se(out)
+        out = self.cbam(out)
 
         if self.downsample is not None:
             residual = self.downsample(x)
@@ -113,6 +113,8 @@ class ResNet(nn.Module):
                  no_max_pool=False,
                  shortcut_type='B',
                  widen_factor=1.0,
+                 with_cb=False,
+                 cb_layers=[1, 1, 1, 1],
                  n_classes=24):
         super().__init__()
 
@@ -120,6 +122,7 @@ class ResNet(nn.Module):
 
         self.in_planes = block_inplanes[0]
         self.no_max_pool = no_max_pool
+        self.cb_layers = cb_layers
 
         self.conv1 = nn.Conv3d(n_input_channels,
                                self.in_planes,
@@ -148,6 +151,10 @@ class ResNet(nn.Module):
                                        layers[3],
                                        shortcut_type,
                                        stride=2)
+        if with_cb:
+            self._build_nonlocal(layers, cb_layers, ratio=16)
+        else:
+            self.CB_1_idx = self.CB_2_idx = self.CB_3_idx = self.CB_4_idx = []
 
         self.avgpool = nn.AdaptiveAvgPool3d((1, 1, 1))
         self.fc = nn.Linear(block_inplanes[3] * block.expansion, n_classes)
@@ -196,19 +203,19 @@ class ResNet(nn.Module):
 
         return nn.Sequential(*layers)
 
-    def _build_gcblock(self, layers, non_layers, bn_norm, num_splits):
+    def _build_gcblock(self, layers, cb_layers, ratio=16):
         self.CB_1 = nn.ModuleList(
-            [ContextBlock3D(64, bn_norm, num_splits) for _ in range(non_layers[0])])
-        self.CB_1_idx = sorted([layers[0] - (i + 1) for i in range(non_layers[0])])
+            [ContextBlock3D(64, ratio) for _ in range(cb_layers[0])])
+        self.CB_1_idx = sorted([layers[0] - (i + 1) for i in range(cb_layers[0])])
         self.CB_2 = nn.ModuleList(
-            [ContextBlock3D(128, bn_norm, num_splits) for _ in range(non_layers[1])])
-        self.CB_2_idx = sorted([layers[1] - (i + 1) for i in range(non_layers[1])])
+            [ContextBlock3D(128, ratio) for _ in range(cb_layers[1])])
+        self.CB_2_idx = sorted([layers[1] - (i + 1) for i in range(cb_layers[1])])
         self.CB_3 = nn.ModuleList(
-            [ContextBlock3D(256, bn_norm, num_splits) for _ in range(non_layers[2])])
-        self.CB_3_idx = sorted([layers[2] - (i + 1) for i in range(non_layers[2])])
+            [ContextBlock3D(256, ratio) for _ in range(cb_layers[2])])
+        self.CB_3_idx = sorted([layers[2] - (i + 1) for i in range(cb_layers[2])])
         self.CB_4 = nn.ModuleList(
-            [ContextBlock3D(512, bn_norm, num_splits) for _ in range(non_layers[3])])
-        self.CB_4_idx = sorted([layers[3] - (i + 1) for i in range(non_layers[3])])
+            [ContextBlock3D(512, ratio) for _ in range(cb_layers[3])])
+        self.CB_4_idx = sorted([layers[3] - (i + 1) for i in range(cb_layers[3])])
 
     def forward(self, x):
         x = self.conv1(x)
@@ -217,10 +224,45 @@ class ResNet(nn.Module):
         if not self.no_max_pool:
             x = self.maxpool(x)
 
-        x = self.layer1(x)
-        x = self.layer2(x)
-        x = self.layer3(x)
-        x = self.layer4(x)
+        CB1_counter = 0
+        if len(self.CB_1_idx) == 0:
+            self.CB_1_idx = [-1]
+        for i in range(len(self.layer1)):
+            x = self.layer1[i](x)
+            if i == self.CB_1_idx[CB1_counter]:
+                _, C, D, H, W = x.shape
+                x = self.CB_1[CB1_counter](x)
+                CB1_counter += 1
+        # Layer 2
+        CB2_counter = 0
+        if len(self.CB_2_idx) == 0:
+            self.CB_2_idx = [-1]
+        for i in range(len(self.layer2)):
+            x = self.layer2[i](x)
+            if i == self.CB_2_idx[CB2_counter]:
+                _, C, D, H, W = x.shape
+                x = self.CB_2[CB2_counter](x)
+                CB2_counter += 1
+        # Layer 3
+        CB3_counter = 0
+        if len(self.CB_3_idx) == 0:
+            self.CB_3_idx = [-1]
+        for i in range(len(self.layer3)):
+            x = self.layer3[i](x)
+            if i == self.CB_3_idx[CB3_counter]:
+                _, C, D, H, W = x.shape
+                x = self.CB_3[CB3_counter](x)
+                CB3_counter += 1
+        # Layer 4
+        CB4_counter = 0
+        if len(self.CB_4_idx) == 0:
+            self.CB_4_idx = [-1]
+        for i in range(len(self.layer4)):
+            x = self.layer4[i](x)
+            if i == self.CB_4_idx[CB4_counter]:
+                _, C, D, H, W = x.shape
+                x = self.CB_4[CB4_counter](x)
+                CB4_counter += 1
 
         x = self.avgpool(x)
 
