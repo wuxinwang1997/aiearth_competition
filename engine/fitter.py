@@ -96,12 +96,28 @@ class Fitter:
         with torch.no_grad():
             for step, (sst, labels) in enumerate(valid_loader):
                 sst = sst.to(self.device).float()
+
+                nino_sst_matrix = np.zeros((sst.shape[0], 6))
+                for i in range(sst.shape[0]):
+                    nino_sst_pts = []
+                    for j in range(12, 18):
+                        nino_sst = 0
+                        for k in range(3):
+                            nino_sst += np.mean(sst[j+k][10:13, 38:49])
+                        nino_sst /= 3
+                        nino_sst_pts.append(nino_sst)
+                    nino_sst_pts = np.array(nino_sst_pts)
+                    nino_sst_matrix[i] = nino_sst_pts
+
                 labels = labels.to(self.device).float()
-                outputs = self.model(sst)
-                loss = self.loss(outputs, labels)
+                outputs = self.model(sst[:, :18, :, :])
+                loss = self.loss(outputs, labels[6:])
                 summary_loss.update(loss.item(), sst.shape[0])
-                pred = torch.zeros(outputs[0].shape).to(self.device).float()
-                y_pred.append(outputs)
+                pred = torch.zeros((outputs.shape[0], 24)).to(self.device).float()
+                for i in range(outputs.shape[0]):
+                    pred[i, :6] = nino_sst_matrix[i, :]
+                    pred[i, 6:] = outputs[i, :]
+                y_pred.append(pred)
                 y_true.append(labels)
                 valid_loader.set_description(f'Validate Step {step}/{len(self.val_loader)}, ' + \
                                              f'summary_loss: {summary_loss.avg:.5f}, ' + \
@@ -121,8 +137,8 @@ class Fitter:
             sst = sst.to(self.device).float()
             labels = labels.to(self.device).float()
             self.optimizer.zero_grad()
-            outputs = self.model(sst)
-            loss = self.loss(outputs, labels)
+            outputs = self.model(sst[:, :18, :, :])
+            loss = self.loss(outputs, labels[6:])
             loss.backward()
 
             summary_loss.update(loss.item(), sst.shape[0])

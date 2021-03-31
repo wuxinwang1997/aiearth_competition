@@ -29,8 +29,8 @@ def prepare_cmip_data(cfg, cmip_data, cmip_label):
         tmp = torch.flatten(tmp, start_dim=0, end_dim=1)
         cmip[name] = tmp.numpy()
     tmp = np.array(cmip_label[:, :])
-    last_half_year_nino = np.array(cmip_label[-1, -6:])
-    cmip['label'] = np.concatenate((tmp.flatten(), last_half_year_nino), axis=0)
+    last_year_nino = np.array(cmip_label[-1, -12:])
+    cmip['label'] = np.concatenate((tmp.flatten(), last_year_nino), axis=0)
 
     dict_cmip = dict()
     for var in ['sst', 'label']:  # 'ua', 'va', 'label']:
@@ -59,12 +59,12 @@ def prepare_cmips_data(cfg):
         one_year_sst = np.expand_dims(cmip_data['sst'][start:end, 0:12, :, :], axis=4)
         # (samples, time, rows, cols, channels)
         next_year_sst = gen_model(one_year_sst)
-        one_half_year_sst = np.concatenate((one_year_sst, next_year_sst), axis=0)[:, 0:6, :, :, :]
+        one_half_year_sst = np.concatenate((one_year_sst, next_year_sst), axis=0)[:, 0:20, :, :, :]
         one_half_year_sst = np.squeeze(one_half_year_sst, axis=4)
         next_two_year_nino = cmip_label['nino'][start:end, 12:24]
         one_year_nino = cmip_label['nino'][start:end, 18:30]
         dict_cmip = prepare_cmip_data(cfg, {'sst': one_half_year_sst},
-                                      one_year_nino)
+                                      next_two_year_nino)
         # dict_cmip = prepare_cmip_data(cfg, {'sst': cmip_data['sst'][start:end, 0:12, :, :]},
         #                               cmip_label['nino'][start:end, 12:24])
         if i < 31:
@@ -87,19 +87,21 @@ def prepare_soda_data(cfg):
 
     soda = dict()
     for var in ['sst']:  # , 't300', 'ua', 'va']:
+        tmp_list = []
         for i in range(soda_data[var].shape[0]):
             tmp = np.array(soda_data[var][i, 0:12, :, :])
             tmp = np.nan_to_num(tmp)
             one_year_sst = np.expand_dims(tmp, axis=4)
             next_year_sst = gen_model(tmp)
-            one_half_year_sst = np.concatenate((one_year_sst, next_year_sst), axis=0)[:, 0:6, :, :, :]
+            one_half_year_sst = np.concatenate((one_year_sst, next_year_sst), axis=0)[:, 0:20, :, :, :]
             tmp = np.squeeze(one_half_year_sst, axis=4)
             tmp = torch.tensor(tmp)
             tmp = torch.flatten(tmp, start_dim=0, end_dim=1)
-            soda[var] = tmp.numpy()
+            tmp_list.append(tmp.numpy())
+        soda[var] = np.concatenate(tmp_list, axis=0)
 
-    tmp = np.array(soda_label['nino'][:, 18:30])
-    last_half_year_nino = np.array(soda_label[-1, -6:])
+    tmp = np.array(soda_label['nino'][:, 12:24])
+    last_half_year_nino = np.array(soda_label[-1, -12:])
     soda['label'] = np.concatenate((tmp.flatten(), last_half_year_nino), axis=0)
 
     dict_soda = dict()
@@ -112,7 +114,7 @@ def prepare_test_data(cfg):
     test_path = cfg.DATASETS.TEST_DIR
     files = os.listdir(test_path)
     test_sst = np.zeros((len(files), 12, 24, 72))
-    test_t300 = np.zeros((len(files), 12, 24, 72))
+    # test_t300 = np.zeros((len(files), 12, 24, 72))
     # test_ua = np.zeros((len(files), 12, 24, 72))
     # test_va = np.zeros((len(files), 12, 24, 72))
     for i in range(len(files)):

@@ -3,19 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="68c37ce9-2442-44cb-a869-809c8fef2e9b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/defaults.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/defaults.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convlstm-cmip/saved_model.pb" beforeDir="false" afterPath="$PROJECT_DIR$/convlstm-cmip/saved_model.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convlstm-cmip/variables/variables.data-00000-of-00001" beforeDir="false" afterPath="$PROJECT_DIR$/convlstm-cmip/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convlstm-cmip/variables/variables.index" beforeDir="false" afterPath="$PROJECT_DIR$/convlstm-cmip/variables/variables.index" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convlstm-soda/saved_model.pb" beforeDir="false" afterPath="$PROJECT_DIR$/convlstm-soda/saved_model.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convlstm-soda/variables/variables.data-00000-of-00001" beforeDir="false" afterPath="$PROJECT_DIR$/convlstm-soda/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convlstm-soda/variables/variables.index" beforeDir="false" afterPath="$PROJECT_DIR$/convlstm-soda/variables/variables.index" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/build.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/datasets/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/datasets/dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/submit-1GPU.sh" beforeDir="false" afterPath="$PROJECT_DIR$/submit-1GPU.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/train_net.py" beforeDir="false" afterPath="$PROJECT_DIR$/tools/train_net.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usr_data/model_data/seresnet18-lr1e4-sst-epoch30-cmip-fold0/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/usr_data/model_data/seresnet18-lr1e4-sst-epoch30-cmip-fold0/log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/fitter.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/fitter.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -290,7 +280,7 @@
       <workItem from="1617032301322" duration="78000" />
       <workItem from="1617032392760" duration="33000" />
       <workItem from="1617064139290" duration="2553000" />
-      <workItem from="1617067571202" duration="11437000" />
+      <workItem from="1617067571202" duration="15886000" />
     </task>
     <servers />
   </component>
